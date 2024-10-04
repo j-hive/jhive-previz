@@ -1,0 +1,122 @@
+{
+    "f435w": {
+        "display": "F435W",
+        "wl_micron": 0.430
+    },
+    "f475w": {
+        "display": "F475W",
+        "wl_micron": 0.477
+    },
+    "f606w": {
+        "display": "F606W",
+        "wl_micron": 0.591
+    },
+    "f775w": {
+        "display": "F775W",
+        "wl_micron": 0.765
+    },
+    "f814w": {
+        "display": "F814W",
+        "wl_micron": 0.833
+    },
+    "f070w": {
+        "display": "F070W",
+        "wl_micron": 0.704
+    },
+    "f090w": {
+        "display": "F080W",
+        "wl_micron": 0.901
+    },
+    "f105w": {
+        "display": "F105W",
+        "wl_micron": 1.055
+    },
+    "f115w": {
+        "display": "F115W",
+        "wl_micron": 1.154
+    },
+    "f125w": {
+        "display": "F125W",
+        "wl_micron": 1.247
+    },
+    "f140w": {
+        "display": "F140W",
+        "wl_micron": 1.392
+    },
+    "f140m": {
+        "display": "F140M",
+        "wl_micron": 1.404
+    },
+    "f150w": {
+        "display": "F150W",
+        "wl_micron": 1.501
+    },
+    "f160w": {
+        "display": "F160W",
+        "wl_micron": 1.537
+    },
+    "f162m": {
+        "display": "F162M",
+        "wl_micron": 1.626
+    },
+    "f182m": {
+        "display": "F182M",
+        "wl_micron": 1.845
+    },
+    "f200w": {
+        "display": "F200W",
+        "wl_micron": 1.990
+    },
+    "f210m": {
+        "display": "F210M",
+        "wl_micron": 2.093
+    },
+    "f250m": {
+        "display": "F250M",
+        "wl_micron": 2.503
+    },
+    "f277w": {
+        "display": "F277W",
+        "wl_micron": 2.786
+    },
+    "f300m": {
+        "display": "F300M",
+        "wl_micron": 2.996
+    },
+    "f335m": {
+        "display": "F335M",
+        "wl_micron": 3.365
+    },
+    "f356w": {
+        "display": "F356W",
+        "wl_micron": 3.563
+    },
+    "f360m": {
+        "display": "F360M",
+        "wl_micron": 3.621
+    },
+    "f410m": {
+        "display": "F410M",
+        "wl_micron": 4.092
+    },
+    "f430m": {
+        "display": "F430M",
+        "wl_micron": 4.280
+    },
+    "f444w": {
+        "display": "F444W",
+        "wl_micron": 4.421
+    },
+    "f460m": {
+        "display": "F460M",
+        "wl_micron": 4.624
+    },
+    "f480m": {
+        "display": "F480M",
+        "wl_micron": 4.834
+    },
+    "alma": {
+        "display": "ALMA",
+        "wl_micron": 596.0
+    }
+}
