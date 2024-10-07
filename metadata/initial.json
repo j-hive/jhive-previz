@@ -1,0 +1,32 @@
+{
+    "id": {
+        "display": "DJA Source ID",
+        "is_magnitude": false,
+        "output_data_type": "int",
+        "file_name": "",
+        "input_column_name": "",
+        "output_num_digits": ""
+    },
+    "ra": {
+        "display": "Right Ascension",
+        "output_units": "Degrees",
+        "is_magnitude": false,
+        "data_type": "float",
+        "input_units": "Degrees",
+        "file_name": "",
+        "input_column_name": "",
+        "output_num_digits": 6
+    },
+    "dec": {
+        "display": "Declination",
+        "unit": "Degrees",
+        "is_magnitude": false,
+        "data_type": "float"
+    },
+    "flux_radius": {
+        "display": "Flux Radius",
+        "unit": "arcseconds",
+        "is_magnitude": false,
+        "data_type": "float"
+    }
+}

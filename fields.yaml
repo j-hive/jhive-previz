@@ -1,0 +1,58 @@
+id:
+  display: "DJA Source ID"
+  is_magnitude: false,
+  output_data_type: "int"
+  output_units: null
+  input_units: null
+  file_name: "cat_filename"
+  input_column_name: "id"
+  output_num_digits: null
+ra:
+  display: "Right Ascension"
+  output_units: "Degrees"
+  is_magnitude: false
+  data_type: "float"
+  input_units: "Degrees"
+  file_name: "cat_filename"
+  input_column_name: "ra"
+  output_num_digits: 6
+dec:
+  display: "Right Ascension"
+  output_units: "Degrees"
+  is_magnitude: false
+  data_type: "float"
+  input_units: "Degrees"
+  file_name: "cat_filename"
+  input_column_name: "dec"
+  output_num_digits: 6
+flux_radius:
+  display: "Flux Radius"
+  output_units: "arcseconds"
+  is_magnitude: false
+  data_type: "float"
+  input_units: "arcseconds"
+  file_name: "cat_filename"
+  input_column_name: "flux_radius"
+  output_num_digits: 3
+f435w:
+  display: "Magnitude F435W"
+  data_type: "float"
+  file_name: "cat_filename"
+  input_column_name: "abmag_f435w"
+  input_units: "uJansky"
+  is_magnitude: True
+  output_num_digits: 3
+  output_units: "arcseconds"
+  wl_micron: 0.430
+  zero_point: 28.9
+f475w:
+  display: "Magnitude F475W"
+  data_type: "float"
+  file_name: "cat_filename"
+  input_column_name: "abmag_f475w"
+  input_units: "uJansky"
+  is_magnitude: True
+  output_num_digits: 3
+  output_units: "arcseconds"
+  wl_micron: 0.477
+  zero_point: 28.9

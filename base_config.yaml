@@ -1,0 +1,16 @@
+paths:
+  cat_path: "./data/"
+  ez_path:
+
+field_name: "abell2744clu-grizli-v7.2"
+cat_filename: "abell2744clu-grizli-v7.2-fix_phot_apcorr.fits"
+ez_filename: "abell2744clu-grizli-v7.2-fix.eazypy.zout.fits"
+
+output_file_suffix: "_jhive_viz_v1"
+columns_to_use:
+  - "id"
+  - "ra"
+  - "dec"
+  - "flux_radius"
+  - "abmag_f435w"
+  - "abmag_f475w"
