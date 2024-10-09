@@ -13,7 +13,7 @@ def log_values(values, field_params: dict):
     return np.log10(values)
 
 
+# TODO turn this into a function that, if the units aren't here, checks if the difference is 'log' and then sends you to that function if true
 conversions = {
-    "magnitude": flux_to_mag,
-    "log": log_values,
+    ("microJansky", "magnitude"): flux_to_mag,
 }

@@ -3,13 +3,25 @@ from astropy.table import Table
 import pandas as pd
 import re
 from pathlib import Path
-from typing import Union, Mapping, List, Tuple
+from pydantic import BaseModel
+from typing import Union, Mapping, List, Tuple, Optional, Dict
 
 from . import conversions as conversions
 
 # variables
 
 output_path = Path("../output/")
+
+
+# classes
+
+
+class Catalogue(BaseModel):
+    file_name: str
+    loaded: bool = False
+    df: Optional[pd.DataFrame] = None
+    columns_to_use: List = []
+    conversion_functions: List = []
 
 
 def get_data_output_filepath(config_params):
@@ -79,7 +91,9 @@ def write_data(new_cat, output_file_path: Path):
     # df_cat.to_csv('../output/dja_abell2744clu-grizli-v7.2_jhive_viz.csv', float_format='%.6f', index=False)
 
 
-def load_dataframe(file_name: str, config_params: Mapping, data_frames: dict) -> dict:
+def load_dataframe(
+    file_name: str, config_params: Mapping, data_frames: Dict[str, Catalogue]
+) -> Dict[str, Catalogue]:
 
     # get variable for the path
     file_path_var = file_name.split("_")[0] + "_path"
@@ -93,8 +107,8 @@ def load_dataframe(file_name: str, config_params: Mapping, data_frames: dict) ->
             df = read_table(file_path)
 
             # if successful, update the data_frames dictionary with the dataframe
-            data_frames[file_name]["loaded"] = True
-            data_frames[file_name]["df"] = df
+            data_frames[file_name].loaded = True
+            data_frames[file_name].df = df
 
         except:
             if file_path_var == "cat_path":
@@ -115,7 +129,7 @@ def load_dataframe(file_name: str, config_params: Mapping, data_frames: dict) ->
 
 
 def populate_columns_to_use(
-    data_frames: dict, config_params: Mapping, field_params: Mapping
+    data_frames: Dict[str, Catalogue], config_params: Mapping, field_params: Mapping
 ) -> Tuple[Mapping, List]:
 
     list_of_loaded_dfs = []
@@ -127,18 +141,19 @@ def populate_columns_to_use(
         base_file = field_params[c]["file_name"]
 
         # check if that file is loaded in (will need to have a variable for this I think)
-        if not data_frames[base_file]["loaded"]:
+        if not data_frames[base_file].loaded:
             # check if column exists in file
 
             # load file
+            # TODO: do this separately
             data_frames = load_dataframe(base_file, config_params, data_frames)
 
             # TODO: check that id will always be the correct one - if not update so that it uses the appropriate value
-            data_frames[base_file]["columns_to_use"].append("id")
+            data_frames[base_file].columns_to_use.append("id")
 
         # get column name that is in the input file and add to list of columns to use
         col_name = field_params[c]["input_column_name"]
-        data_frames[base_file]["columns_to_use"].append(col_name)
+        data_frames[base_file].columns_to_use.append(col_name)
         list_of_loaded_dfs.append(base_file)
 
         # TODO: could also convert columns here instead of doing another loop?
@@ -149,17 +164,9 @@ def populate_columns_to_use(
 def process_data(config_params: Mapping, field_params: Mapping):
 
     # Create dictionary to store all file names and data frames once loaded
-    data_frames = {}
+    data_frames: Dict[str, Catalogue] = {}
     for name in config_params["file_names"].keys():
-        data_frames[name] = {
-            "file_name": config_params["file_names"][name],
-            "loaded": False,
-            "df": None,
-            "columns_to_use": [],
-        }
-
-    # read in main catalogue
-    data_frames = load_dataframe("cat_filename", config_params, data_frames)
+        data_frames[name] = Catalogue(file_name=config_params["file_names"][name])
 
     # populate columns to use per file and load in any additional data files
     list_of_loaded_dfs, data_frames = populate_columns_to_use(
@@ -168,10 +175,13 @@ def process_data(config_params: Mapping, field_params: Mapping):
 
     # create subtables for all tables that we need
 
+    # read in main catalogue
+    data_frames = load_dataframe("cat_filename", config_params, data_frames)
+
+    # convert relevant columns
+
     # start by making subtable of catalogue table columns
-    new_df = data_frames["cat_filename"]["df"][
-        data_frames["cat_filename"]["columns_to_use"]
-    ]
+    new_df = data_frames["cat_filename"].df[data_frames["cat_filename"].columns_to_use]
 
     # if there is one or more additional dfs loaded
     if len(list_of_loaded_dfs) >= 1:
@@ -179,23 +189,23 @@ def process_data(config_params: Mapping, field_params: Mapping):
             if name == "cat_filename":
                 # skip, this one is already completed
                 pass
-            elif len(data_frames[name]["columns_to_use"]) > 0:
+            elif len(data_frames[name].columns_to_use) > 0:
                 # make sure data frame is loaded
-                if data_frames[name]["loaded"]:
+                if data_frames[name].loaded:
 
                     # update the dataframe to only include the columns that we want to use
-                    data_frames[name]["df"] = data_frames[name]["df"][
-                        data_frames[name]["columns_to_use"]
+                    data_frames[name].df = data_frames[name].df[
+                        data_frames[name].columns_to_use
                     ]
 
                     # join to previous table here
-                    new_df.join(data_frames[name]["df"].set_index("id"), on="id")
+                    new_df.join(data_frames[name].df.set_index("id"), on="id")
                 else:
                     # dataframe failed to load, all columns from it will be empty
 
                     # get list of old columns + new columns
                     old_columns = list(new_df.columns)
-                    new_columns = old_columns + data_frames[name]["columns_to_use"]
+                    new_columns = old_columns + data_frames[name].columns_to_use
 
                     # creates a new dataframe with all old columns and empty new columns
                     new_df = new_df.reindex(columns=new_columns)
