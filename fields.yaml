@@ -39,10 +39,10 @@ f435w:
   data_type: "float"
   file_name: "cat_filename"
   input_column_name: "abmag_f435w"
-  input_units: "uJansky"
+  input_units: "microJansky"
   is_magnitude: True
   output_num_digits: 3
-  output_units: "arcseconds"
+  output_units: "magnitude"
   wl_micron: 0.430
   zero_point: 28.9
 f475w:
@@ -50,9 +50,20 @@ f475w:
   data_type: "float"
   file_name: "cat_filename"
   input_column_name: "abmag_f475w"
-  input_units: "uJansky"
+  input_units: "microJansky"
   is_magnitude: True
   output_num_digits: 3
-  output_units: "arcseconds"
+  output_units: "magnitude"
   wl_micron: 0.477
+  zero_point: 28.9
+f606w:
+  display: "Magnitude F606W"
+  data_type: "float"
+  file_name: "cat_filename"
+  input_column_name: "abmag_f475w"
+  input_units: "microJansky"
+  is_magnitude: True
+  output_num_digits: 3
+  output_units: "magnitude"
+  wl_micron: 0.591
   zero_point: 28.9
