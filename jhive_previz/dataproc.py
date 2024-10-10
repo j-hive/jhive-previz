@@ -21,10 +21,11 @@ class Catalogue(BaseModel):
     loaded: bool = False
     df: Optional[pd.DataFrame] = None
     columns_to_use: List = []
+    config_colnames: List = []
     conversion_functions: List = []
 
 
-def get_data_output_filepath(config_params):
+def get_data_output_filepath(config_params: Mapping) -> Path:
 
     data_output_filename = (
         config_params["field_name"] + config_params["output_file_suffix"] + ".csv"
@@ -33,7 +34,7 @@ def get_data_output_filepath(config_params):
     return output_path / data_output_filename
 
 
-def read_table(data_file_path: Path, config_params):
+def read_table(data_file_path: Path, config_params: Mapping) -> pd.DataFrame:
     # # Since we want this to be pandas later, make pandas now
     phot_cat = Table.read(data_file_path)
 
@@ -77,23 +78,31 @@ def read_table(data_file_path: Path, config_params):
 #     return new_cat
 
 
-def write_data(new_cat, output_file_path: Path):
+def write_data(df_cat: pd.DataFrame, output_file_path: Path):
+    """Writes out the dataframe to a csv file at the given output path. Ensures the parent directory exists. The csv is written without the pandas index, and cuts off all floats at 6 decimal places.
+
+    Parameters
+    ----------
+    df_cat : pd.DataFrame
+        The pandas dataframe to write out.
+    output_file_path : Path
+        The full path of the csv file to write to.
+    """
 
     # make sure that output file path exists
-    # if it doesn't, create it
+    if not output_file_path.parent.is_dir():
+        # if it doesn't, create it
+        output_file_path.parent.mkdir()
 
-    # write data
-    new_cat.write(
+    # write data and set floats to have no more than 6 decimal places
+    df_cat.to_csv(
         output_file_path,
-        format="ascii.csv",
-        overwrite=True,
+        float_format="%.6f",
+        index=False,
     )
-    # df_cat.to_csv('../output/dja_abell2744clu-grizli-v7.2_jhive_viz.csv', float_format='%.6f', index=False)
 
 
-def load_dataframe(
-    file_name: str, config_params: Mapping, data_frames: Dict[str, Catalogue]
-) -> Dict[str, Catalogue]:
+def load_dataframe(file_name: str, config_params: Mapping, cat: Catalogue) -> Catalogue:
 
     # get variable for the path
     file_path_var = file_name.split("_")[0] + "_path"
@@ -107,8 +116,8 @@ def load_dataframe(
             df = read_table(file_path)
 
             # if successful, update the data_frames dictionary with the dataframe
-            data_frames[file_name].loaded = True
-            data_frames[file_name].df = df
+            cat.loaded = True
+            cat.df = df
 
         except:
             if file_path_var == "cat_path":
@@ -125,14 +134,12 @@ def load_dataframe(
             f"No path given for {config_params[file_name]}, columns requiring this file will be empty."
         )
 
-    return data_frames
+    return cat
 
 
-def populate_columns_to_use(
+def populate_column_information(
     data_frames: Dict[str, Catalogue], config_params: Mapping, field_params: Mapping
 ) -> Tuple[Mapping, List]:
-
-    list_of_loaded_dfs = []
 
     # iterate through output columns
     for c in config_params["columns_to_use"]:
@@ -141,55 +148,150 @@ def populate_columns_to_use(
         base_file = field_params[c]["file_name"]
 
         # check if that file is loaded in (will need to have a variable for this I think)
-        if not data_frames[base_file].loaded:
-            # check if column exists in file
+        if base_file not in data_frames.keys():
 
-            # load file
-            # TODO: do this separately
-            data_frames = load_dataframe(base_file, config_params, data_frames)
+            # add the catalog to the dictionary of data frames
+            data_frames[base_file] = Catalogue(
+                file_name=config_params["file_names"][base_file]
+            )
 
-            # TODO: check that id will always be the correct one - if not update so that it uses the appropriate value
+            # make sure that the id parameter is used for all files in addition to the main catalogue
             data_frames[base_file].columns_to_use.append("id")
 
         # get column name that is in the input file and add to list of columns to use
         col_name = field_params[c]["input_column_name"]
         data_frames[base_file].columns_to_use.append(col_name)
-        list_of_loaded_dfs.append(base_file)
+        data_frames[base_file].config_colnames.append(c)
 
-        # TODO: could also convert columns here instead of doing another loop?
+        # get any conversion functions needed for columns
+        try:
+            # add the function to the class
+            data_frames[base_file].conversion_functions.append(
+                conversions.get_conversion_function(
+                    field_params[c]["input_units"], field_params[c]["output_units"]
+                )
+            )
+        except ValueError:
 
-    return list_of_loaded_dfs, data_frames
+            # no conversion function exists for these units
+            print(f"Unit {field_params[c]["input_units"]} conversion to {field_params[c]["output_units"]} not supported, keeping input units for {c}.")
+            data_frames[base_file].conversion_functions.append(None)
+
+    return data_frames
+
+
+def filter_column_values(df: pd.DataFrame, col_name: str, col_field_params: Dict):
+
+    # replace any infs with nans
+    # filter so values are finite 
+    df[col_name] = np.where(np.isfinite(df[col_name]), df[col_name],  np.nan)
+
+    # if there is a min or max value given for the column, replace any values outside this range with nans
+    min_max = (col_field_params["min_value"], col_field_params["max_value"])
+    if all(min_max):
+        # we have a min and a max
+        # where the column falls within the range, keep values, and replace with nans outside that 
+        df[col_name] = np.where(min_max[1] >= df[col_name] >= min_max[0], df[col_name], np.nan)
+
+    elif min_max[0]:
+        # we have only a min
+
+        df[col_name] = np.where(df[col_name] >= min_max[0], df[col_name], np.nan)
+        
+    elif min_max[1]:
+        # we only have a max
+        df[col_name] = np.where(min_max[1] >= df[col_name], df[col_name], np.nan)
+
+        
+
+
+def convert_columns_in_df(cat: Catalogue, field_params: Dict) -> Catalogue:
+    """Iterates through the columns to use and applies the associated conversion function
+    to the column.
+
+    Parameters
+    ----------
+    cat : Catalogue
+        The class object that stores the dataframe and the columns to use and conversion function lists.
+    field_params : Dict
+        The field parameters dictionary for that column.
+
+    Returns
+    -------
+    Catalogue
+        The same class object as above, modified by the function.
+    """
+
+
+    for i in range(0, len(cat.columns_to_use)):
+
+        # only apply a function if conversion function is not None
+        if cat.conversion_functions[i] is not None:
+            # apply the conversion function to the associated column
+            cat.df[cat.columns_to_use[i]].apply(
+                cat.conversion_functions[i],
+                raw=True,
+                args=(field_params[cat.config_colnames[i]]),
+            )
+
+        # filter values in columns with floats to ensure they are finite and fall within the given range
+        if field_params[cat.config_colnames[i]]["data_type"] == "float":
+            filter_column_values(cat.df, cat.config_colnames[i], field_params[cat.config_colnames[i]])
+
+        #TODO: if we are rounding also put that here
+
+
+        if cat.columns_to_use[i] != cat.config_colnames[i]:
+            # rename the column in the database if necessary
+            cat.df.rename(columns={cat.columns_to_use[i]: cat.config_colnames[i]}, inplace=True)
+
+    #TODO: also replace values with nans here?
+
+    return cat
 
 
 def process_data(config_params: Mapping, field_params: Mapping):
 
     # Create dictionary to store all file names and data frames once loaded
     data_frames: Dict[str, Catalogue] = {}
-    for name in config_params["file_names"].keys():
-        data_frames[name] = Catalogue(file_name=config_params["file_names"][name])
+    # load in main catalogue file
+    data_frames["cat_filename"] = Catalogue(
+        file_name=config_params["file_names"]["cat_filename"]
+    )
 
     # populate columns to use per file and load in any additional data files
-    list_of_loaded_dfs, data_frames = populate_columns_to_use(
-        data_frames, config_params, field_params
-    )
+    data_frames = populate_column_information(data_frames, config_params, field_params)
 
     # create subtables for all tables that we need
 
     # read in main catalogue
-    data_frames = load_dataframe("cat_filename", config_params, data_frames)
+    data_frames["cat_filename"] = load_dataframe(
+        "cat_filename", config_params, data_frames
+    )
 
-    # convert relevant columns
+    # convert necessary columns
+    data_frames["cat_filename"] = convert_columns_in_df(
+        data_frames["cat_filename"], field_params
+    )
+
+    # TODO: convert any necessary values to NANs
 
     # start by making subtable of catalogue table columns
     new_df = data_frames["cat_filename"].df[data_frames["cat_filename"].columns_to_use]
 
     # if there is one or more additional dfs loaded
-    if len(list_of_loaded_dfs) >= 1:
+    if len(data_frames.keys()) > 1:
         for name in data_frames.keys():
             if name == "cat_filename":
                 # skip, this one is already completed
                 pass
             elif len(data_frames[name].columns_to_use) > 0:
+
+                # load in data frame
+                data_frames[name] = load_dataframe(
+                    data_frames[name], config_params, data_frames[name]
+                )
+
                 # make sure data frame is loaded
                 if data_frames[name].loaded:
 
@@ -197,6 +299,11 @@ def process_data(config_params: Mapping, field_params: Mapping):
                     data_frames[name].df = data_frames[name].df[
                         data_frames[name].columns_to_use
                     ]
+
+                    # convert any columns needed
+                    data_frames[name] = convert_columns_in_df(
+                        data_frames[name], field_params
+                    )
 
                     # join to previous table here
                     new_df.join(data_frames[name].df.set_index("id"), on="id")
@@ -210,34 +317,9 @@ def process_data(config_params: Mapping, field_params: Mapping):
                     # creates a new dataframe with all old columns and empty new columns
                     new_df = new_df.reindex(columns=new_columns)
 
-    # now we need to convert any columns that need converting
-
-    for c in config_params["columns_to_use"]:
-        if field_params[c]["input_units"] != field_params[c]["output_units"]:
-            # we need to convert columns
-            conversions.conversions[field_params[c]["output_units"]](
-                new_df[field_params[c]["input_column_name"]],
-                field_params[c],
-            )
-
-    # get the columns that we want
-    # filtered_cat, flux_cols_filtered = get_filtered_table(cat_df)
-
-    # convert fluxes to magnitudes
-    # new_cat = convert_flux_to_magnitude(filtered_cat, flux_cols_filtered)
-
     # write out the data to a csv file
-    write_data(new_cat)
-
-
-# structure
-
-
-# read in the main catalogue file
-# could also read in any other files we have paths to here?
-# and get list of their columns? That way we read in whatever first
-
-# get a list of the columns
+    output_file_path = get_data_output_filepath(config_params)
+    write_data(new_df, output_file_path)
 
 
 # check the list of the desired columns
@@ -263,12 +345,3 @@ def process_data(config_params: Mapping, field_params: Mapping):
 
 #     tmp_inds = np.where(filtered_cat[tmp_col] == -99.0)
 #     filtered_cat[tmp_col][tmp_inds] = np.nan
-
-
-# Converting Required Cols to Log
-
-# for tmp_col in ("Lv", "MLv", "mass", "LIR", "sfr"):
-#     new_cat[tmp_col] = np.log10(new_cat[tmp_col])
-
-#     tmp_inds = np.where(~np.isfinite(new_cat[tmp_col]))
-#     new_cat[tmp_col][tmp_inds] = np.nan
