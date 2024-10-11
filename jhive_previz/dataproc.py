@@ -3,26 +3,45 @@ from astropy.table import Table
 import pandas as pd
 import re
 from pathlib import Path
-from pydantic import BaseModel
-from typing import Union, Mapping, List, Tuple, Optional, Dict
+from pydantic import BaseModel, ConfigDict
+from typing import Union, Mapping, List, Tuple, Optional, Dict, TypeVar
 
 from . import conversions as conversions
 
 # variables
 
 output_path = Path("../output/")
+PandasDataFrame = TypeVar("pandas.core.frame.DataFrame")
 
 
 # classes
 
 
 class Catalogue(BaseModel):
+    model_config = ConfigDict(arbitrary_types_allowed=True)
+
     file_name: str
+    file_path: Optional[Path]
     loaded: bool = False
-    df: Optional[pd.DataFrame] = None
+    df: PandasDataFrame | None = None
     columns_to_use: List = []
     config_colnames: List = []
     conversion_functions: List = []
+
+
+def get_cat_filepath(filename_key: str, config_params: Mapping) -> Path:
+
+    filepath_key = filename_key.split("_")[0] + "_path"
+
+    if config_params["paths"][filepath_key] is not None:
+        file_path = (
+            Path(config_params["paths"][filepath_key])
+            / config_params["file_names"][filename_key]
+        )
+    else:
+        file_path = None
+
+    return file_path
 
 
 def get_data_output_filepath(config_params: Mapping) -> Path:
@@ -34,7 +53,7 @@ def get_data_output_filepath(config_params: Mapping) -> Path:
     return output_path / data_output_filename
 
 
-def read_table(data_file_path: Path, config_params: Mapping) -> pd.DataFrame:
+def read_table(data_file_path: Path) -> pd.DataFrame:
     # # Since we want this to be pandas later, make pandas now
     phot_cat = Table.read(data_file_path)
 
@@ -102,36 +121,31 @@ def write_data(df_cat: pd.DataFrame, output_file_path: Path):
     )
 
 
-def load_dataframe(file_name: str, config_params: Mapping, cat: Catalogue) -> Catalogue:
+def load_dataframe(file_name: str, cat: Catalogue) -> Catalogue:
 
     # get variable for the path
-    file_path_var = file_name.split("_")[0] + "_path"
-    if config_params[file_path_var] is not None:
+    if cat.file_path is not None:
         # try to load in file
         try:
-            file_path = (
-                Path(config_params[file_path_var])
-                / config_params["file_names"][file_name]
-            )
-            df = read_table(file_path)
+            df = read_table(cat.file_path)
 
             # if successful, update the data_frames dictionary with the dataframe
             cat.loaded = True
             cat.df = df
 
         except:
-            if file_path_var == "cat_path":
+            if file_name == "cat_filename":
                 # this file is required to run, so if not loaded raise error
                 # TODO: change the error type here
                 # also maybe move this error to the read table function?
                 raise ValueError("Could not load dataframe")
             else:
                 print(
-                    f"Could not load {config_params[file_name]} at {config_params[file_path_var]}, columns requiring this file will be empty."
+                    f"Could not load {cat.file_name} at {cat.file_path}, columns requiring this file will be empty."
                 )
     else:
         print(
-            f"No path given for {config_params[file_name]}, columns requiring this file will be empty."
+            f"No path given for {cat.file_name}, columns requiring this file will be empty."
         )
 
     return cat
@@ -152,7 +166,8 @@ def populate_column_information(
 
             # add the catalog to the dictionary of data frames
             data_frames[base_file] = Catalogue(
-                file_name=config_params["file_names"][base_file]
+                file_name=config_params["file_names"][base_file],
+                file_path=get_cat_filepath(base_file, config_params),
             )
 
             # make sure that the id parameter is used for all files in addition to the main catalogue
@@ -174,7 +189,9 @@ def populate_column_information(
         except ValueError:
 
             # no conversion function exists for these units
-            print(f"Unit {field_params[c]["input_units"]} conversion to {field_params[c]["output_units"]} not supported, keeping input units for {c}.")
+            print(
+                f"Unit {field_params[c]['input_units']} conversion to {field_params[c]['output_units']} not supported, keeping input units for {c}."
+            )
             data_frames[base_file].conversion_functions.append(None)
 
     return data_frames
@@ -183,26 +200,26 @@ def populate_column_information(
 def filter_column_values(df: pd.DataFrame, col_name: str, col_field_params: Dict):
 
     # replace any infs with nans
-    # filter so values are finite 
-    df[col_name] = np.where(np.isfinite(df[col_name]), df[col_name],  np.nan)
+    # filter so values are finite
+    df[col_name] = np.where(np.isfinite(df[col_name]), df[col_name], np.nan)
 
     # if there is a min or max value given for the column, replace any values outside this range with nans
     min_max = (col_field_params["min_value"], col_field_params["max_value"])
     if all(min_max):
         # we have a min and a max
-        # where the column falls within the range, keep values, and replace with nans outside that 
-        df[col_name] = np.where(min_max[1] >= df[col_name] >= min_max[0], df[col_name], np.nan)
+        # where the column falls within the range, keep values, and replace with nans outside that
+        df[col_name] = np.where(
+            min_max[1] >= df[col_name] >= min_max[0], df[col_name], np.nan
+        )
 
     elif min_max[0]:
         # we have only a min
 
         df[col_name] = np.where(df[col_name] >= min_max[0], df[col_name], np.nan)
-        
+
     elif min_max[1]:
         # we only have a max
         df[col_name] = np.where(min_max[1] >= df[col_name], df[col_name], np.nan)
-
-        
 
 
 def convert_columns_in_df(cat: Catalogue, field_params: Dict) -> Catalogue:
@@ -222,7 +239,6 @@ def convert_columns_in_df(cat: Catalogue, field_params: Dict) -> Catalogue:
         The same class object as above, modified by the function.
     """
 
-
     for i in range(0, len(cat.columns_to_use)):
 
         # only apply a function if conversion function is not None
@@ -236,16 +252,19 @@ def convert_columns_in_df(cat: Catalogue, field_params: Dict) -> Catalogue:
 
         # filter values in columns with floats to ensure they are finite and fall within the given range
         if field_params[cat.config_colnames[i]]["data_type"] == "float":
-            filter_column_values(cat.df, cat.config_colnames[i], field_params[cat.config_colnames[i]])
+            filter_column_values(
+                cat.df, cat.config_colnames[i], field_params[cat.config_colnames[i]]
+            )
 
-        #TODO: if we are rounding also put that here
-
+        # TODO: if we are rounding also put that here
 
         if cat.columns_to_use[i] != cat.config_colnames[i]:
             # rename the column in the database if necessary
-            cat.df.rename(columns={cat.columns_to_use[i]: cat.config_colnames[i]}, inplace=True)
+            cat.df.rename(
+                columns={cat.columns_to_use[i]: cat.config_colnames[i]}, inplace=True
+            )
 
-    #TODO: also replace values with nans here?
+    # TODO: also replace values with nans here?
 
     return cat
 
@@ -256,7 +275,8 @@ def process_data(config_params: Mapping, field_params: Mapping):
     data_frames: Dict[str, Catalogue] = {}
     # load in main catalogue file
     data_frames["cat_filename"] = Catalogue(
-        file_name=config_params["file_names"]["cat_filename"]
+        file_name=config_params["file_names"]["cat_filename"],
+        file_path=get_cat_filepath("cat_filename", config_params),
     )
 
     # populate columns to use per file and load in any additional data files
@@ -266,7 +286,7 @@ def process_data(config_params: Mapping, field_params: Mapping):
 
     # read in main catalogue
     data_frames["cat_filename"] = load_dataframe(
-        "cat_filename", config_params, data_frames
+        "cat_filename", data_frames["cat_filename"]
     )
 
     # convert necessary columns
@@ -288,9 +308,7 @@ def process_data(config_params: Mapping, field_params: Mapping):
             elif len(data_frames[name].columns_to_use) > 0:
 
                 # load in data frame
-                data_frames[name] = load_dataframe(
-                    data_frames[name], config_params, data_frames[name]
-                )
+                data_frames[name] = load_dataframe(data_frames[name], data_frames[name])
 
                 # make sure data frame is loaded
                 if data_frames[name].loaded:
@@ -320,22 +338,6 @@ def process_data(config_params: Mapping, field_params: Mapping):
     # write out the data to a csv file
     output_file_path = get_data_output_filepath(config_params)
     write_data(new_df, output_file_path)
-
-
-# check the list of the desired columns
-# go through one by one?
-# if that column is not in the list (specifically the input column name)
-# then try to read in the associated file
-# if there is no path to the associated file
-# then put a warning that the column will be empty
-# while doing this loop, construct the new table with the columns we want
-# as we input a column, we also do any conversions necessary? We can also do mass conversion later for the fluxes
-# not sure which is faster
-# the nice thing about doing it this way is it's easy access for all of the information
-# i.e. you'll have the zero point, etc
-
-# in this loop should we also do other things? I don't think it's necessary,
-# we don't need excessive speed here
 
 
 # code for the columns we don't currently use

@@ -1,5 +1,5 @@
 import numpy as np
-from typing import Tuple, object, Optional
+from typing import Tuple, Optional
 
 
 # function that converts fluxes to magnitudes
@@ -29,7 +29,7 @@ conversions = {
 }
 
 
-def get_conversion_function(input_unit: str, output_unit: str) -> Optional[object]:
+def get_conversion_function(input_unit: str, output_unit: str) -> Optional:
 
     # TODO: should I caseify these units? Just in case there are inconsistencies?
     if input_unit == output_unit:
