@@ -1,7 +1,7 @@
 id:
   display: "DJA Source ID"
   is_magnitude: false,
-  output_data_type: "int"
+  data_type: "int"
   output_units: null
   input_units: null
   file_name: "cat_filename"

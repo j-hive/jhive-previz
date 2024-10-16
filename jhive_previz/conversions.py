@@ -29,7 +29,7 @@ conversions = {
 }
 
 
-def get_conversion_function(input_unit: str, output_unit: str) -> Optional:
+def get_conversion_function(input_unit: str, output_unit: str):
 
     # TODO: should I caseify these units? Just in case there are inconsistencies?
     if input_unit == output_unit:

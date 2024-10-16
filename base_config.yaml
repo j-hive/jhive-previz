@@ -13,5 +13,5 @@ columns_to_use:
   - "ra"
   - "dec"
   - "flux_radius"
-  - "f435w"
-  - "f475w"
+  - "abmag_f435w"
+  - "abmag_f475w"
