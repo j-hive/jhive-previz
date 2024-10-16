@@ -58,6 +58,25 @@ def test_populate_columns(create_cat, load_config):
     assert len(data_frames["cat_filename"].columns_to_use) == 6
 
 
+def test_filter_columns(load_config):
+    """Make sure that filter_columns is working as expected"""
+
+    # pick a column with a minimum value
+    col_name = "f435w_corr_1"
+    out_col_name = "abmag_f435w"
+
+    # test data frame
+    cat_path = dataproc.get_cat_filepath("cat_filename", load_config[0])
+    df = dataproc.read_table(cat_path)
+
+    # test that there were values less than min value
+    assert df[col_name].min() < load_config[1][out_col_name]["min_value"]
+
+    dataproc.filter_column_values(df, col_name, load_config[1][out_col_name])
+
+    assert df[col_name].min() >= load_config[1][out_col_name]["min_value"]
+
+
 def test_convert_columns(load_config, setup_dataframes):
 
     # populate columns

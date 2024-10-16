@@ -204,22 +204,23 @@ def filter_column_values(df: pd.DataFrame, col_name: str, col_field_params: Dict
     df[col_name] = np.where(np.isfinite(df[col_name]), df[col_name], np.nan)
 
     # if there is a min or max value given for the column, replace any values outside this range with nans
-    min_max = (col_field_params["min_value"], col_field_params["max_value"])
-    if all(min_max):
+    min_val = col_field_params["min_value"]
+    max_val = col_field_params["max_value"]
+    if min_val is not None and max_val is not None:
         # we have a min and a max
         # where the column falls within the range, keep values, and replace with nans outside that
         df[col_name] = np.where(
-            min_max[1] >= df[col_name] >= min_max[0], df[col_name], np.nan
+            max_val >= df[col_name] >= min_val, df[col_name], np.nan
         )
 
-    elif min_max[0]:
+    elif min_val is not None and max_val is None:
         # we have only a min
 
-        df[col_name] = np.where(df[col_name] >= min_max[0], df[col_name], np.nan)
+        df[col_name] = np.where(df[col_name] >= min_val, df[col_name], np.nan)
 
-    elif min_max[1]:
+    elif max_val:
         # we only have a max
-        df[col_name] = np.where(min_max[1] >= df[col_name], df[col_name], np.nan)
+        df[col_name] = np.where(max_val >= df[col_name], df[col_name], np.nan)
 
 
 def convert_columns_in_df(cat: Catalogue, field_params: Dict) -> Catalogue:
@@ -246,14 +247,13 @@ def convert_columns_in_df(cat: Catalogue, field_params: Dict) -> Catalogue:
             # apply the conversion function to the associated column
             cat.df[cat.columns_to_use[i]].apply(
                 cat.conversion_functions[i],
-                raw=True,
-                args=(field_params[cat.config_colnames[i]]),
+                field_params=field_params[cat.config_colnames[i]],
             )
 
         # filter values in columns with floats to ensure they are finite and fall within the given range
         if field_params[cat.config_colnames[i]]["data_type"] == "float":
             filter_column_values(
-                cat.df, cat.config_colnames[i], field_params[cat.config_colnames[i]]
+                cat.df, cat.columns_to_use[i], field_params[cat.config_colnames[i]]
             )
 
         # TODO: if we are rounding also put that here
