@@ -25,7 +25,7 @@ class Catalogue(BaseModel):
     columns_to_use: List = []
     config_colnames: List = []
     conversion_functions: List = []
-    # columns: Dict = {}
+    columns_to_round: Dict = {}
 
 
 # Functions
@@ -227,6 +227,11 @@ def populate_column_information(
         data_frames[base_file].columns_to_use.append(col_name)
         data_frames[base_file].config_colnames.append(c)
         # data_frames[base_file].columns[col_name] = c
+        # add to columns to round if there is a number of decimals supplied
+        if field_params[c]["output_num_decimals"] is not None:
+            data_frames[base_file].columns_to_round[c] = field_params[c][
+                "output_num_decimals"
+            ]
 
         # get any conversion functions needed for columns
         try:
@@ -325,6 +330,9 @@ def convert_columns_in_df(cat: Catalogue, field_params: Dict) -> Catalogue:
                 columns={cat.columns_to_use[i]: cat.config_colnames[i]}, inplace=True
             )
 
+    # round the relevant columns
+    cat.df.round(cat.columns_to_round)
+
     return cat
 
 
@@ -410,6 +418,7 @@ def process_data(config_params: Mapping, field_params: Mapping) -> pd.DataFrame:
                 new_df = new_df.reindex(columns=new_columns)
 
     # write out the data to a csv file
+
     output_file_path = get_data_output_filepath(config_params)
     write_data(new_df, output_file_path)
 
