@@ -8,9 +8,7 @@ from typing import Union, Mapping, List, Tuple, Optional, Dict, TypeVar
 
 from . import conversions as conversions
 
-# variables
-
-output_path = Path("../output/")
+# setting up pandas datatype
 PandasDataFrame = TypeVar("pandas.core.frame.DataFrame")
 
 
@@ -27,9 +25,24 @@ class Catalogue(BaseModel):
     columns_to_use: List = []
     config_colnames: List = []
     conversion_functions: List = []
+    columns: Dict = {}
 
 
 def get_cat_filepath(filename_key: str, config_params: Mapping) -> Path:
+    """Function to get the full path to the catalogue as given in the config file.
+
+    Parameters
+    ----------
+    filename_key : str
+        The filename key used in the config file
+    config_params : Mapping
+        The dictionary of config parameters from the config file.
+
+    Returns
+    -------
+    Path
+        The full path as a Path object to the relevant file.
+    """
 
     filepath_key = filename_key.split("_")[0] + "_path"
 
@@ -45,6 +58,21 @@ def get_cat_filepath(filename_key: str, config_params: Mapping) -> Path:
 
 
 def get_data_output_filepath(config_params: Mapping) -> Path:
+    """Returns the path to output the .csv to.
+
+    Parameters
+    ----------
+    config_params : Mapping
+        The dictionary of config parameters from the config file.
+
+    Returns
+    -------
+    Path
+        The full path (including file name) to write the .csv output to.
+    """
+
+    # turn the output base path into Path object
+    output_path = Path(config_params["output_path"])
 
     data_output_filename = (
         config_params["field_name"] + config_params["output_file_suffix"] + ".csv"
@@ -54,47 +82,14 @@ def get_data_output_filepath(config_params: Mapping) -> Path:
 
 
 def read_table(data_file_path: Path) -> pd.DataFrame:
-    # # Since we want this to be pandas later, make pandas now
+
+    # read in table as astropy table
     phot_cat = Table.read(data_file_path)
 
     # now convert to pandas
     cat_df = phot_cat.to_pandas()
 
     return cat_df
-
-
-# def get_filtered_table(phot_cat):
-#     flux_cols = [
-#         tmp_colname
-#         for tmp_colname in phot_cat.colnames
-#         if tmp_colname.endswith("_corr_1")
-#     ]
-
-#     flux_cols_filtered = []
-
-#     for flux_col_name in flux_cols:
-#         if re.search("^f[0-9]{3}[a-z]_corr_1", flux_col_name):
-
-#             flux_cols_filtered.append(flux_col_name)
-
-#     # filter the table down to the desired columns
-#     filtered_cat = phot_cat[cat_keys + tuple(flux_cols_filtered)]
-
-#     return filtered_cat, flux_cols_filtered
-
-
-# def convert_flux_to_magnitude(filtered_cat, flux_cols_filtered):
-#     new_cat = filtered_cat[cat_keys]
-
-#     # converts columns and adds them to the new table
-#     for flux_col_name in flux_cols_filtered:
-#         filter_name = flux_col_name.split("_")[0]
-
-#         mag_name = "abmag_" + filter_name
-
-#         new_cat[mag_name] = flux_to_mag(filtered_cat[flux_col_name])
-
-#     return new_cat
 
 
 def write_data(df_cat: pd.DataFrame, output_file_path: Path):
@@ -122,6 +117,25 @@ def write_data(df_cat: pd.DataFrame, output_file_path: Path):
 
 
 def load_dataframe(file_name: str, cat: Catalogue) -> Catalogue:
+    """Loads in a dataframe as a variable of a Catalogue object, and updates the 'loaded' variable.
+
+    Parameters
+    ----------
+    file_name : str
+        The key associated with the file name in the config file, i.e. 'cat_filename'
+    cat : Catalogue
+        The Catalogue object to load the dataframe to.
+
+    Returns
+    -------
+    Catalogue
+        The updated Catalogue object.
+
+    Raises
+    ------
+    RuntimeError
+        Raises an error if the main catalogue dataframe fails to load.
+    """
 
     # get variable for the path
     if cat.file_path is not None:
@@ -136,9 +150,9 @@ def load_dataframe(file_name: str, cat: Catalogue) -> Catalogue:
         except:
             if file_name == "cat_filename":
                 # this file is required to run, so if not loaded raise error
-                # TODO: change the error type here
-                # also maybe move this error to the read table function?
-                raise ValueError("Could not load dataframe")
+
+                # TODO: maybe move this error to the read table function?
+                raise RuntimeError("Could not load dataframe for the main cat file")
             else:
                 print(
                     f"Could not load {cat.file_name} at {cat.file_path}, columns requiring this file will be empty."
@@ -153,7 +167,26 @@ def load_dataframe(file_name: str, cat: Catalogue) -> Catalogue:
 
 def populate_column_information(
     data_frames: Dict[str, Catalogue], config_params: Mapping, field_params: Mapping
-) -> Tuple[Mapping, List]:
+) -> Dict[str, Catalogue]:
+    """This function iterates through the columns to use in the config file. It checks what file
+    each column comes from, and if that file does not already have a Catalogue entry in the data_frames
+    dictionary, it adds it in. Additionally, it adds to the columns_to_use, config_colnames, and conversion_functions
+    lists for the relevant Catalogue objects.
+
+    Parameters
+    ----------
+    data_frames : Dict[str, Catalogue]
+        The dictionary of Catalogue objects, one for each of the required catalogue files.
+    config_params : Mapping
+        The dictionary of parameters from the config file.
+    field_params : Mapping
+        The dictionary of parameters from the fields file.
+
+    Returns
+    -------
+    Dict[str, Catalogue]
+        Returns the data frames dictionary with updated values.
+    """
 
     # iterate through output columns
     for c in config_params["columns_to_use"]:
@@ -172,11 +205,13 @@ def populate_column_information(
 
             # make sure that the id parameter is used for all files in addition to the main catalogue
             data_frames[base_file].columns_to_use.append("id")
+            data_frames[base_file].config_colnames.append("id")
 
         # get column name that is in the input file and add to list of columns to use
         col_name = field_params[c]["input_column_name"]
         data_frames[base_file].columns_to_use.append(col_name)
         data_frames[base_file].config_colnames.append(c)
+        data_frames[base_file].columns[col_name] = c
 
         # get any conversion functions needed for columns
         try:
@@ -198,24 +233,35 @@ def populate_column_information(
 
 
 def filter_column_values(df: pd.DataFrame, col_name: str, col_field_params: Dict):
+    """Filters values in a Pandas column (a Series) such that all values are finite. It also filters
+    values so that they are NaNs if they are outside the range given for that column in the fields.yaml
+    file. If no range is given, no filtering is done.
 
-    # replace any infs with nans
+    Parameters
+    ----------
+    df : pd.DataFrame
+        The dataframe that has the desired column.
+    col_name : str
+        The name of the column to filter.
+    col_field_params : Dict
+        The dictionary of parameters for the column to filter.
+    """
+
     # filter so values are finite
     df[col_name] = np.where(np.isfinite(df[col_name]), df[col_name], np.nan)
 
+    min_val = col_field_params["filt_min_val"]
+    max_val = col_field_params["filt_max_val"]
+
     # if there is a min or max value given for the column, replace any values outside this range with nans
-    min_val = col_field_params["min_value"]
-    max_val = col_field_params["max_value"]
     if min_val is not None and max_val is not None:
         # we have a min and a max
-        # where the column falls within the range, keep values, and replace with nans outside that
         df[col_name] = np.where(
             max_val >= df[col_name] >= min_val, df[col_name], np.nan
         )
 
     elif min_val is not None and max_val is None:
         # we have only a min
-
         df[col_name] = np.where(df[col_name] >= min_val, df[col_name], np.nan)
 
     elif max_val:
@@ -264,8 +310,6 @@ def convert_columns_in_df(cat: Catalogue, field_params: Dict) -> Catalogue:
                 columns={cat.columns_to_use[i]: cat.config_colnames[i]}, inplace=True
             )
 
-    # TODO: also replace values with nans here?
-
     return cat
 
 
@@ -273,6 +317,7 @@ def process_data(config_params: Mapping, field_params: Mapping):
 
     # Create dictionary to store all file names and data frames once loaded
     data_frames: Dict[str, Catalogue] = {}
+
     # load in main catalogue file
     data_frames["cat_filename"] = Catalogue(
         file_name=config_params["file_names"]["cat_filename"],
@@ -294,56 +339,46 @@ def process_data(config_params: Mapping, field_params: Mapping):
         data_frames["cat_filename"], field_params
     )
 
-    # TODO: convert any necessary values to NANs
-
     # start by making subtable of catalogue table columns
-    new_df = data_frames["cat_filename"].df[data_frames["cat_filename"].columns_to_use]
+    new_df = data_frames["cat_filename"].df[data_frames["cat_filename"].config_colnames]
 
     # if there is one or more additional dfs loaded
     if len(data_frames.keys()) > 1:
         for name in data_frames.keys():
             if name == "cat_filename":
                 # skip, this one is already completed
-                pass
-            elif len(data_frames[name].columns_to_use) > 0:
+                continue
 
-                # load in data frame
-                data_frames[name] = load_dataframe(data_frames[name], data_frames[name])
+            # load in data frame
+            data_frames[name] = load_dataframe(data_frames[name], data_frames[name])
 
-                # make sure data frame is loaded
-                if data_frames[name].loaded:
+            # make sure data frame is loaded
+            if data_frames[name].loaded:
 
-                    # update the dataframe to only include the columns that we want to use
-                    data_frames[name].df = data_frames[name].df[
-                        data_frames[name].columns_to_use
-                    ]
+                # update the dataframe to only include the columns that we want to use
+                data_frames[name].df = data_frames[name].df[
+                    data_frames[name].config_colnames
+                ]
 
-                    # convert any columns needed
-                    data_frames[name] = convert_columns_in_df(
-                        data_frames[name], field_params
-                    )
+                # convert any columns needed
+                data_frames[name] = convert_columns_in_df(
+                    data_frames[name], field_params
+                )
 
-                    # join to previous table here
-                    new_df.join(data_frames[name].df.set_index("id"), on="id")
-                else:
-                    # dataframe failed to load, all columns from it will be empty
+                # join to previous table here
+                new_df.join(data_frames[name].df.set_index("id"), on="id")
+            else:
+                # dataframe failed to load, all columns from it will be empty
 
-                    # get list of old columns + new columns
-                    old_columns = list(new_df.columns)
-                    new_columns = old_columns + data_frames[name].columns_to_use
+                # get list of old columns + new columns
+                old_columns = list(new_df.columns)
+                new_columns = old_columns + data_frames[name].config_colnames
 
-                    # creates a new dataframe with all old columns and empty new columns
-                    new_df = new_df.reindex(columns=new_columns)
+                # creates a new dataframe with all old columns and empty new columns
+                new_df = new_df.reindex(columns=new_columns)
 
     # write out the data to a csv file
     output_file_path = get_data_output_filepath(config_params)
     write_data(new_df, output_file_path)
 
-
-# code for the columns we don't currently use
-# For all the flux columns:
-
-# for tmp_col in flux_cols_filtered:
-
-#     tmp_inds = np.where(filtered_cat[tmp_col] == -99.0)
-#     filtered_cat[tmp_col][tmp_inds] = np.nan
+    return new_df

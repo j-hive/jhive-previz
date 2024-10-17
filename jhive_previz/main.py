@@ -52,13 +52,13 @@ def load_config():
     return config_params, field_params
 
 
-if __name__ == "__main__":
+def main():
     # get the input file path and name of the field
     # and turn them into necessary output file names
     config_params, field_params = load_config()
 
     # create the csv file
-    dataproc.process_data(config_params, field_params)
+    cat_df = dataproc.process_data(config_params, field_params)
 
     # create the metadata json file
-    metadata.create_metadata_file(config_params, field_params)
+    metadata.create_metadata_file(config_params, field_params, cat_df)

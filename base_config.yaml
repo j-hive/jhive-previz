@@ -8,6 +8,7 @@ file_names:
   ez_filename: "abell2744clu-grizli-v7.2-fix.eazypy.zout.fits"
 
 output_file_suffix: "_jhive_viz_v1"
+output_path: "./output/"
 columns_to_use:
   - "id"
   - "ra"

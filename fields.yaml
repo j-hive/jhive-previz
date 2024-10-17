@@ -13,8 +13,8 @@ ra:
   is_magnitude: false
   data_type: "float"
   input_units: "Degrees"
-  max_value: null
-  min_value: null
+  filt_max_val: null
+  filt_min_val: null
   file_name: "cat_filename"
   input_column_name: "ra"
   output_num_digits: 6
@@ -24,8 +24,8 @@ dec:
   is_magnitude: false
   data_type: "float"
   input_units: "Degrees"
-  max_value: null
-  min_value: null
+  filt_max_val: null
+  filt_min_val: null
   file_name: "cat_filename"
   input_column_name: "dec"
   output_num_digits: 6
@@ -35,21 +35,21 @@ flux_radius:
   is_magnitude: false
   data_type: "float"
   input_units: "arcseconds"
-  max_value: null
-  min_value: null
+  filt_max_val: null
+  filt_min_val: null
   file_name: "cat_filename"
   input_column_name: "flux_radius"
   output_num_digits: 3
 abmag_f435w:
-  display: "Magnitude (F435W)"
+  dispvlay: "Magnitude (F435W)"
   data_type: "float"
   file_name: "cat_filename"
   filt_name: "F435W"
   input_column_name: "f435w_corr_1"
   input_units: "microJansky"
   is_magnitude: True
-  max_value: null
-  min_value: 0.0
+  filt_max_val: null
+  filt_min_val: 0.0
   output_num_digits: 3
   output_units: "magnitude"
   wl_micron: 0.430
@@ -62,8 +62,8 @@ abmag_f475w:
   input_column_name: "f475w_corr_1"
   input_units: "microJansky"
   is_magnitude: True
-  max_value: null
-  min_value: 0.0
+  filt_max_val: null
+  filt_min_val: 0.0
   output_num_digits: 3
   output_units: "magnitude"
   wl_micron: 0.477
@@ -76,8 +76,8 @@ abmag_f606w:
   input_column_name: "f475w_corr_1"
   input_units: "microJansky"
   is_magnitude: True
-  max_value: null
-  min_value: 0.0
+  filt_max_val: null
+  filt_min_val: 0.0
   output_num_digits: 3
   output_units: "magnitude"
   wl_micron: 0.591
