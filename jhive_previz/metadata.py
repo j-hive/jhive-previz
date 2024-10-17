@@ -5,6 +5,19 @@ from typing import Mapping, Union, Dict, List
 
 
 def get_metadata_output_path(config_params: Mapping) -> Path:
+    """Uses the config parameters to generate the full path to the metadata
+    output file.
+
+    Parameters
+    ----------
+    config_params : Mapping
+        The dictionary of config parameters.
+
+    Returns
+    -------
+    Path
+        The full path to the output metadata file.
+    """
 
     # turn output base path into Path object
     output_path = Path(config_params["output_path"])
@@ -14,46 +27,23 @@ def get_metadata_output_path(config_params: Mapping) -> Path:
     return output_path / metadata_output_filename
 
 
-# def read_json_file(file_path: Union[Path, str]) -> Mapping:
-#     with open(file_path, "r") as f:
-#         json_file = json.load(f)
-
-#     return json_file
-
-
-def read_csv_pandas(data_file_path: Union[Path, str]) -> pd.DataFrame:
-    # read in the .csv
-    whole_cat = pd.read_csv(data_file_path)
-    return whole_cat
-
-
-# def add_abmag_keys_to_json(initial_json_dict, whole_cat, filt_info):
-#     # add in the abmag keys to the initial_json dictionary
-
-#     # get the relevant column names
-#     colnames = list(whole_cat.columns)
-
-#     mag_col_names = [colname for colname in colnames if colname.startswith("abmag_")]
-
-#     # iterate over each column name and add object to json metadata
-#     for tmp_key in mag_col_names:
-#         tmp_dict = filt_info[tmp_key.replace("abmag_", "")]
-#         tmp_filt = tmp_dict["display"]
-#         tmp_dict["display"] = f"Magnitude ({tmp_filt})"
-#         tmp_dict["is_magnitude"] = True
-#         tmp_dict["filt_name"] = tmp_filt
-#         new_key = tmp_key
-#         tmp_dict["data_type"] = "float"
-
-#         initial_json_dict[new_key] = tmp_dict
-
-
-#     return initial_json_dict
-
-
 def get_desired_column_metadata(
     field_params: Mapping, columns_to_use: List[str]
 ) -> Dict:
+    """Creates a metadata dictionary from the field parameters with only the desired columns from the main config.
+
+    Parameters
+    ----------
+    field_params : Mapping
+        The metadata for all columns.
+    columns_to_use : List[str]
+        The columns to be included in the metadata file.
+
+    Returns
+    -------
+    Dict
+        The dictionary of metadata for the desired columns.
+    """
 
     # TODO: do we care if one of the columns in columns_to_use is not in field_params?
     # I think this issue would likely be encountered in dataproc first
@@ -65,7 +55,22 @@ def get_desired_column_metadata(
     #     initial_json_dict[c] = field_params[c]
 
 
-def add_min_max_val_to_json(initial_json_dict: Dict, whole_cat: pd.DataFrame):
+def add_min_max_val_to_json(initial_json_dict: Dict, whole_cat: pd.DataFrame) -> Dict:
+    """Takes an existing metadata dictionary, and adds the min and max value of each column
+    that contains ints or floats to the dictionary.
+
+    Parameters
+    ----------
+    initial_json_dict : Dict
+        The metadata dictionary for the pandas table, with a key for each column name.
+    whole_cat : pd.DataFrame
+        The pandas table with the data.
+
+    Returns
+    -------
+    Dict
+        The updated metadata dictionary.
+    """
 
     # Adding min_val and max_val to JSON
 
@@ -77,6 +82,7 @@ def add_min_max_val_to_json(initial_json_dict: Dict, whole_cat: pd.DataFrame):
             max_val = whole_cat[colname].max()
 
             if initial_json_dict[colname]["data_type"] == "int":
+                # make sure these values are integers if the column is an integer type
                 min_val = int(min_val)
                 max_val = int(max_val)
 
@@ -86,7 +92,16 @@ def add_min_max_val_to_json(initial_json_dict: Dict, whole_cat: pd.DataFrame):
     return initial_json_dict
 
 
-def write_json(output_metadata_path, initial_json_dict):
+def write_json(output_metadata_path: Path, initial_json_dict: Dict):
+    """Writes out a dictionary to a json file.
+
+    Parameters
+    ----------
+    output_metadata_path : Path
+        The full path to write the file to, including file name.
+    initial_json_dict : Dict
+        The dictionary to write to a json.
+    """
     # write out json metadata file
     with open(output_metadata_path, "w") as f:
         json.dump(initial_json_dict, f, indent=4)
@@ -95,6 +110,19 @@ def write_json(output_metadata_path, initial_json_dict):
 def create_metadata_file(
     config_params: Mapping, field_params: Mapping, whole_cat: pd.DataFrame
 ):
+    """Creates a metadata file for the given datatable, using metadata from field_params and generating additional values as necessary.
+      It has keys for each column, and is written as a json.
+
+    Parameters
+    ----------
+    config_params : Mapping
+        The config parameters dictionary.
+    field_params : Mapping
+        The field parameters dictionary.
+    whole_cat : pd.DataFrame
+        The dataframe to generate metadata for.
+    """
+
     # get the full path to write out metadata to
     output_metdata_path = get_metadata_output_path(config_params)
 

@@ -1,35 +1,63 @@
 import numpy as np
-from typing import Tuple, Optional
+from typing import Tuple, Optional, Dict
 
 
-# function that converts fluxes to magnitudes
-def flux_to_mag(fluxes, field_params: dict):
+# Functions
 
+
+def flux_to_mag(fluxes, field_params: Dict):
+    """Function that converts fluxes to magnitudes.
+
+    Parameters
+    ----------
+    fluxes : _type_
+        A single value or array-like structure of fluxes.
+    field_params : Dict
+        The dictionary of metadata for that column or value.
+
+    Returns
+    -------
+    The value or values converted to magnitudes.
+    """
+
+    # get the zero point from the column metadata
     zp = field_params["zero_point"]
-    # TODO: add in something that returns None if it's a nan?
+
     return -2.5 * np.log10(fluxes) + zp
 
 
 def log_values(values, field_params: dict):
+    """Returns the log of the given values or value."""
     return np.log10(values)
 
 
-# Converting Required Cols to Log
+# dictionary of conversions
 
-# for tmp_col in ("Lv", "MLv", "mass", "LIR", "sfr"):
-#     new_cat[tmp_col] = np.log10(new_cat[tmp_col])
-
-#     tmp_inds = np.where(~np.isfinite(new_cat[tmp_col]))
-#     new_cat[tmp_col][tmp_inds] = np.nan
-
-
-# TODO turn this into a function that, if the units aren't here, checks if the difference is 'log' and then sends you to that function if true
 conversions = {
     ("microJansky", "magnitude"): flux_to_mag,
 }
 
 
 def get_conversion_function(input_unit: str, output_unit: str):
+    """Takes the input and output unit of the columns, and returns the
+    function that should be used to convert from the input to output units.
+
+    Parameters
+    ----------
+    input_unit : str
+        The input unit
+    output_unit : str
+        The output unit
+
+    Returns
+    -------
+    The python function to use to convert between the two.
+
+    Raises
+    ------
+    ValueError
+        Raises an error if the units cannot be converted with current capabilities.
+    """
 
     # TODO: should I caseify these units? Just in case there are inconsistencies?
     if input_unit == output_unit:

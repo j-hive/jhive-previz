@@ -25,7 +25,10 @@ class Catalogue(BaseModel):
     columns_to_use: List = []
     config_colnames: List = []
     conversion_functions: List = []
-    columns: Dict = {}
+    # columns: Dict = {}
+
+
+# Functions
 
 
 def get_cat_filepath(filename_key: str, config_params: Mapping) -> Path:
@@ -82,6 +85,18 @@ def get_data_output_filepath(config_params: Mapping) -> Path:
 
 
 def read_table(data_file_path: Path) -> pd.DataFrame:
+    """Reads the data fits file into a pandas dataframe via astropy.
+
+    Parameters
+    ----------
+    data_file_path : Path
+        The full path to the data file.
+
+    Returns
+    -------
+    pd.DataFrame
+        A dataframe with the data from the file.
+    """
 
     # read in table as astropy table
     phot_cat = Table.read(data_file_path)
@@ -211,7 +226,7 @@ def populate_column_information(
         col_name = field_params[c]["input_column_name"]
         data_frames[base_file].columns_to_use.append(col_name)
         data_frames[base_file].config_colnames.append(c)
-        data_frames[base_file].columns[col_name] = c
+        # data_frames[base_file].columns[col_name] = c
 
         # get any conversion functions needed for columns
         try:
@@ -313,7 +328,24 @@ def convert_columns_in_df(cat: Catalogue, field_params: Dict) -> Catalogue:
     return cat
 
 
-def process_data(config_params: Mapping, field_params: Mapping):
+def process_data(config_params: Mapping, field_params: Mapping) -> pd.DataFrame:
+    """This is the main function that processes the data file and writes out the processed
+    version to a .csv. The function converts columns as desired, filters them to be NaNs outside
+    of a certain range (if the range is given in fields.yaml), and then takes only the columns
+    desired and creates a new dataframe. This dataframe is written to a .csv file in the output folder.
+
+    Parameters
+    ----------
+    config_params : Mapping
+        The config parameters from the config.yaml file
+    field_params : Mapping
+        The field parameters from the field.yaml file
+
+    Returns
+    -------
+    pd.DataFrame
+        The new dataframe.
+    """
 
     # Create dictionary to store all file names and data frames once loaded
     data_frames: Dict[str, Catalogue] = {}

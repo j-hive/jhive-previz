@@ -1,12 +1,24 @@
 from pathlib import Path
 import yaml
-from typing import Union, Mapping
+from typing import Union, Mapping, Tuple
 
 from . import dataproc
 from . import metadata
 
 
-def validate_config_params(config_params):
+def validate_cat_path(config_params: Mapping):
+    """Validate that the cat_path and cat_filename lead to an existing file.
+
+    Parameters
+    ----------
+    config_params : Mapping
+        The dictionary of config parameters.
+
+    Raises
+    ------
+    ValueError
+        Raises a ValueError if cat_path is not given, or if an invalid path is given.
+    """
 
     if isinstance(config_params["paths"]["cat_path"], str):
         cat_path = Path(config_params["paths"]["cat_path"])
@@ -19,7 +31,34 @@ def validate_config_params(config_params):
     else:
         # there is no path given to the cat_file
         raise ValueError(
-            "cat_path is a required argument, please enter the full path to the catalogue file."
+            "cat_path is a required argument in config.yaml, please enter the full path to the catalogue file."
+        )
+
+
+def validate_output_path(config_params: Mapping):
+    """Validates that the output_path exists. If not, creates it.
+
+    Parameters
+    ----------
+    config_params : Mapping
+        The dictionary of config parameters.
+
+    Raises
+    ------
+    ValueError
+        Raises an error if no output path is given.
+    """
+
+    if isinstance(config_params["output_path"], str):
+        output_path = Path(config_params["output_path"])
+        # make sure that output file path exists
+        if not output_path.is_dir():
+
+            # if it doesn't, create it
+            output_path.parent.mkdir()
+    else:
+        raise ValueError(
+            "output_path is a required argument in config.yaml, please enter the path to the output directory."
         )
 
 
@@ -43,9 +82,20 @@ def read_yaml(file_path: Union[Path, str]) -> Mapping:
     return config
 
 
-def load_config():
+def load_config() -> Tuple[Mapping, Mapping]:
+    """Loads in the two config files and returns them as dictionaries.
+
+    Returns
+    -------
+    Tuple[Mapping, Mapping]
+        The config_params and field_params dictionaries.
+    """
+
+    # Paths to files
     config_path = "./base_config.yaml"
     field_path = "./fields.yaml"
+
+    # read in the files
     config_params = read_yaml(config_path)
     field_params = read_yaml(field_path)
 
@@ -53,9 +103,18 @@ def load_config():
 
 
 def main():
-    # get the input file path and name of the field
-    # and turn them into necessary output file names
+    """The main function. This reads in the two config files, validates that
+    the required parameters exist, and then creates the new filtered and converted
+    data table, writes it to a csv in the output folder, and writes the metadata
+    json file to the same folder.
+    """
+
+    # get the config parameters
     config_params, field_params = load_config()
+
+    # validate and create the output path if necessary
+    validate_cat_path(config_params)
+    validate_output_path(config_params)
 
     # create the csv file
     cat_df = dataproc.process_data(config_params, field_params)
