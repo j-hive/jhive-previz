@@ -9,12 +9,6 @@ from jhive_previz import conversions as conv
 
 
 @pytest.fixture
-def load_config():
-    # TODO: put this in a conftest file
-    return main.load_config()
-
-
-@pytest.fixture
 def setup_dataframes(load_config):
     # Create dictionary to store all file names and data frames once loaded
     data_frames = {}
@@ -35,12 +29,12 @@ def create_cat(load_config):
 
 
 @pytest.fixture()
-def test_output_path(monkeypatch):
+def test_output_path(monkeypatch, load_config):
 
     # def mock_destbase(*args, **kwargs):
     #    return Path("./")
 
-    monkeypatch.setattr(dataproc, "output_path", Path("./tests/test_output/"))
+    monkeypatch.setitem(load_config[0], "output_path", "./tests/test_output/")
 
 
 @pytest.fixture()
@@ -141,6 +135,7 @@ def test_load_dataframe(create_cat):
     assert create_cat.loaded == True
     # test that there is actually a dataframe with one of the relevant columns
     assert "id" in create_cat.df.columns
+    assert len(create_cat.df.columns) == 5
 
 
 def test_populate_columns(setup_dataframes, load_config):
@@ -150,27 +145,31 @@ def test_populate_columns(setup_dataframes, load_config):
         setup_dataframes, load_config[0], load_config[1]
     )
 
-    assert "ra" in setup_dataframes["cat_filename"].columns_to_use
-    assert len(setup_dataframes["cat_filename"].columns_to_use) == 6
+    assert "stellar_mass" in setup_dataframes["cat_filename"].columns_to_use
+    assert len(setup_dataframes["cat_filename"].columns_to_use) == 4
 
 
 def test_filter_columns(load_config):
     """Make sure that filter_columns is working as expected"""
 
     # pick a column with a minimum value
-    col_name = "f435w_corr_1"
-    out_col_name = "abmag_f435w"
+    col_name = "f333w_corr_1"
+    out_col_name = "abmag_f333w"
 
     # test data frame
     cat_path = dataproc.get_cat_filepath("cat_filename", load_config[0])
     df = dataproc.read_table(cat_path)
 
     # test that there were values less than min value
-    assert df[col_name].min() < load_config[1][out_col_name]["min_value"]
+    assert df[col_name].min() < load_config[1][out_col_name]["filt_min_val"]
 
-    dataproc.filter_column_values(df, col_name, load_config[1][out_col_name])
+    filtered_col = dataproc.filter_column_values(
+        df[col_name], load_config[1][out_col_name]
+    )
 
-    assert df[col_name].min() >= load_config[1][out_col_name]["min_value"]
+    # make sure the nans were added and also that the minimum is now above the min
+    assert np.isnan(filtered_col.min())
+    assert np.nanmin(filtered_col) >= load_config[1][out_col_name]["filt_min_val"]
 
 
 def test_convert_columns(load_config, setup_dataframes):
@@ -187,29 +186,48 @@ def test_convert_columns(load_config, setup_dataframes):
     )
 
     # test there are a lot of columns
-    assert len(setup_dataframes["cat_filename"].df.columns) > 6
+    assert len(setup_dataframes["cat_filename"].df.columns) > 4
 
-    # get subset of columns
-    # update the dataframe to only include the columns that we want to use
-    setup_dataframes["cat_filename"].df = setup_dataframes["cat_filename"].df[
-        setup_dataframes["cat_filename"].columns_to_use
-    ]
-
-    assert len(setup_dataframes["cat_filename"].df.columns) == len(
-        setup_dataframes["cat_filename"].columns_to_use
-    )
-    assert "f435w_corr_1" in setup_dataframes["cat_filename"].df.columns
+    # make sure we have a copy of the original dataframe
+    old_df = setup_dataframes["cat_filename"].df
 
     # convert any columns needed
     setup_dataframes["cat_filename"] = dataproc.convert_columns_in_df(
         setup_dataframes["cat_filename"], load_config[1]
     )
 
-    assert "f435w_corr_1" not in setup_dataframes["cat_filename"].df.columns
-    assert "abmag_f435w" in setup_dataframes["cat_filename"].df.columns
+    assert "f333w_corr_1" not in setup_dataframes["cat_filename"].df.columns
+    assert "abmag_f333w" in setup_dataframes["cat_filename"].df.columns
+    assert len(setup_dataframes["cat_filename"].df.columns) == len(
+        setup_dataframes["cat_filename"].columns_to_use
+    )
+
+    # make sure values stayed the same outside of filtering
+    assert (
+        setup_dataframes["cat_filename"].df["abmag_f444w"].iloc[10]
+        == old_df["f444w_corr_1"].iloc[10]
+    )
+    # make sure new values are log of old ones
+    assert setup_dataframes["cat_filename"].df["mass"].iloc[10] == np.log10(
+        old_df["stellar_mass"].iloc[10]
+    )
+
+    # make sure that values in new dataframe match a converted value from old dataframe
+    assert setup_dataframes["cat_filename"].df["abmag_f333w"].iloc[
+        10
+    ] == conv.flux_to_mag(
+        old_df["f333w_corr_1"].iloc[10], load_config[1]["abmag_f333w"]
+    )
+
+    # make sure that filtering happened
+    assert (
+        setup_dataframes["cat_filename"].df["abmag_f444w"].min()
+        > old_df["f444w_corr_1"].min()
+    )
 
 
-def test_log_populate_and_convert_columns(mock_data, mock_config, mock_fields):
+def test_log_convert_and_filter_columns(mock_data, mock_config, mock_fields):
+    """Make sure that convert and filter columns work as expected"""
 
     # mock data
     old_df = mock_data.copy()
@@ -256,7 +274,7 @@ def test_log_populate_and_convert_columns(mock_data, mock_config, mock_fields):
 
 
 def test_process_data(load_config, test_output_path):
-    """Make sure that process_data is working as expected+"""
+    """Make sure that process_data is working as expected."""
 
     cat_df = dataproc.process_data(load_config[0], load_config[1])
 

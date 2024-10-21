@@ -1,0 +1,15 @@
+paths:
+  cat_path: "./tests/"
+
+field_name: "test-field"
+file_names:
+  cat_filename: "test-data.csv"
+
+output_file_suffix: "_test_output"
+output_path: "./tests/test_output/"
+
+columns_to_use:
+  - "id"
+  - "mass"
+  - "abmag_f333w"
+  - "abmag_f444w"

@@ -5,6 +5,11 @@ from typing import Union, Mapping, Tuple
 from . import dataproc
 from . import metadata
 
+# Paths to config files
+
+config_path = "./base_config.yaml"
+field_path = "./fields.yaml"
+
 
 # Validation functions
 def validate_cat_path(config_params: Mapping):
@@ -94,10 +99,6 @@ def load_config() -> Tuple[Mapping, Mapping]:
     Tuple[Mapping, Mapping]
         The config_params and field_params dictionaries.
     """
-
-    # Paths to files
-    config_path = "./base_config.yaml"
-    field_path = "./fields.yaml"
 
     # read in the files
     config_params = read_yaml(config_path)
