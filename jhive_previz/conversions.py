@@ -61,11 +61,11 @@ def get_conversion_function(input_unit: str, output_unit: str):
         Raises an error if the units cannot be converted with current capabilities.
     """
 
-    # TODO: should I caseify these units? Just in case there are inconsistencies?
-    if input_unit.casefold == output_unit.casefold:
+    # check if units match
+    if input_unit == output_unit:
         # no conversion needed
         return None
-    elif input_unit.casefold != output_unit.casefold:
+    elif input_unit != output_unit:
 
         # get conversion needed
         if (input_unit, output_unit) in conversions.keys():

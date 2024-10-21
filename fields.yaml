@@ -41,7 +41,7 @@ flux_radius:
   input_column_name: "flux_radius"
   output_num_decimals: 3
 abmag_f435w:
-  dispvlay: "Magnitude (F435W)"
+  display: "Magnitude (F435W)"
   data_type: "float"
   file_name: "cat_filename"
   filt_name: "F435W"

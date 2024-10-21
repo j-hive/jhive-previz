@@ -259,7 +259,7 @@ def populate_column_information(
     return data_frames
 
 
-def filter_column_values(df: pd.DataFrame, col_name: str, col_field_params: Dict):
+def filter_column_values(column: pd.Series, col_field_params: Dict):
     """Filters values in a Pandas column (a Series) such that all values are finite. It also filters
     values so that they are NaNs if they are outside the range given for that column in the fields.yaml
     file. If no range is given, no filtering is done.
@@ -275,7 +275,7 @@ def filter_column_values(df: pd.DataFrame, col_name: str, col_field_params: Dict
     """
 
     # filter so values are finite
-    df[col_name] = np.where(np.isfinite(df[col_name]), df[col_name], np.nan)
+    column = np.where(np.isfinite(column), column, np.nan)
 
     min_val = col_field_params["filt_min_val"]
     max_val = col_field_params["filt_max_val"]
@@ -283,17 +283,17 @@ def filter_column_values(df: pd.DataFrame, col_name: str, col_field_params: Dict
     # if there is a min or max value given for the column, replace any values outside this range with nans
     if min_val is not None and max_val is not None:
         # we have a min and a max
-        df[col_name] = np.where(
-            max_val >= df[col_name] >= min_val, df[col_name], np.nan
-        )
+        column = np.where(max_val >= column >= min_val, column, np.nan)
 
     elif min_val is not None and max_val is None:
         # we have only a min
-        df[col_name] = np.where(df[col_name] >= min_val, df[col_name], np.nan)
+        column = np.where(column >= min_val, column, np.nan)
 
     elif max_val:
         # we only have a max
-        df[col_name] = np.where(max_val >= df[col_name], df[col_name], np.nan)
+        column = np.where(max_val >= column, column, np.nan)
+
+    return column
 
 
 def convert_columns_in_df(cat: Catalogue, field_params: Dict) -> Catalogue:
@@ -313,29 +313,35 @@ def convert_columns_in_df(cat: Catalogue, field_params: Dict) -> Catalogue:
         The same class object as above, modified by the function.
     """
 
+    # dict of new columns
+    new_cols = {}
+
     for i in range(0, len(cat.columns_to_use)):
 
         # only apply a function if conversion function is not None
         if cat.conversion_functions[i] is not None:
             # apply the conversion function to the associated column
-            cat.df[cat.columns_to_use[i]].apply(
+            new_cols[cat.config_colnames[i]] = cat.df[cat.columns_to_use[i]].apply(
                 cat.conversion_functions[i],
                 field_params=field_params[cat.config_colnames[i]],
             )
+        else:
+            new_cols[cat.config_colnames[i]] = cat.df[cat.columns_to_use[i]]
 
         # filter values in columns with floats to ensure they are finite and fall within the given range
         if field_params[cat.config_colnames[i]]["data_type"] == "float":
-            filter_column_values(
-                cat.df, cat.columns_to_use[i], field_params[cat.config_colnames[i]]
+            new_cols[cat.config_colnames[i]] = filter_column_values(
+                new_cols[cat.config_colnames[i]], field_params[cat.config_colnames[i]]
             )
 
-        # TODO: if we are rounding also put that here
+        # if cat.columns_to_use[i] != cat.config_colnames[i]:
+        #     # rename the column in the database if necessary
+        #     cat.df.rename(
+        #         columns={cat.columns_to_use[i]: cat.config_colnames[i]}, inplace=True
+        #     )
 
-        if cat.columns_to_use[i] != cat.config_colnames[i]:
-            # rename the column in the database if necessary
-            cat.df.rename(
-                columns={cat.columns_to_use[i]: cat.config_colnames[i]}, inplace=True
-            )
+    # replace catalogue dataframe with new dataframe
+    cat.df = pd.DataFrame(new_cols)
 
     # round the relevant columns
     cat.df.round(cat.columns_to_round)
@@ -390,7 +396,8 @@ def process_data(config_params: Mapping, field_params: Mapping) -> pd.DataFrame:
     )
 
     # start by making subtable of catalogue table columns
-    new_df = data_frames["cat_filename"].df[data_frames["cat_filename"].config_colnames]
+    # new_df = data_frames["cat_filename"].df[data_frames["cat_filename"].config_colnames]
+    new_df = data_frames["cat_filename"].df
 
     # if there is one or more additional dfs loaded
     if len(data_frames.keys()) > 1:
@@ -406,9 +413,9 @@ def process_data(config_params: Mapping, field_params: Mapping) -> pd.DataFrame:
             if data_frames[name].loaded:
 
                 # update the dataframe to only include the columns that we want to use
-                data_frames[name].df = data_frames[name].df[
-                    data_frames[name].config_colnames
-                ]
+                # data_frames[name].df = data_frames[name].df[
+                #     data_frames[name].config_colnames
+                # ]
 
                 # convert any columns needed
                 data_frames[name] = convert_columns_in_df(
