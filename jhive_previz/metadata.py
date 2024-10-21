@@ -86,8 +86,9 @@ def add_min_max_val_to_json(initial_json_dict: Dict, whole_cat: pd.DataFrame) ->
                 min_val = int(min_val)
                 max_val = int(max_val)
 
-        initial_json_dict[colname]["min_val"] = min_val
-        initial_json_dict[colname]["max_val"] = max_val
+            # add ths min and max values to the metadata json
+            initial_json_dict[colname]["min_val"] = min_val
+            initial_json_dict[colname]["max_val"] = max_val
 
     return initial_json_dict
 

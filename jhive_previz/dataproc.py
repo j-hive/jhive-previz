@@ -8,14 +8,16 @@ from typing import Union, Mapping, List, Tuple, Optional, Dict, TypeVar
 
 from . import conversions as conversions
 
-# setting up pandas datatype
+# Custom pandas datatype
 PandasDataFrame = TypeVar("pandas.core.frame.DataFrame")
 
 
-# classes
+# Classes
 
 
 class Catalogue(BaseModel):
+
+    # allow for custom types for the variables
     model_config = ConfigDict(arbitrary_types_allowed=True)
 
     file_name: str
@@ -29,6 +31,8 @@ class Catalogue(BaseModel):
 
 
 # Functions
+
+## Utility functions
 
 
 def get_cat_filepath(filename_key: str, config_params: Mapping) -> Path:
@@ -178,6 +182,9 @@ def load_dataframe(file_name: str, cat: Catalogue) -> Catalogue:
         )
 
     return cat
+
+
+## Functional functions
 
 
 def populate_column_information(
@@ -334,6 +341,9 @@ def convert_columns_in_df(cat: Catalogue, field_params: Dict) -> Catalogue:
     cat.df.round(cat.columns_to_round)
 
     return cat
+
+
+## Organizational functions
 
 
 def process_data(config_params: Mapping, field_params: Mapping) -> pd.DataFrame:

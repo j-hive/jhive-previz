@@ -2,7 +2,7 @@ import numpy as np
 from typing import Tuple, Optional, Dict
 
 
-# Functions
+# Conversion functions
 
 
 def flux_to_mag(fluxes, field_params: Dict):
@@ -31,11 +31,13 @@ def log_values(values, field_params: dict):
     return np.log10(values)
 
 
-# dictionary of conversions
+# Dictionary of conversions
 
 conversions = {
     ("microJansky", "magnitude"): flux_to_mag,
 }
+
+# Organizational function
 
 
 def get_conversion_function(input_unit: str, output_unit: str):
@@ -60,10 +62,10 @@ def get_conversion_function(input_unit: str, output_unit: str):
     """
 
     # TODO: should I caseify these units? Just in case there are inconsistencies?
-    if input_unit == output_unit:
+    if input_unit.casefold == output_unit.casefold:
         # no conversion needed
         return None
-    elif input_unit != output_unit:
+    elif input_unit.casefold != output_unit.casefold:
 
         # get conversion needed
         if (input_unit, output_unit) in conversions.keys():

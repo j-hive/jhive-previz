@@ -6,6 +6,7 @@ from . import dataproc
 from . import metadata
 
 
+# Validation functions
 def validate_cat_path(config_params: Mapping):
     """Validate that the cat_path and cat_filename lead to an existing file.
 
@@ -62,6 +63,9 @@ def validate_output_path(config_params: Mapping):
         )
 
 
+# Loading functions
+
+
 def read_yaml(file_path: Union[Path, str]) -> Mapping:
     """Function to read in yaml file as dictionary. This uses unsafe load and
     so should only be done on yaml files in this code package.
@@ -100,6 +104,9 @@ def load_config() -> Tuple[Mapping, Mapping]:
     field_params = read_yaml(field_path)
 
     return config_params, field_params
+
+
+# Organizational function
 
 
 def main():
