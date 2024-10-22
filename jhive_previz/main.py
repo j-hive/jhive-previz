@@ -6,7 +6,7 @@ from . import dataproc
 from . import metadata
 
 # Paths to config files
-
+# TODO: where these files are stored and how they are read in requires some thought
 config_path = "./base_config.yaml"
 field_path = "./fields.yaml"
 

@@ -228,6 +228,7 @@ def populate_column_information(
             data_frames[base_file].config_colnames.append("id")
 
         # get column name that is in the input file and add to list of columns to use
+        # TODO: rename columns to use and config colnames as input and output columns
         col_name = field_params[c]["input_column_name"]
         data_frames[base_file].columns_to_use.append(col_name)
         data_frames[base_file].config_colnames.append(c)
@@ -247,7 +248,7 @@ def populate_column_information(
                 )
             )
         except ValueError:
-
+            # TODO: make it fail on this instead of letting it continue
             # no conversion function exists for these units
             print(
                 f"Unit {field_params[c]['input_units']} conversion to {field_params[c]['output_units']} not supported, keeping input units for {c}."
@@ -294,7 +295,7 @@ def filter_column_values(column: pd.Series, col_field_params: Dict):
     return column
 
 
-def convert_columns_in_df(cat: Catalogue, field_params: Dict) -> Catalogue:
+def process_column_data(cat: Catalogue, field_params: Dict) -> Catalogue:
     """Iterates through the columns to use and applies the associated conversion function
     to the column.
 
@@ -310,6 +311,7 @@ def convert_columns_in_df(cat: Catalogue, field_params: Dict) -> Catalogue:
     Catalogue
         The same class object as above, modified by the function.
     """
+    # TODO: rename to convert, filter and round
 
     # dict of new columns
     new_cols = {}
@@ -389,7 +391,7 @@ def process_data(config_params: Mapping, field_params: Mapping) -> pd.DataFrame:
     )
 
     # convert necessary columns
-    data_frames["cat_filename"] = convert_columns_in_df(
+    data_frames["cat_filename"] = process_column_data(
         data_frames["cat_filename"], field_params
     )
 
@@ -416,9 +418,7 @@ def process_data(config_params: Mapping, field_params: Mapping) -> pd.DataFrame:
                 # ]
 
                 # convert any columns needed
-                data_frames[name] = convert_columns_in_df(
-                    data_frames[name], field_params
-                )
+                data_frames[name] = process_column_data(data_frames[name], field_params)
 
                 # join to previous table here
                 new_df.join(data_frames[name].df.set_index("id"), on="id")

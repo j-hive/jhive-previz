@@ -19,7 +19,7 @@ ipython = "^8.28.0"
 pytest = "^8.3.3"
 
 [tool.poetry.scripts]
-previz = "jhive_previz.main:main"
+jhive_previz = "jhive_previz.main:main"
 
 [build-system]
 requires = ["poetry-core"]

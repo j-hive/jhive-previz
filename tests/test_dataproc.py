@@ -28,15 +28,6 @@ def create_cat(load_config):
     )
 
 
-@pytest.fixture()
-def test_output_path(monkeypatch, load_config):
-
-    # def mock_destbase(*args, **kwargs):
-    #    return Path("./")
-
-    monkeypatch.setitem(load_config[0], "output_path", "./tests/test_output/")
-
-
 def test_load_dataframe(create_cat):
     """Test that load_dataframe works as expected"""
 
@@ -83,7 +74,7 @@ def test_filter_columns(load_config):
     assert np.nanmin(filtered_col) >= load_config[1][out_col_name]["filt_min_val"]
 
 
-def test_convert_columns(load_config, setup_dataframes):
+def test_process_column_data(load_config, setup_dataframes):
     """Make sure that convert columns is working as expected"""
 
     # populate columns
@@ -103,7 +94,7 @@ def test_convert_columns(load_config, setup_dataframes):
     old_df = setup_dataframes["cat_filename"].df
 
     # convert any columns needed
-    setup_dataframes["cat_filename"] = dataproc.convert_columns_in_df(
+    setup_dataframes["cat_filename"] = dataproc.process_column_data(
         setup_dataframes["cat_filename"], load_config[1]
     )
 
@@ -137,9 +128,7 @@ def test_convert_columns(load_config, setup_dataframes):
     )
 
 
-def test_process_data(load_config, test_output_path):
+def test_process_data(get_processed_data, load_config):
     """Make sure that process_data is working as expected."""
 
-    cat_df = dataproc.process_data(load_config[0], load_config[1])
-
-    assert len(load_config[0]["columns_to_use"]) == len(cat_df.columns)
+    assert len(load_config[0]["columns_to_use"]) == len(get_processed_data.columns)
