@@ -169,8 +169,6 @@ def load_dataframe(file_name: str, cat: Catalogue) -> Catalogue:
         except:
             if file_name == "cat_filename":
                 # this file is required to run, so if not loaded raise error
-
-                # TODO: maybe move this error to the read table function?
                 raise RuntimeError("Could not load dataframe for the main cat file")
             else:
                 print(

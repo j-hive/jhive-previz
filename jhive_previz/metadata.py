@@ -45,9 +45,6 @@ def get_desired_column_metadata(
         The dictionary of metadata for the desired columns.
     """
 
-    # TODO: do we care if one of the columns in columns_to_use is not in field_params?
-    # I think this issue would likely be encountered in dataproc first
-    # but check if we should add something here to check for that
     initial_json_dict = {c: field_params[c] for c in columns_to_use}
 
     return initial_json_dict
