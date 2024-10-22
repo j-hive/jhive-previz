@@ -17,13 +17,16 @@ def test_get_conversion_function():
 def test_flux_to_mag(load_config):
     """Make sure that flux_to_mag works as expected"""
 
-    file_path = dataproc.get_data_output_filepath(load_config[0])
-    df = pd.read_csv(file_path)
+    # read in test data
+    file_path = dataproc.get_cat_filepath("cat_filename", load_config[0])
+    df = dataproc.read_table(file_path)
 
-    converted = conv.flux_to_mag(df["abmag_f444w"], load_config[1]["abmag_f444w"])
+    # convert a column
+    converted = conv.flux_to_mag(df["f444w_corr_1"], load_config[1]["abmag_f444w"])
 
+    # test that the object returned is correct and the converted value matches
     test_result = (
-        -2.5 * np.log10(df["abmag_f444w"].iloc[6])
+        -2.5 * np.log10(df["f444w_corr_1"].iloc[6])
         + load_config[1]["abmag_f444w"]["zero_point"]
     )
     assert converted.iloc[6] == test_result
