@@ -1,14 +1,11 @@
 from pathlib import Path
 import yaml
 from typing import Union, Mapping, Tuple
+import typer
+from typing_extensions import Annotated
 
 from . import dataproc
 from . import metadata
-
-# Paths to config files
-# TODO: where these files are stored and how they are read in requires some thought
-config_path = "./base_config.yaml"
-field_path = "./fields.yaml"
 
 
 # Validation functions
@@ -91,7 +88,7 @@ def read_yaml(file_path: Union[Path, str]) -> Mapping:
     return config
 
 
-def load_config() -> Tuple[Mapping, Mapping]:
+def load_config(config_path: Path, field_path: Path) -> Tuple[Mapping, Mapping]:
     """Loads in the two config files and returns them as dictionaries.
 
     Returns
@@ -99,7 +96,6 @@ def load_config() -> Tuple[Mapping, Mapping]:
     Tuple[Mapping, Mapping]
         The config_params and field_params dictionaries.
     """
-
     # read in the files
     config_params = read_yaml(config_path)
     field_params = read_yaml(field_path)
@@ -107,18 +103,56 @@ def load_config() -> Tuple[Mapping, Mapping]:
     return config_params, field_params
 
 
+def validate_config_paths(config_path: str, field_path: str):
+    """Validates that the provided paths lead to files that exist.
+
+    Parameters
+    ----------
+    config_path : str
+        The full path to the config yaml file.
+    field_path : str
+        The full path to the fields yaml file.
+
+    Raises
+    ------
+    FileExistsError
+        Raises an error if either of the files do not exist at the given path.
+    """
+
+    config_path = Path(config_path)
+    field_path = Path(field_path)
+
+    if not config_path.is_file():
+        raise FileExistsError(f"Config file at {config_path} does not exist.")
+    if not field_path.is_file():
+        raise FileExistsError(f"Fields file at {field_path} does not exist.")
+
+
 # Organizational function
-
-
-def main():
+def process_data_and_write_metadata(
+    config_path: Annotated[
+        str, typer.Option(help="The full path and file name of the base config file.")
+    ] = "./base_config.yaml",
+    field_path: Annotated[
+        str, typer.Option(help="The full path and file name of the fields config file.")
+    ] = "./fields.yaml",
+):
     """The main function. This reads in the two config files, validates that
     the required parameters exist, and then creates the new filtered and converted
     data table, writes it to a csv in the output folder, and writes the metadata
     json file to the same folder.
+
+    Parameters
+    ----------
+    config_path: str, default = './base_config.yaml'
+        The full path and file name of the base config yaml file.
+    field_path: str, default = './fields.yaml'
+        The full path and file name of the fields yaml file.
     """
 
     # get the config parameters
-    config_params, field_params = load_config()
+    validate_config_paths(config_path, field_path)
+    config_params, field_params = load_config(config_path, field_path)
 
     # validate and create the output path if necessary
     validate_cat_path(config_params)
@@ -129,3 +163,7 @@ def main():
 
     # create the metadata json file
     metadata.create_metadata_file(config_params, field_params, cat_df)
+
+
+def main():
+    typer.run(process_data_and_write_metadata)
