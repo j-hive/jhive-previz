@@ -104,11 +104,6 @@ def test_process_column_data(load_config, setup_dataframes):
         setup_dataframes["cat_filename"].columns_to_use
     )
 
-    # make sure values stayed the same outside of filtering
-    assert (
-        setup_dataframes["cat_filename"].df["abmag_f444w"].iloc[10]
-        == old_df["f444w_corr_1"].iloc[10]
-    )
     # make sure new values are log of old ones
     assert setup_dataframes["cat_filename"].df["mass"].iloc[10] == np.log10(
         old_df["stellar_mass"].iloc[10]

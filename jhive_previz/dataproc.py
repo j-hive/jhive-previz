@@ -15,6 +15,10 @@ PandasDataFrame = TypeVar("pandas.core.frame.DataFrame")
 # Classes
 
 
+class UnitConversionError(Exception):
+    pass
+
+
 class Catalogue(BaseModel):
 
     # allow for custom types for the variables
@@ -24,10 +28,10 @@ class Catalogue(BaseModel):
     file_path: Optional[Path]
     loaded: bool = False
     df: PandasDataFrame | None = None
-    columns_to_use: List = []
-    config_colnames: List = []
+    input_columns: List = []
+    output_columns: List = []
     conversion_functions: List = []
-    columns_to_round: Dict = {}
+    decimals_to_round: Dict = {}
 
 
 # Functions
@@ -190,7 +194,7 @@ def populate_column_information(
 ) -> Dict[str, Catalogue]:
     """This function iterates through the columns to use in the config file. It checks what file
     each column comes from, and if that file does not already have a Catalogue entry in the data_frames
-    dictionary, it adds it in. Additionally, it adds to the columns_to_use, config_colnames, and conversion_functions
+    dictionary, it adds it in. Additionally, it adds to the input_columns, output_columns, and conversion_functions
     lists for the relevant Catalogue objects.
 
     Parameters
@@ -214,7 +218,6 @@ def populate_column_information(
         # check for which file to look in for this column
         base_file = field_params[c]["file_name"]
 
-        # check if that file is loaded in (will need to have a variable for this I think)
         if base_file not in data_frames.keys():
 
             # add the catalog to the dictionary of data frames
@@ -224,18 +227,17 @@ def populate_column_information(
             )
 
             # make sure that the id parameter is used for all files in addition to the main catalogue
-            data_frames[base_file].columns_to_use.append("id")
-            data_frames[base_file].config_colnames.append("id")
+            data_frames[base_file].input_columns.append("id")
+            data_frames[base_file].output_columns.append("id")
 
         # get column name that is in the input file and add to list of columns to use
-        # TODO: rename columns to use and config colnames as input and output columns
         col_name = field_params[c]["input_column_name"]
-        data_frames[base_file].columns_to_use.append(col_name)
-        data_frames[base_file].config_colnames.append(c)
-        # data_frames[base_file].columns[col_name] = c
+        data_frames[base_file].input_columns.append(col_name)
+        data_frames[base_file].output_columns.append(c)
+
         # add to columns to round if there is a number of decimals supplied
         if field_params[c]["output_num_decimals"] is not None:
-            data_frames[base_file].columns_to_round[c] = field_params[c][
+            data_frames[base_file].decimals_to_round[c] = field_params[c][
                 "output_num_decimals"
             ]
 
@@ -248,12 +250,10 @@ def populate_column_information(
                 )
             )
         except ValueError:
-            # TODO: make it fail on this instead of letting it continue
             # no conversion function exists for these units
-            print(
-                f"Unit {field_params[c]['input_units']} conversion to {field_params[c]['output_units']} not supported, keeping input units for {c}."
+            raise UnitConversionError(
+                f"Unit conversion failed for column {c}, no conversion function exists for {field_params[c]['input_units']} to {field_params[c]['output_units']}."
             )
-            data_frames[base_file].conversion_functions.append(None)
 
     return data_frames
 
@@ -311,40 +311,33 @@ def process_column_data(cat: Catalogue, field_params: Dict) -> Catalogue:
     Catalogue
         The same class object as above, modified by the function.
     """
-    # TODO: rename to convert, filter and round
 
     # dict of new columns
     new_cols = {}
 
-    for i in range(0, len(cat.columns_to_use)):
+    for i in range(0, len(cat.input_columns)):
 
         # only apply a function if conversion function is not None
         if cat.conversion_functions[i] is not None:
             # apply the conversion function to the associated column
-            new_cols[cat.config_colnames[i]] = cat.df[cat.columns_to_use[i]].apply(
+            new_cols[cat.output_columns[i]] = cat.df[cat.input_columns[i]].apply(
                 cat.conversion_functions[i],
-                field_params=field_params[cat.config_colnames[i]],
+                field_params=field_params[cat.output_columns[i]],
             )
         else:
-            new_cols[cat.config_colnames[i]] = cat.df[cat.columns_to_use[i]]
+            new_cols[cat.output_columns[i]] = cat.df[cat.input_columns[i]]
 
         # filter values in columns with floats to ensure they are finite and fall within the given range
-        if field_params[cat.config_colnames[i]]["data_type"] == "float":
-            new_cols[cat.config_colnames[i]] = filter_column_values(
-                new_cols[cat.config_colnames[i]], field_params[cat.config_colnames[i]]
+        if field_params[cat.output_columns[i]]["data_type"] == "float":
+            new_cols[cat.output_columns[i]] = filter_column_values(
+                new_cols[cat.output_columns[i]], field_params[cat.output_columns[i]]
             )
-
-        # if cat.columns_to_use[i] != cat.config_colnames[i]:
-        #     # rename the column in the database if necessary
-        #     cat.df.rename(
-        #         columns={cat.columns_to_use[i]: cat.config_colnames[i]}, inplace=True
-        #     )
 
     # replace catalogue dataframe with new dataframe
     cat.df = pd.DataFrame(new_cols)
 
     # round the relevant columns
-    cat.df.round(cat.columns_to_round)
+    cat.df.round(cat.decimals_to_round)
 
     return cat
 
@@ -374,29 +367,22 @@ def process_data(config_params: Mapping, field_params: Mapping) -> pd.DataFrame:
     # Create dictionary to store all file names and data frames once loaded
     data_frames: Dict[str, Catalogue] = {}
 
-    # load in main catalogue file
+    # load in main catalogue file and populate columns to use per file and load in any additional data files
     data_frames["cat_filename"] = Catalogue(
         file_name=config_params["file_names"]["cat_filename"],
         file_path=get_cat_filepath("cat_filename", config_params),
     )
-
-    # populate columns to use per file and load in any additional data files
     data_frames = populate_column_information(data_frames, config_params, field_params)
 
-    # create subtables for all tables that we need
-
-    # read in main catalogue
+    # read in main catalogue and convert and filter necessary columns
     data_frames["cat_filename"] = load_dataframe(
         "cat_filename", data_frames["cat_filename"]
     )
-
-    # convert necessary columns
     data_frames["cat_filename"] = process_column_data(
         data_frames["cat_filename"], field_params
     )
 
     # start by making subtable of catalogue table columns
-    # new_df = data_frames["cat_filename"].df[data_frames["cat_filename"].config_colnames]
     new_df = data_frames["cat_filename"].df
 
     # if there is one or more additional dfs loaded
@@ -411,29 +397,19 @@ def process_data(config_params: Mapping, field_params: Mapping) -> pd.DataFrame:
 
             # make sure data frame is loaded
             if data_frames[name].loaded:
-
-                # update the dataframe to only include the columns that we want to use
-                # data_frames[name].df = data_frames[name].df[
-                #     data_frames[name].config_colnames
-                # ]
-
-                # convert any columns needed
+                # if it is, convert any columns needed and join to previous table
                 data_frames[name] = process_column_data(data_frames[name], field_params)
-
-                # join to previous table here
                 new_df.join(data_frames[name].df.set_index("id"), on="id")
+
             else:
                 # dataframe failed to load, all columns from it will be empty
-
-                # get list of old columns + new columns
+                # get list of old columns + new columns and make new dataframe with old columns and empty columns
                 old_columns = list(new_df.columns)
-                new_columns = old_columns + data_frames[name].config_colnames
+                new_columns = old_columns + data_frames[name].output_columns
 
-                # creates a new dataframe with all old columns and empty new columns
                 new_df = new_df.reindex(columns=new_columns)
 
     # write out the data to a csv file
-
     output_file_path = get_data_output_filepath(config_params)
     write_data(new_df, output_file_path)
 

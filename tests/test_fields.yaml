@@ -38,9 +38,9 @@ abmag_f444w:
   file_name: "cat_filename"
   filt_name: "F444W"
   input_column_name: "f444w_corr_1"
-  input_units: "Jansky"
+  input_units: "microJansky"
   is_magnitude: True
-  filt_max_val: null
+  filt_max_val: 45.
   filt_min_val: 0.0
   output_num_decimals: 3
   output_units: "magnitude"

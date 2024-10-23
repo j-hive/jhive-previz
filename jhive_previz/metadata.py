@@ -44,12 +44,10 @@ def get_desired_column_metadata(
     Dict
         The dictionary of metadata for the desired columns.
     """
-
+    # get the subsection of the field_params that matches the columns to use
     initial_json_dict = {c: field_params[c] for c in columns_to_use}
 
     return initial_json_dict
-    # for c in columns_to_use:
-    #     initial_json_dict[c] = field_params[c]
 
 
 def add_min_max_val_to_json(initial_json_dict: Dict, whole_cat: pd.DataFrame) -> Dict:
@@ -69,13 +67,10 @@ def add_min_max_val_to_json(initial_json_dict: Dict, whole_cat: pd.DataFrame) ->
         The updated metadata dictionary.
     """
 
-    # Adding min_val and max_val to JSON
-
     for colname in initial_json_dict.keys():
 
         # only add in a min/max value if the column is an int or float type
         if initial_json_dict[colname]["data_type"] in ["float", "int"]:
-            # change to np.nanmin etc
             min_val = whole_cat[colname].min()
             max_val = whole_cat[colname].max()
 
