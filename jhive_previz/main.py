@@ -28,11 +28,11 @@ def validate_cat_path(config_params: Mapping):
 
     if isinstance(config_params["paths"]["cat_path"], str):
         cat_path = Path(config_params["paths"]["cat_path"])
-        full_cat_path = cat_path / config_params["cat_filename"]
+        full_cat_path = cat_path / config_params["file_names"]["cat_filename"]
         if not full_cat_path.is_file():
             # make sure that the path given leads to the correct file
             raise ValueError(
-                f"cat_path is not a valid path to the file {config_params['cat_filename']}"
+                f"cat_path is not a valid path to the file {config_params['file_names']['cat_filename']}"
             )
     else:
         # there is no path given to the cat_file

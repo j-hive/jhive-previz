@@ -317,6 +317,14 @@ def process_column_data(cat: Catalogue, field_params: Dict) -> Catalogue:
 
     for i in range(0, len(cat.input_columns)):
 
+        # if the column doesn't exist in the dataframe, add empty one to dictionary and move along
+        if cat.input_columns[i] not in cat.df.columns:
+            new_cols[cat.output_columns[i]] = pd.Series()
+            print(
+                f"Column {cat.input_columns[i]} not found in dataframe, creating empty column {cat.output_columns[i]}."
+            )
+            continue
+
         # only apply a function if conversion function is not None
         if cat.conversion_functions[i] is not None:
             # apply the conversion function to the associated column

@@ -19,7 +19,7 @@ ra:
   input_column_name: "ra"
   output_num_decimals: 6
 dec:
-  display: "Right Ascension"
+  display: "Declination"
   output_units: "Degrees"
   is_magnitude: false
   data_type: "float"

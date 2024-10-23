@@ -71,15 +71,21 @@ def add_min_max_val_to_json(initial_json_dict: Dict, whole_cat: pd.DataFrame) ->
 
         # only add in a min/max value if the column is an int or float type
         if initial_json_dict[colname]["data_type"] in ["float", "int"]:
-            min_val = whole_cat[colname].min()
-            max_val = whole_cat[colname].max()
+
+            if whole_cat[colname].dropna().empty:
+                # add in a min and max of 0 if the column is empty
+                min_val = 0.0
+                max_val = 0.0
+            else:
+                min_val = whole_cat[colname].min()
+                max_val = whole_cat[colname].max()
 
             if initial_json_dict[colname]["data_type"] == "int":
                 # make sure these values are integers if the column is an integer type
                 min_val = int(min_val)
                 max_val = int(max_val)
 
-            # add ths min and max values to the metadata json
+            # add the min and max values to the metadata json
             initial_json_dict[colname]["min_val"] = min_val
             initial_json_dict[colname]["max_val"] = max_val
 
