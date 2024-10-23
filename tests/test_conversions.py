@@ -6,10 +6,17 @@ from jhive_previz import conversions as conv
 from jhive_previz import dataproc
 
 
-def test_get_conversion_function():
+@pytest.mark.parametrize(
+    "input_unit,output_unit,expected",
+    [
+        ("microJansky", "magnitude", conv.flux_to_mag),
+        pytest.param("Jansky", "magnitude", conv.flux_to_mag, marks=pytest.mark.xfail),
+    ],
+)
+def test_get_conversion_function(input_unit, output_unit, expected):
     """Make sure that get_conversion_function works as expected"""
 
-    test = conv.get_conversion_function("microJansky", "magnitude")
+    test = conv.get_conversion_function(input_unit, output_unit)
 
     assert test == conv.flux_to_mag
 
