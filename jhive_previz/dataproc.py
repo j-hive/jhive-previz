@@ -229,6 +229,7 @@ def populate_column_information(
             # make sure that the id parameter is used for all files in addition to the main catalogue
             data_frames[base_file].input_columns.append("id")
             data_frames[base_file].output_columns.append("id")
+            data_frames[base_file].conversion_functions.append(None)
 
         # get column name that is in the input file and add to list of columns to use
         col_name = field_params[c]["input_column_name"]
@@ -282,7 +283,7 @@ def filter_column_values(column: pd.Series, col_field_params: Dict):
     # if there is a min or max value given for the column, replace any values outside this range with nans
     if min_val is not None and max_val is not None:
         # we have a min and a max
-        column = np.where(max_val >= column >= min_val, column, np.nan)
+        column = np.where(((max_val >= column) & (column >= min_val)), column, np.nan)
 
     elif min_val is not None and max_val is None:
         # we have only a min
@@ -407,7 +408,7 @@ def process_data(config_params: Mapping, field_params: Mapping) -> pd.DataFrame:
             if data_frames[name].loaded:
                 # if it is, convert any columns needed and join to previous table
                 data_frames[name] = process_column_data(data_frames[name], field_params)
-                new_df.join(data_frames[name].df.set_index("id"), on="id")
+                new_df = new_df.join(data_frames[name].df.set_index("id"), on="id")
 
             else:
                 # dataframe failed to load, all columns from it will be empty

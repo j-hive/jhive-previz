@@ -47,8 +47,8 @@ def test_populate_columns(setup_dataframes, load_config):
         setup_dataframes, load_config[0], load_config[1]
     )
 
-    assert "stellar_mass" in setup_dataframes["cat_filename"].columns_to_use
-    assert len(setup_dataframes["cat_filename"].columns_to_use) == 4
+    assert "stellar_mass" in setup_dataframes["cat_filename"].input_columns
+    assert len(setup_dataframes["cat_filename"].input_columns) == 4
 
 
 def test_filter_columns(load_config):
@@ -101,7 +101,7 @@ def test_process_column_data(load_config, setup_dataframes):
     assert "f333w_corr_1" not in setup_dataframes["cat_filename"].df.columns
     assert "abmag_f333w" in setup_dataframes["cat_filename"].df.columns
     assert len(setup_dataframes["cat_filename"].df.columns) == len(
-        setup_dataframes["cat_filename"].columns_to_use
+        setup_dataframes["cat_filename"].input_columns
     )
 
     # make sure new values are log of old ones
@@ -127,3 +127,16 @@ def test_process_data(get_processed_data, load_config):
     """Make sure that process_data is working as expected."""
 
     assert len(load_config[0]["columns_to_use"]) == len(get_processed_data.columns)
+
+
+def test_with_two_catalogues(load_config, test_output_path):
+
+    # alter the config
+    load_config[0]["columns_to_use"].append("abmag_f480w")
+
+    new_df = dataproc.process_data(load_config[0], load_config[1])
+
+    # make sure the column was added to the table correctly and there are blanks where there was no data
+    assert "abmag_f480w" in new_df.columns
+    assert np.isnan(new_df["abmag_f480w"].iloc[27])
+    assert "mass" in new_df.columns

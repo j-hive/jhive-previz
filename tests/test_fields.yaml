@@ -46,3 +46,17 @@ abmag_f444w:
   output_units: "magnitude"
   wl_micron: 0.430
   zero_point: 28.9
+abmag_f480w:
+  display: "Magnitude (F480W)"
+  data_type: "float"
+  file_name: "ez_filename"
+  filt_name: "F480W"
+  input_column_name: "f480w_corr_1"
+  input_units: "microJansky"
+  is_magnitude: True
+  filt_max_val: null
+  filt_min_val: 0.0
+  output_num_decimals: 3
+  output_units: "magnitude"
+  wl_micron: 0.480
+  zero_point: 28.9

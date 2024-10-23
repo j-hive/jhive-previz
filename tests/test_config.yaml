@@ -1,9 +1,11 @@
 paths:
   cat_path: "./tests/"
+  ez_path: "./tests/"
 
 field_name: "test-field"
 file_names:
   cat_filename: "test-data.csv"
+  ez_filename: "test-data-2.csv"
 
 output_file_suffix: "_test_output"
 output_path: "./tests/test_output/"
