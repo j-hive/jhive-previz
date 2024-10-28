@@ -14,7 +14,10 @@ from jhive_previz import dataproc
 @pytest.fixture(autouse=True)
 def load_config():
     """Load in the config files."""
-    return main.load_config("./tests/test_config.yaml", ["./tests/test_fields.yaml"])
+    return main.load_config(
+        "./tests/test_config.yaml",
+        ["./tests/test_fields.yaml", "./tests/test2_fields.yaml"],
+    )
 
 
 @pytest.fixture(autouse=True)

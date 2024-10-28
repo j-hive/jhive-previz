@@ -1,6 +1,6 @@
 # dense basis stuff
 file_name: "cat_filename"
-cat_id:
+id:
   display: "DJA Source ID"
   is_magnitude: false,
   data_type: "int"
@@ -214,11 +214,39 @@ t75_50:
   wl_micron: null
   zero_point: null
 chi2:
-  display: "Chi Squared of the fit"
+  display: "Chi Squared"
   data_type: "float"
   file_name: "db_filename"
   filt_name: null
   input_column_name: "chi2"
+  input_units: null
+  is_magnitude: False
+  filt_max_val: null
+  filt_min_val: null
+  output_num_decimals: 3
+  output_units: null
+  wl_micron: null
+  zero_point: null
+fit_flags:
+  display: "Fit Flags"
+  data_type: "float"
+  file_name: "db_filename"
+  filt_name: null
+  input_column_name: "fit_flags"
+  input_units: null
+  is_magnitude: False
+  filt_max_val: null
+  filt_min_val: null
+  output_num_decimals: 3
+  output_units: null
+  wl_micron: null
+  zero_point: null
+nbands:
+  display: "Number of Photometric Bands Used for Fit"
+  data_type: "int"
+  file_name: "db_filename"
+  filt_name: null
+  input_column_name: "nbands"
   input_units: null
   is_magnitude: False
   filt_max_val: null

@@ -15,9 +15,9 @@
 `logSFR100_50`: median log SFR for 100 Msol stars
 `logSFR300_50`: median log SFR for 300 Msol stars
 `logSFR1000_50`: median log SFR for 1000 Msol stars
-`t25_50`: median fraction of the age of the universe that galaxy formed 25% of its mass concentration
-`t50_50`: median fraction of the age of the universe that galaxy formed 50% of its mass concentration
-`t75_50`: median fraction of the age of the universe that galaxy formed 75% of its mass concentration
+`t25_50`: median fraction of the age of the universe that galaxy formed 25% of its mass
+`t50_50`: median fraction of the age of the universe that galaxy formed 50% of its mass
+`t75_50`: median fraction of the age of the universe that galaxy formed 75% of its mass
 `nparam`: number of tx parameters 
 `nbands`: number of good photometric bands used for the fit
 `chi2`: the fit likelihood

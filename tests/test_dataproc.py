@@ -138,9 +138,10 @@ def test_process_data(get_processed_data, load_config):
 
 
 def test_with_two_catalogues(load_config, test_output_path):
+    """Making sure that the process data function works as expected when using two catalogues"""
 
-    # alter the config
-    load_config[0]["columns_to_use"]["cat_filename"].append("abmag_f480w")
+    # alter the config to include columns from second data file
+    load_config[0]["columns_to_use"]["ez_filename"] = ["id", "abmag_f480w"]
 
     new_df = dataproc.process_data(load_config[0], load_config[1])
 
