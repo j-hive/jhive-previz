@@ -1,6 +1,6 @@
 from pathlib import Path
 import yaml
-from typing import Union, Mapping, Tuple
+from typing import Union, Mapping, Tuple, List, Dict
 import typer
 from typing_extensions import Annotated
 
@@ -88,30 +88,55 @@ def read_yaml(file_path: Union[Path, str]) -> Mapping:
     return config
 
 
-def load_config(config_path: Path, field_path: Path) -> Tuple[Mapping, Mapping]:
+def load_config(
+    config_path: Path, field_paths: List[Path]
+) -> Tuple[Mapping, List[Mapping]]:
     """Loads in the two config files and returns them as dictionaries.
+
+    Parameters
+    ----------
+    config_path: Path
+        The full path to the base config yaml file.
+    field_paths: List[Path]
+        The full paths to the fields yaml files.
 
     Returns
     -------
-    Tuple[Mapping, Mapping]
+    Tuple[Mapping, Dict[Mapping]]
         The config_params and field_params dictionaries.
     """
-    # read in the files
+
+    # read in the config file
     config_params = read_yaml(config_path)
-    field_params = read_yaml(field_path)
+
+    # read the field params files into a dictionary
+    field_params = {}
+
+    for i in range(0, len(field_paths)):
+        field_param = read_yaml(field_paths[i])
+        field_params[field_param["file_name"]] = field_param
 
     return config_params, field_params
 
 
-def validate_config_paths(config_path: str, field_path: str):
+def validate_config_paths(
+    config_path: str, field_paths: List[str]
+) -> Tuple[Path, List[Path]]:
     """Validates that the provided paths lead to files that exist.
 
     Parameters
     ----------
     config_path : str
         The full path to the config yaml file.
-    field_path : str
-        The full path to the fields yaml file.
+    field_paths : List[str]
+        The full paths to the fields yaml files.
+
+    Returns
+    -------
+    config_path : Path
+        The full path to the config yaml file as a Path object.
+    field_paths : List[Path]
+        The full paths to the fields yaml files as Path objects.
 
     Raises
     ------
@@ -120,12 +145,32 @@ def validate_config_paths(config_path: str, field_path: str):
     """
 
     config_path = Path(config_path)
-    field_path = Path(field_path)
+    new_field_paths = []
 
+    # validate the config file exists
     if not config_path.is_file():
         raise FileExistsError(f"Config file at {config_path} does not exist.")
-    if not field_path.is_file():
-        raise FileExistsError(f"Fields file at {field_path} does not exist.")
+
+    # make sure a field path is given and that it exists
+    if len(field_paths) <= 0:
+        raise ValueError("No field paths given")
+
+    if len(field_paths) == 1:
+        new_field_paths = [Path(field_paths[0])]
+
+        if not new_field_paths[0].is_file():
+            raise FileExistsError(f"Fields file at {field_path} does not exist.")
+
+    else:
+        # iterate through given field paths and check if they exist
+        for fp in field_paths:
+            field_path = Path(fp)
+            if not field_path.is_file():
+                raise FileExistsError(f"Fields file at {field_path} does not exist.")
+
+            new_field_paths.append(field_path)
+
+    return config_path, new_field_paths
 
 
 # Organizational function
@@ -133,9 +178,10 @@ def process_data_and_write_metadata(
     config_path: Annotated[
         str, typer.Option(help="The full path and file name of the base config file.")
     ] = "./base_config.yaml",
-    field_path: Annotated[
-        str, typer.Option(help="The full path and file name of the fields config file.")
-    ] = "./fields.yaml",
+    field_paths: Annotated[
+        List[str],
+        typer.Option(help="A list of full paths to the field config files."),
+    ] = ["./fields.yaml"],
 ):
     """The main function. This reads in the two config files, validates that
     the required parameters exist, and then creates the new filtered and converted
@@ -146,13 +192,13 @@ def process_data_and_write_metadata(
     ----------
     config_path: str, default = './base_config.yaml'
         The full path and file name of the base config yaml file.
-    field_path: str, default = './fields.yaml'
+    field_path: List[str], default = ['./fields.yaml']
         The full path and file name of the fields yaml file.
     """
 
     # get the config parameters
-    validate_config_paths(config_path, field_path)
-    config_params, field_params = load_config(config_path, field_path)
+    config_path, field_paths = validate_config_paths(config_path, field_paths)
+    config_params, field_params = load_config(config_path, field_paths)
 
     # validate and create the output path if necessary
     validate_cat_path(config_params)

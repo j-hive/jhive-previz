@@ -63,15 +63,21 @@ def test_filter_columns(load_config):
     df = dataproc.read_table(cat_path)
 
     # test that there were values less than min value
-    assert df[col_name].min() < load_config[1][out_col_name]["filt_min_val"]
+    assert (
+        df[col_name].min()
+        < load_config[1]["cat_filename"][out_col_name]["filt_min_val"]
+    )
 
     filtered_col = dataproc.filter_column_values(
-        df[col_name], load_config[1][out_col_name]
+        df[col_name], load_config[1]["cat_filename"][out_col_name]
     )
 
     # make sure the nans were added and also that the minimum is now above the min
     assert np.isnan(filtered_col.min())
-    assert np.nanmin(filtered_col) >= load_config[1][out_col_name]["filt_min_val"]
+    assert (
+        np.nanmin(filtered_col)
+        >= load_config[1]["cat_filename"][out_col_name]["filt_min_val"]
+    )
 
 
 def test_process_column_data(load_config, setup_dataframes):
@@ -95,7 +101,7 @@ def test_process_column_data(load_config, setup_dataframes):
 
     # convert any columns needed
     setup_dataframes["cat_filename"] = dataproc.process_column_data(
-        setup_dataframes["cat_filename"], load_config[1]
+        setup_dataframes["cat_filename"], load_config[1]["cat_filename"]
     )
 
     assert "f333w_corr_1" not in setup_dataframes["cat_filename"].df.columns
@@ -113,7 +119,7 @@ def test_process_column_data(load_config, setup_dataframes):
     assert setup_dataframes["cat_filename"].df["abmag_f333w"].iloc[
         10
     ] == conv.flux_to_mag(
-        old_df["f333w_corr_1"].iloc[10], load_config[1]["abmag_f333w"]
+        old_df["f333w_corr_1"].iloc[10], load_config[1]["cat_filename"]["abmag_f333w"]
     )
 
     # make sure that filtering happened
@@ -126,13 +132,15 @@ def test_process_column_data(load_config, setup_dataframes):
 def test_process_data(get_processed_data, load_config):
     """Make sure that process_data is working as expected."""
 
-    assert len(load_config[0]["columns_to_use"]) == len(get_processed_data.columns)
+    assert len(load_config[0]["columns_to_use"]["cat_filename"]) == len(
+        get_processed_data.columns
+    )
 
 
 def test_with_two_catalogues(load_config, test_output_path):
 
     # alter the config
-    load_config[0]["columns_to_use"].append("abmag_f480w")
+    load_config[0]["columns_to_use"]["cat_filename"].append("abmag_f480w")
 
     new_df = dataproc.process_data(load_config[0], load_config[1])
 

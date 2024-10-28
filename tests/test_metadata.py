@@ -13,7 +13,9 @@ def test_get_desired_column_metadata(load_config):
     )
 
     # make sure we got all the metadata we wanted
-    assert set(new_metadata.keys()) == set(load_config[0]["columns_to_use"])
+    assert set(new_metadata.keys()) == set(
+        load_config[0]["columns_to_use"]["cat_filename"]
+    )
     assert "display" in new_metadata["id"]
 
 

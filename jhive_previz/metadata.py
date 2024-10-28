@@ -27,25 +27,27 @@ def get_metadata_output_path(config_params: Mapping) -> Path:
     return output_path / metadata_output_filename
 
 
-def get_desired_column_metadata(
-    field_params: Mapping, columns_to_use: List[str]
-) -> Dict:
+def get_desired_column_metadata(field_params: Mapping, columns_to_use: Dict) -> Dict:
     """Creates a metadata dictionary from the field parameters with only the desired columns from the main config.
 
     Parameters
     ----------
     field_params : Mapping
         The metadata for all columns.
-    columns_to_use : List[str]
-        The columns to be included in the metadata file.
+    columns_to_use : Dict[str]
+        The dictionary of columns to be included in the metadata file.
 
     Returns
     -------
     Dict
         The dictionary of metadata for the desired columns.
     """
-    # get the subsection of the field_params that matches the columns to use
-    initial_json_dict = {c: field_params[c] for c in columns_to_use}
+    # get the subsection of the field_params that matches the columns to use for each fields file
+    initial_json_dict = {
+        c: field_params[filename][c]
+        for filename, columns in columns_to_use.items()
+        for c in columns
+    }
 
     return initial_json_dict
 

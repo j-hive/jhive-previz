@@ -1,0 +1,258 @@
+# dense basis stuff
+file_name: "cat_filename"
+cat_id:
+  display: "DJA Source ID"
+  is_magnitude: false,
+  data_type: "int"
+  output_units: null
+  input_units: null
+  file_name: "db_filename"
+  input_column_name: "CAT_ID"
+  output_num_decimals: null
+ra:
+  display: "Right Ascension"
+  output_units: "Degrees"
+  is_magnitude: false
+  data_type: "float"
+  input_units: "Degrees"
+  filt_max_val: null
+  filt_min_val: null
+  file_name: "db_filename"
+  input_column_name: "RA"
+  output_num_decimals: 6
+dec:
+  display: "Declination"
+  output_units: "Degrees"
+  is_magnitude: false
+  data_type: "float"
+  input_units: "Degrees"
+  filt_max_val: null
+  filt_min_val: null
+  file_name: "db_filename"
+  input_column_name: "DEC"
+  output_num_decimals: 6
+z_phot:
+  display: "Photometric Redshift"
+  data_type: "float"
+  file_name: "db_filename"
+  filt_name: null
+  input_column_name: "z_phot"
+  input_units: null
+  is_magnitude: False
+  filt_max_val: null
+  filt_min_val: null
+  output_num_decimals: 3
+  output_units: null
+  wl_micron: null
+  zero_point: null
+logM_50:
+  display: "Current Stellar Mass"
+  data_type: "float"
+  file_name: "db_filename"
+  filt_name: null
+  input_column_name: "logM_50"
+  input_units: "log Solar Masses"
+  is_magnitude: False
+  filt_max_val: null
+  filt_min_val: null
+  output_num_decimals: 3
+  output_units: "log Solar Masses"
+  wl_micron: null
+  zero_point: null
+logSFRinst_50:
+  display: "Star Formation Rate"
+  data_type: "float"
+  file_name: "db_filename"
+  filt_name: null
+  input_column_name: "logSFRinst_50"
+  input_units: "log Solar Masses per year"
+  is_magnitude: False
+  filt_max_val: null
+  filt_min_val: null
+  output_num_decimals: 3
+  output_units: "log Solar Masses per year"
+  wl_micron: null
+  zero_point: null
+logZsol_50:
+  display: "Metallicity"
+  data_type: "float"
+  file_name: "db_filename"
+  filt_name: null
+  input_column_name: "logZsol_50"
+  input_units: "log Solar"
+  is_magnitude: False
+  filt_max_val: null
+  filt_min_val: null
+  output_num_decimals: 3
+  output_units: "log Solar"
+  wl_micron: null
+  zero_point: null
+Av_50:
+  display: "Extinction (V)"
+  data_type: "float"
+  file_name: "db_filename"
+  filt_name: null
+  input_column_name: "Av_50"
+  input_units: "magnitudes"
+  is_magnitude: False
+  filt_max_val: null
+  filt_min_val: null
+  output_num_decimals: 3
+  output_units: "magnitudes"
+  wl_micron: null
+  zero_point: null
+logMt_50:
+  display: "Total Stellar Mass Formed"
+  data_type: "float"
+  file_name: "db_filename"
+  filt_name: null
+  input_column_name: "logMt_50"
+  input_units: "log Solar Masses"
+  is_magnitude: False
+  filt_max_val: null
+  filt_min_val: null
+  output_num_decimals: 3
+  output_units: "log Solar Masses"
+  wl_micron: null
+  zero_point: null
+logSFR10_50:
+  display: "Specific Star Formation Rate for 10 Solar Masses"
+  data_type: "float"
+  file_name: "db_filename"
+  filt_name: null
+  input_column_name: "logSFR10_50"
+  input_units: "log Solar Masses per year per 10 Solar Masses"
+  is_magnitude: False
+  filt_max_val: null
+  filt_min_val: null
+  output_num_decimals: 3
+  output_units: "log Solar Masses per year per 10 Solar Masses"
+  wl_micron: null
+  zero_point: null
+logSFR100_50:
+  display: "Specific Star Formation Rate for 100 Solar Masses"
+  data_type: "float"
+  file_name: "db_filename"
+  filt_name: null
+  input_column_name: "logSFR100_50"
+  input_units: "log Solar Masses per year per 100 Solar Masses"
+  is_magnitude: False
+  filt_max_val: null
+  filt_min_val: null
+  output_num_decimals: 3
+  output_units: "log Solar Masses per year per 100 Solar Masses"
+  wl_micron: null
+  zero_point: null
+logSFR300_50:
+  display: "Specific Star Formation Rate for 300 Solar Masses"
+  data_type: "float"
+  file_name: "db_filename"
+  filt_name: null
+  input_column_name: "logSFR300_50"
+  input_units: "log Solar Masses per year per 300 Solar Masses"
+  is_magnitude: False
+  filt_max_val: null
+  filt_min_val: null
+  output_num_decimals: 3
+  output_units: "log Solar Masses per year per 300 Solar Masses"
+  wl_micron: null
+  zero_point: null
+logSFR1000_50:
+  display: "Specific Star Formation Rate for 1000 Solar Masses"
+  data_type: "float"
+  file_name: "db_filename"
+  filt_name: null
+  input_column_name: "logSFR1000_50"
+  input_units: "log Solar Masses per year per 1000 Solar Masses"
+  is_magnitude: False
+  filt_max_val: null
+  filt_min_val: null
+  output_num_decimals: 3
+  output_units: "log Solar Masses per year per 1000 Solar Masses"
+  wl_micron: null
+  zero_point: null
+t25_50:
+  display: "Time the Galaxy formed 25% of its Total Mass"
+  data_type: "float"
+  file_name: "db_filename"
+  filt_name: null
+  input_column_name: "t25_50"
+  input_units: "Fraction of the Age of the Universe"
+  is_magnitude: False
+  filt_max_val: null
+  filt_min_val: null
+  output_num_decimals: 3
+  output_units: "Fraction of the Age of the Universe"
+  wl_micron: null
+  zero_point: null
+t50_50:
+  display: "Time the Galaxy formed 50% of its Total Mass"
+  data_type: "float"
+  file_name: "db_filename"
+  filt_name: null
+  input_column_name: "t50_50"
+  input_units: "Fraction of the Age of the Universe"
+  is_magnitude: False
+  filt_max_val: null
+  filt_min_val: null
+  output_num_decimals: 3
+  output_units: "Fraction of the Age of the Universe"
+  wl_micron: null
+  zero_point: null
+t75_50:
+  display: "Time the Galaxy formed 75% of its Total Mass"
+  data_type: "float"
+  file_name: "db_filename"
+  filt_name: null
+  input_column_name: "t75_50"
+  input_units: "Fraction of the Age of the Universe"
+  is_magnitude: False
+  filt_max_val: null
+  filt_min_val: null
+  output_num_decimals: 3
+  output_units: "Fraction of the Age of the Universe"
+  wl_micron: null
+  zero_point: null
+chi2:
+  display: "Chi Squared of the fit"
+  data_type: "float"
+  file_name: "db_filename"
+  filt_name: null
+  input_column_name: "chi2"
+  input_units: null
+  is_magnitude: False
+  filt_max_val: null
+  filt_min_val: null
+  output_num_decimals: 3
+  output_units: null
+  wl_micron: null
+  zero_point: null
+# do we want to exclude these parameters?
+zfit_50:
+  display: "Photometric Redshift"
+  data_type: "float"
+  file_name: "db_filename"
+  filt_name: null
+  input_column_name: "zfit_50"
+  input_units: null
+  is_magnitude: False
+  filt_max_val: null
+  filt_min_val: null
+  output_num_decimals: 3
+  output_units: null
+  wl_micron: null
+  zero_point: null
+logSFRtuple_50:
+  display: "Star Formation Rate"
+  data_type: "float"
+  file_name: "db_filename"
+  filt_name: null
+  input_column_name: "logSFRtuple_50"
+  input_units: "log Solar Masses per year"
+  is_magnitude: False
+  filt_max_val: null
+  filt_min_val: null
+  output_num_decimals: 3
+  output_units: "log Solar Masses per year"
+  wl_micron: null
+  zero_point: null

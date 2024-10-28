@@ -1,3 +1,4 @@
+file_name: "cat_filename"
 id:
   display: "DJA Source ID"
   is_magnitude: false,

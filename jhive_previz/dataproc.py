@@ -212,12 +212,8 @@ def populate_column_information(
         Returns the data frames dictionary with updated values.
     """
 
-    # iterate through output columns
-    for c in config_params["columns_to_use"]:
-
-        # check for which file to look in for this column
-        base_file = field_params[c]["file_name"]
-
+    # iterate through output columns for each catalog file
+    for base_file, columns in config_params["columns_to_use"].items():
         if base_file not in data_frames.keys():
 
             # add the catalog to the dictionary of data frames
@@ -226,35 +222,49 @@ def populate_column_information(
                 file_path=get_cat_filepath(base_file, config_params),
             )
 
-            # make sure that the id parameter is used for all files in addition to the main catalogue
-            data_frames[base_file].input_columns.append("id")
-            data_frames[base_file].output_columns.append("id")
-            data_frames[base_file].conversion_functions.append(None)
+        for c in columns:
 
-        # get column name that is in the input file and add to list of columns to use
-        col_name = field_params[c]["input_column_name"]
-        data_frames[base_file].input_columns.append(col_name)
-        data_frames[base_file].output_columns.append(c)
+            # check for which file to look in for this column
+            # base_file = field_params[c]["file_name"]
 
-        # add to columns to round if there is a number of decimals supplied
-        if field_params[c]["output_num_decimals"] is not None:
-            data_frames[base_file].decimals_to_round[c] = field_params[c][
-                "output_num_decimals"
-            ]
+            # if base_file not in data_frames.keys():
 
-        # get any conversion functions needed for columns
-        try:
-            # add the function to the class
-            data_frames[base_file].conversion_functions.append(
-                conversions.get_conversion_function(
-                    field_params[c]["input_units"], field_params[c]["output_units"]
+            #     # add the catalog to the dictionary of data frames
+            #     data_frames[base_file] = Catalogue(
+            #         file_name=config_params["file_names"][base_file],
+            #         file_path=get_cat_filepath(base_file, config_params),
+            #     )
+
+            #     # make sure that the id parameter is used for all files in addition to the main catalogue
+            #     data_frames[base_file].input_columns.append("id")
+            #     data_frames[base_file].output_columns.append("id")
+            #     data_frames[base_file].conversion_functions.append(None)
+
+            # get column name that is in the input file and add to list of columns to use
+            col_name = field_params[base_file][c]["input_column_name"]
+            data_frames[base_file].input_columns.append(col_name)
+            data_frames[base_file].output_columns.append(c)
+
+            # add to columns to round if there is a number of decimals supplied
+            if field_params[base_file][c]["output_num_decimals"] is not None:
+                data_frames[base_file].decimals_to_round[c] = field_params[base_file][
+                    c
+                ]["output_num_decimals"]
+
+            # get any conversion functions needed for columns
+            try:
+                # add the function to the class
+                data_frames[base_file].conversion_functions.append(
+                    conversions.get_conversion_function(
+                        field_params[base_file][c]["input_units"],
+                        field_params[base_file][c]["output_units"],
+                    )
                 )
-            )
-        except ValueError:
-            # no conversion function exists for these units
-            raise UnitConversionError(
-                f"Unit conversion failed for column {c}, no conversion function exists for {field_params[c]['input_units']} to {field_params[c]['output_units']}."
-            )
+            except ValueError:
+                # no conversion function exists for these units
+                raise UnitConversionError(
+                    f"Unit conversion failed for column {c}, no conversion function exists for {field_params[base_file][c]['input_units']} to {field_params[base_file][c]['output_units']}."
+                )
 
     return data_frames
 
@@ -305,7 +315,7 @@ def process_column_data(cat: Catalogue, field_params: Dict) -> Catalogue:
     cat : Catalogue
         The class object that stores the dataframe and the columns to use and conversion function lists.
     field_params : Dict
-        The field parameters dictionary for that column.
+        The field parameters dictionary for that catalog.
 
     Returns
     -------
@@ -388,7 +398,7 @@ def process_data(config_params: Mapping, field_params: Mapping) -> pd.DataFrame:
         "cat_filename", data_frames["cat_filename"]
     )
     data_frames["cat_filename"] = process_column_data(
-        data_frames["cat_filename"], field_params
+        data_frames["cat_filename"], field_params["cat_filename"]
     )
 
     # start by making subtable of catalogue table columns
@@ -396,7 +406,9 @@ def process_data(config_params: Mapping, field_params: Mapping) -> pd.DataFrame:
 
     # if there is one or more additional dfs loaded
     if len(data_frames.keys()) > 1:
+
         for name in data_frames.keys():
+
             if name == "cat_filename":
                 # skip, this one is already completed
                 continue
@@ -404,10 +416,11 @@ def process_data(config_params: Mapping, field_params: Mapping) -> pd.DataFrame:
             # load in data frame
             data_frames[name] = load_dataframe(data_frames[name], data_frames[name])
 
-            # make sure data frame is loaded
             if data_frames[name].loaded:
-                # if it is, convert any columns needed and join to previous table
-                data_frames[name] = process_column_data(data_frames[name], field_params)
+                # if data frame is loaded, convert any columns needed and join to previous table
+                data_frames[name] = process_column_data(
+                    data_frames[name], field_params[name]
+                )
                 new_df = new_df.join(data_frames[name].df.set_index("id"), on="id")
 
             else:
