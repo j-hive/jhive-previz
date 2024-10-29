@@ -181,7 +181,7 @@ def process_data_and_write_metadata(
     field_paths: Annotated[
         List[str],
         typer.Option(help="A list of full paths to the field config files."),
-    ] = ["./fields.yaml"],
+    ] = ["./fields.yaml", "./db_fields.yaml"],
 ):
     """The main function. This reads in the two config files, validates that
     the required parameters exist, and then creates the new filtered and converted

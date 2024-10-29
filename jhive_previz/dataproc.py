@@ -26,6 +26,7 @@ class Catalogue(BaseModel):
 
     file_name: str
     file_path: Optional[Path]
+    file_format: str
     loaded: bool = False
     df: PandasDataFrame | None = None
     input_columns: List = []
@@ -92,7 +93,7 @@ def get_data_output_filepath(config_params: Mapping) -> Path:
     return output_path / data_output_filename
 
 
-def read_table(data_file_path: Path) -> pd.DataFrame:
+def read_table(data_file_path: Path, file_format: str) -> pd.DataFrame:
     """Reads the data fits file into a pandas dataframe via astropy.
 
     Parameters
@@ -107,7 +108,7 @@ def read_table(data_file_path: Path) -> pd.DataFrame:
     """
 
     # read in table as astropy table
-    phot_cat = Table.read(data_file_path)
+    phot_cat = Table.read(data_file_path, format=file_format)
 
     # now convert to pandas
     cat_df = phot_cat.to_pandas()
@@ -164,7 +165,7 @@ def load_dataframe(file_name: str, cat: Catalogue) -> Catalogue:
     if cat.file_path is not None:
         # try to load in file
         try:
-            df = read_table(cat.file_path)
+            df = read_table(cat.file_path, cat.file_format)
 
             # if successful, update the data_frames dictionary with the dataframe
             cat.loaded = True
@@ -220,6 +221,7 @@ def populate_column_information(
             data_frames[base_file] = Catalogue(
                 file_name=config_params["file_names"][base_file],
                 file_path=get_cat_filepath(base_file, config_params),
+                file_format=field_params[base_file]["file_format"],
             )
 
         for c in columns:
@@ -390,6 +392,7 @@ def process_data(config_params: Mapping, field_params: Mapping) -> pd.DataFrame:
     data_frames["cat_filename"] = Catalogue(
         file_name=config_params["file_names"]["cat_filename"],
         file_path=get_cat_filepath("cat_filename", config_params),
+        file_format=field_params["cat_filename"]["file_format"],
     )
     data_frames = populate_column_information(data_frames, config_params, field_params)
 
@@ -427,8 +430,10 @@ def process_data(config_params: Mapping, field_params: Mapping) -> pd.DataFrame:
                 # dataframe failed to load, all columns from it will be empty
                 # get list of old columns + new columns and make new dataframe with old columns and empty columns
                 old_columns = list(new_df.columns)
+                data_frames[name].output_columns.remove(
+                    "id"
+                )  # make sure we don't have duplicate id columns
                 new_columns = old_columns + data_frames[name].output_columns
-
                 new_df = new_df.reindex(columns=new_columns)
 
     # write out the data to a csv file
