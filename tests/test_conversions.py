@@ -26,17 +26,17 @@ def test_flux_to_mag(load_config):
 
     # read in test data
     file_path = dataproc.get_cat_filepath("cat_filename", load_config[0])
-    df = dataproc.read_table(file_path)
+    df = dataproc.read_table(file_path, "ascii.csv")
 
     # convert a column
     converted = conv.flux_to_mag(
-        df["f444w_corr_1"], load_config[1]["cat_filename"]["abmag_f444w"]
+        df["f444w_corr_1"], load_config[1]["cat_filename"]["columns"]["abmag_f444w"]
     )
 
     # test that the object returned is correct and the converted value matches
     test_result = (
         -2.5 * np.log10(df["f444w_corr_1"].iloc[6])
-        + load_config[1]["cat_filename"]["abmag_f444w"]["zero_point"]
+        + load_config[1]["cat_filename"]["columns"]["abmag_f444w"]["zero_point"]
     )
     assert converted.iloc[6] == test_result
     assert isinstance(converted, pd.Series)

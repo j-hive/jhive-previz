@@ -45,7 +45,7 @@ def get_desired_column_metadata(field_params: Mapping, columns_to_use: Dict) -> 
     """
     # get the subsection of the field_params that matches the columns to use for each fields file
     initial_json_dict = {
-        c: field_params[filename][c]
+        c: field_params[filename]["columns"][c]
         for filename, columns in columns_to_use.items()
         for c in columns
     }

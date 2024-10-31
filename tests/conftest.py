@@ -15,8 +15,8 @@ from jhive_previz import dataproc
 def load_config():
     """Load in the config files."""
     return main.load_config(
-        "./base_config.yaml",
-        ["./fields.yaml", "./db_fields.yaml"],
+        "./tests/test_config.yaml",
+        ["./tests/test_fields.yaml", "./tests/test2_fields.yaml"],
     )
 
 

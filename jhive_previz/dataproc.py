@@ -243,23 +243,23 @@ def populate_column_information(
             #     data_frames[base_file].conversion_functions.append(None)
 
             # get column name that is in the input file and add to list of columns to use
-            col_name = field_params[base_file][c]["input_column_name"]
+            col_name = field_params[base_file]["columns"][c]["input_column_name"]
             data_frames[base_file].input_columns.append(col_name)
             data_frames[base_file].output_columns.append(c)
 
             # add to columns to round if there is a number of decimals supplied
-            if field_params[base_file][c]["output_num_decimals"] is not None:
+            if field_params[base_file]["columns"][c]["output_num_decimals"] is not None:
                 data_frames[base_file].decimals_to_round[c] = field_params[base_file][
-                    c
-                ]["output_num_decimals"]
+                    "columns"
+                ][c]["output_num_decimals"]
 
             # get any conversion functions needed for columns
             try:
                 # add the function to the class
                 data_frames[base_file].conversion_functions.append(
                     conversions.get_conversion_function(
-                        field_params[base_file][c]["input_units"],
-                        field_params[base_file][c]["output_units"],
+                        field_params[base_file]["columns"][c]["input_units"],
+                        field_params[base_file]["columns"][c]["output_units"],
                     )
                 )
             except ValueError:
@@ -343,15 +343,16 @@ def process_column_data(cat: Catalogue, field_params: Dict) -> Catalogue:
             # apply the conversion function to the associated column
             new_cols[cat.output_columns[i]] = cat.df[cat.input_columns[i]].apply(
                 cat.conversion_functions[i],
-                field_params=field_params[cat.output_columns[i]],
+                field_params=field_params["columns"][cat.output_columns[i]],
             )
         else:
             new_cols[cat.output_columns[i]] = cat.df[cat.input_columns[i]]
 
         # filter values in columns with floats to ensure they are finite and fall within the given range
-        if field_params[cat.output_columns[i]]["data_type"] == "float":
+        if field_params["columns"][cat.output_columns[i]]["data_type"] == "float":
             new_cols[cat.output_columns[i]] = filter_column_values(
-                new_cols[cat.output_columns[i]], field_params[cat.output_columns[i]]
+                new_cols[cat.output_columns[i]],
+                field_params["columns"][cat.output_columns[i]],
             )
 
     # replace catalogue dataframe with new dataframe

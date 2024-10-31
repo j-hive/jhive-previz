@@ -16,6 +16,7 @@ def setup_dataframes(load_config):
     data_frames["cat_filename"] = dataproc.Catalogue(
         file_name=load_config[0]["file_names"]["cat_filename"],
         file_path=dataproc.get_cat_filepath("cat_filename", load_config[0]),
+        file_format=load_config[1]["cat_filename"]["file_format"],
     )
     return data_frames
 
@@ -24,7 +25,9 @@ def setup_dataframes(load_config):
 def create_cat(load_config):
     file_path = dataproc.get_cat_filepath("cat_filename", load_config[0])
     return dataproc.Catalogue(
-        file_name=load_config[0]["file_names"]["cat_filename"], file_path=file_path
+        file_name=load_config[0]["file_names"]["cat_filename"],
+        file_path=file_path,
+        file_format=load_config[1]["cat_filename"]["file_format"],
     )
 
 
@@ -60,23 +63,23 @@ def test_filter_columns(load_config):
 
     # test data frame
     cat_path = dataproc.get_cat_filepath("cat_filename", load_config[0])
-    df = dataproc.read_table(cat_path)
+    df = dataproc.read_table(cat_path, load_config[1]["cat_filename"]["file_format"])
 
     # test that there were values less than min value
     assert (
         df[col_name].min()
-        < load_config[1]["cat_filename"][out_col_name]["filt_min_val"]
+        < load_config[1]["cat_filename"]["columns"][out_col_name]["filt_min_val"]
     )
 
     filtered_col = dataproc.filter_column_values(
-        df[col_name], load_config[1]["cat_filename"][out_col_name]
+        df[col_name], load_config[1]["cat_filename"]["columns"][out_col_name]
     )
 
     # make sure the nans were added and also that the minimum is now above the min
     assert np.isnan(filtered_col.min())
     assert (
         np.nanmin(filtered_col)
-        >= load_config[1]["cat_filename"][out_col_name]["filt_min_val"]
+        >= load_config[1]["cat_filename"]["columns"][out_col_name]["filt_min_val"]
     )
 
 
@@ -119,7 +122,8 @@ def test_process_column_data(load_config, setup_dataframes):
     assert setup_dataframes["cat_filename"].df["abmag_f333w"].iloc[
         10
     ] == conv.flux_to_mag(
-        old_df["f333w_corr_1"].iloc[10], load_config[1]["cat_filename"]["abmag_f333w"]
+        old_df["f333w_corr_1"].iloc[10],
+        load_config[1]["cat_filename"]["columns"]["abmag_f333w"],
     )
 
     # make sure that filtering happened
