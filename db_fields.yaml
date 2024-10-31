@@ -117,59 +117,59 @@ columns:
     wl_micron: null
     zero_point: null
   logSFR10_50:
-    display: "Specific Star Formation Rate for 10 Solar Masses"
+    display: "Average Star Formation Rate for last 10 Myr"
     data_type: "float"
     file_name: "db_filename"
     filt_name: null
     input_column_name: "logSFR10_50"
-    input_units: "log Solar Masses per year per 10 Solar Masses"
+    input_units: "log Solar Masses per year"
     is_magnitude: False
     filt_max_val: null
     filt_min_val: null
     output_num_decimals: 3
-    output_units: "log Solar Masses per year per 10 Solar Masses"
+    output_units: "log Solar Masses per year"
     wl_micron: null
     zero_point: null
   logSFR100_50:
-    display: "Specific Star Formation Rate for 100 Solar Masses"
+    display: "Average Star Formation Rate for last 100 Myr"
     data_type: "float"
     file_name: "db_filename"
     filt_name: null
     input_column_name: "logSFR100_50"
-    input_units: "log Solar Masses per year per 100 Solar Masses"
+    input_units: "log Solar Masses per year"
     is_magnitude: False
     filt_max_val: null
     filt_min_val: null
     output_num_decimals: 3
-    output_units: "log Solar Masses per year per 100 Solar Masses"
+    output_units: "log Solar Masses per year"
     wl_micron: null
     zero_point: null
   logSFR300_50:
-    display: "Specific Star Formation Rate for 300 Solar Masses"
+    display: "Average Star Formation Rate for last 300 Myr"
     data_type: "float"
     file_name: "db_filename"
     filt_name: null
     input_column_name: "logSFR300_50"
-    input_units: "log Solar Masses per year per 300 Solar Masses"
+    input_units: "log Solar Masses per year"
     is_magnitude: False
     filt_max_val: null
     filt_min_val: null
     output_num_decimals: 3
-    output_units: "log Solar Masses per year per 300 Solar Masses"
+    output_units: "log Solar Masses per year"
     wl_micron: null
     zero_point: null
   logSFR1000_50:
-    display: "Specific Star Formation Rate for 1000 Solar Masses"
+    display: "Average Star Formation Rate for last 1000 Myr"
     data_type: "float"
     file_name: "db_filename"
     filt_name: null
     input_column_name: "logSFR1000_50"
-    input_units: "log Solar Masses per year per 1000 Solar Masses"
+    input_units: "log Solar Masses per year"
     is_magnitude: False
     filt_max_val: null
     filt_min_val: null
     output_num_decimals: 3
-    output_units: "log Solar Masses per year per 1000 Solar Masses"
+    output_units: "log Solar Masses per year"
     wl_micron: null
     zero_point: null
   t25_50:

@@ -11,10 +11,10 @@
 `zfit_50`: the fitted redshift, usually ~ z_phot
 `logMt_50`: median log total formed stellar mass in solar masses
 `logSFRtuple_50`: median log SFR (internal parameter, mostly equivalent to SFRinst)
-`logSFR10_50`: median log SFR for 10 Msol stars
-`logSFR100_50`: median log SFR for 100 Msol stars
-`logSFR300_50`: median log SFR for 300 Msol stars
-`logSFR1000_50`: median log SFR for 1000 Msol stars
+`logSFR10_50`: median log SFR over last 10 Myr
+`logSFR100_50`: median log SFR over last 100 Myr
+`logSFR300_50`: median log SFR over last 300 Myr
+`logSFR1000_50`: median log SFR over last 1000 Myr
 `t25_50`: median fraction of the age of the universe that galaxy formed 25% of its mass
 `t50_50`: median fraction of the age of the universe that galaxy formed 50% of its mass
 `t75_50`: median fraction of the age of the universe that galaxy formed 75% of its mass
