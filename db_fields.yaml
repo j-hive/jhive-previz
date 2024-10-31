@@ -61,7 +61,7 @@ columns:
     wl_micron: null
     zero_point: null
   logSFRinst_50:
-    display: "Star Formation Rate"
+    display: "SFR"
     data_type: "float"
     file_name: "db_filename"
     filt_name: null
@@ -117,7 +117,7 @@ columns:
     wl_micron: null
     zero_point: null
   logSFR10_50:
-    display: "Average Star Formation Rate for last 10 Myr"
+    display: "Average SFR (10 Myr)"
     data_type: "float"
     file_name: "db_filename"
     filt_name: null
@@ -131,7 +131,7 @@ columns:
     wl_micron: null
     zero_point: null
   logSFR100_50:
-    display: "Average Star Formation Rate for last 100 Myr"
+    display: "Average SFR (100 Myr)"
     data_type: "float"
     file_name: "db_filename"
     filt_name: null
@@ -145,7 +145,7 @@ columns:
     wl_micron: null
     zero_point: null
   logSFR300_50:
-    display: "Average Star Formation Rate for last 300 Myr"
+    display: "Average SFR (300 Myr)"
     data_type: "float"
     file_name: "db_filename"
     filt_name: null
@@ -159,7 +159,7 @@ columns:
     wl_micron: null
     zero_point: null
   logSFR1000_50:
-    display: "Average Star Formation Rate for last 1000 Myr"
+    display: "Average SFR (1000 Myr)"
     data_type: "float"
     file_name: "db_filename"
     filt_name: null
@@ -271,7 +271,7 @@ columns:
     wl_micron: null
     zero_point: null
   logSFRtuple_50:
-    display: "Star Formation Rate"
+    display: "SFR"
     data_type: "float"
     file_name: "db_filename"
     filt_name: null
