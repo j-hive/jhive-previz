@@ -1,5 +1,5 @@
 file_name: "mf_filename"
-file_format: "ascii.commented_header"
+file_format: "ascii"
 columns:
   id:
     display: "DJA Source ID"
@@ -50,7 +50,7 @@ columns:
     wl_micron: null
     zero_point: null
   f150w-clear-sersic:
-    display: "sersic (F150W)"
+    display: "Sersic (F150W)"
     is_magnitude: false,
     data_type: "float"
     output_units: null
@@ -62,7 +62,7 @@ columns:
     wl_micron: null
     zero_point: null
   f150w-clear-axratio:
-    display: "Axis Ratio (F150W)"
+    display: "Model Axis Ratio (F150W)"
     is_magnitude: false,
     data_type: "float"
     output_units: null

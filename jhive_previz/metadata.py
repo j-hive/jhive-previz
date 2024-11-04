@@ -28,7 +28,9 @@ def get_metadata_output_path(config_params: Mapping) -> Path:
     return output_path / metadata_output_filename
 
 
-def get_desired_column_metadata(field_params: Mapping, columns_to_use: Dict) -> Dict:
+def get_desired_column_metadata(
+    field_params: Mapping, columns_to_use: Dict, whole_cat: pd.DataFrame
+) -> Dict:
     """Creates a metadata dictionary from the field parameters with only the desired columns from the main config.
 
     Parameters
@@ -44,18 +46,21 @@ def get_desired_column_metadata(field_params: Mapping, columns_to_use: Dict) -> 
         The dictionary of metadata for the desired columns.
     """
     # get the subsection of the field_params that matches the columns to use for each fields file
-    initial_json_dict = {
-        c: field_params[filename]["columns"][c]
-        for filename, columns in columns_to_use.items()
-        for c in columns
-    }
+    # where those columns also exist in the dataframe
+    initial_json_dict = {}
+
+    for filename, columns in columns_to_use.items():
+        for c in columns:
+            if c in whole_cat.columns:
+                initial_json_dict[c] = field_params[filename]["columns"][c]
 
     return initial_json_dict
 
 
 def add_min_max_val_to_json(initial_json_dict: Dict, whole_cat: pd.DataFrame) -> Dict:
     """Takes an existing metadata dictionary, and adds the min and max value of each column
-    that contains ints or floats to the dictionary.
+    that contains ints or floats to the dictionary. It also removes any metadata columns from the
+    dictionary that don't exist in the dataframe.
 
     Parameters
     ----------
@@ -80,6 +85,7 @@ def add_min_max_val_to_json(initial_json_dict: Dict, whole_cat: pd.DataFrame) ->
                 min_val = 0.0
                 max_val = 0.0
             else:
+                # calculate the max and min
                 min_val = whole_cat[colname].min()
                 max_val = whole_cat[colname].max()
 
@@ -162,7 +168,7 @@ def create_metadata_file(
 
     # get the relevant columns in the json
     initial_json_dict = get_desired_column_metadata(
-        field_params, config_params["columns_to_use"]
+        field_params, config_params["columns_to_use"], whole_cat
     )
     initial_json_dict = add_min_max_val_to_json(initial_json_dict, whole_cat)
 

@@ -1,11 +1,13 @@
 paths:
   cat_path: "./data/"
   db_path: "./data/"
+  mf_path: "./data/"
 
 field_name: "ceers-full-grizli-v7.2"
 file_names:
   cat_filename: "ceers-full-grizli-v7.2-fix_phot_apcorr.fits"
   db_filename: "ceers-full_v7.2_DB_catalog_small.cat"
+  mf_filename: "file.csv"
 
 output_file_suffix: "_jhive_viz_v1"
 output_path: "./output/"
