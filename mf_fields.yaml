@@ -1,0 +1,75 @@
+file_name: "mf_filename"
+file_format: "ascii.commented_header"
+columns:
+  id:
+    display: "DJA Source ID"
+    is_magnitude: false,
+    data_type: "int"
+    output_units: null
+    input_units: null
+    input_column_name: "object"
+    filt_max_val: null
+    filt_min_val: null
+    output_num_decimals: null
+    wl_micron: null
+    zero_point: null
+  f150w-clear-use:
+    display: "Useablity (F150W)"
+    is_magnitude: false,
+    data_type: "bool"
+    output_units: null
+    input_units: null
+    input_column_name: "use (f150w-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    output_num_decimals: null
+    wl_micron: null
+    zero_point: null
+  f150w-clear-sb:
+    display: "Surface Brightness (F150W)"
+    is_magnitude: false,
+    data_type: "float"
+    output_units: null
+    input_units: null
+    input_column_name: "surface brightness (f150w-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    output_num_decimals: null
+    wl_micron: null
+    zero_point: null
+  f150w-clear-reff:
+    display: "Effective Radius (F150W)"
+    is_magnitude: false,
+    data_type: "float"
+    output_units: null
+    input_units: null
+    input_column_name: "effective radius (f150w-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    output_num_decimals: null
+    wl_micron: null
+    zero_point: null
+  f150w-clear-sersic:
+    display: "sersic (F150W)"
+    is_magnitude: false,
+    data_type: "float"
+    output_units: null
+    input_units: null
+    input_column_name: "sersic (f150w-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    output_num_decimals: null
+    wl_micron: null
+    zero_point: null
+  f150w-clear-axratio:
+    display: "Axis Ratio (F150W)"
+    is_magnitude: false,
+    data_type: "float"
+    output_units: null
+    input_units: null
+    input_column_name: "axis ratio (f150w-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    output_num_decimals: null
+    wl_micron: null
+    zero_point: null

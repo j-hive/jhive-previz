@@ -7,9 +7,12 @@ columns:
     data_type: "int"
     output_units: null
     input_units: null
-    file_name: "db_filename"
     input_column_name: "CAT_ID"
+    filt_max_val: null
+    filt_min_val: null
     output_num_decimals: null
+    wl_micron: null
+    zero_point: null
   ra:
     display: "Right Ascension"
     output_units: "Degrees"
@@ -18,9 +21,10 @@ columns:
     input_units: "Degrees"
     filt_max_val: null
     filt_min_val: null
-    file_name: "db_filename"
     input_column_name: "RA"
     output_num_decimals: 6
+    wl_micron: null
+    zero_point: null
   dec:
     display: "Declination"
     output_units: "Degrees"
@@ -29,13 +33,13 @@ columns:
     input_units: "Degrees"
     filt_max_val: null
     filt_min_val: null
-    file_name: "db_filename"
     input_column_name: "DEC"
     output_num_decimals: 6
+    wl_micron: null
+    zero_point: null
   z_phot:
     display: "Photometric Redshift"
     data_type: "float"
-    file_name: "db_filename"
     filt_name: null
     input_column_name: "z_phot"
     input_units: null
@@ -49,7 +53,6 @@ columns:
   logM_50:
     display: "Current Stellar Mass"
     data_type: "float"
-    file_name: "db_filename"
     filt_name: null
     input_column_name: "logM_50"
     input_units: "log Solar Masses"
@@ -63,7 +66,6 @@ columns:
   logSFRinst_50:
     display: "SFR"
     data_type: "float"
-    file_name: "db_filename"
     filt_name: null
     input_column_name: "logSFRinst_50"
     input_units: "log Solar Masses per year"
@@ -77,7 +79,6 @@ columns:
   logZsol_50:
     display: "Metallicity"
     data_type: "float"
-    file_name: "db_filename"
     filt_name: null
     input_column_name: "logZsol_50"
     input_units: "log Solar"
@@ -91,7 +92,6 @@ columns:
   Av_50:
     display: "Extinction (V)"
     data_type: "float"
-    file_name: "db_filename"
     filt_name: null
     input_column_name: "Av_50"
     input_units: "magnitudes"
@@ -105,7 +105,6 @@ columns:
   logMt_50:
     display: "Total Stellar Mass Formed"
     data_type: "float"
-    file_name: "db_filename"
     filt_name: null
     input_column_name: "logMt_50"
     input_units: "log Solar Masses"
@@ -119,7 +118,6 @@ columns:
   logSFR10_50:
     display: "Average SFR (10 Myr)"
     data_type: "float"
-    file_name: "db_filename"
     filt_name: null
     input_column_name: "logSFR10_50"
     input_units: "log Solar Masses per year"
@@ -133,7 +131,6 @@ columns:
   logSFR100_50:
     display: "Average SFR (100 Myr)"
     data_type: "float"
-    file_name: "db_filename"
     filt_name: null
     input_column_name: "logSFR100_50"
     input_units: "log Solar Masses per year"
@@ -147,7 +144,6 @@ columns:
   logSFR300_50:
     display: "Average SFR (300 Myr)"
     data_type: "float"
-    file_name: "db_filename"
     filt_name: null
     input_column_name: "logSFR300_50"
     input_units: "log Solar Masses per year"
@@ -161,7 +157,6 @@ columns:
   logSFR1000_50:
     display: "Average SFR (1000 Myr)"
     data_type: "float"
-    file_name: "db_filename"
     filt_name: null
     input_column_name: "logSFR1000_50"
     input_units: "log Solar Masses per year"
@@ -175,7 +170,6 @@ columns:
   t25_50:
     display: "t (25%)"
     data_type: "float"
-    file_name: "db_filename"
     filt_name: null
     input_column_name: "t25_50"
     input_units: "t/t0"
@@ -189,7 +183,6 @@ columns:
   t50_50:
     display: "t (50%)"
     data_type: "float"
-    file_name: "db_filename"
     filt_name: null
     input_column_name: "t50_50"
     input_units: "t/t0"
@@ -203,7 +196,6 @@ columns:
   t75_50:
     display: "t (75%)"
     data_type: "float"
-    file_name: "db_filename"
     filt_name: null
     input_column_name: "t75_50"
     input_units: "t/t0"
@@ -217,7 +209,6 @@ columns:
   chi2:
     display: "Chi Squared"
     data_type: "float"
-    file_name: "db_filename"
     filt_name: null
     input_column_name: "chi2"
     input_units: null
@@ -231,7 +222,6 @@ columns:
   fit_flags:
     display: "Fit Flags"
     data_type: "float"
-    file_name: "db_filename"
     filt_name: null
     input_column_name: "fit_flags"
     input_units: null
@@ -245,7 +235,6 @@ columns:
   nbands:
     display: "Nbands"
     data_type: "int"
-    file_name: "db_filename"
     filt_name: null
     input_column_name: "nbands"
     input_units: null
@@ -259,7 +248,6 @@ columns:
   zfit_50:
     display: "Photometric Redshift"
     data_type: "float"
-    file_name: "db_filename"
     filt_name: null
     input_column_name: "zfit_50"
     input_units: null
@@ -273,7 +261,6 @@ columns:
   logSFRtuple_50:
     display: "SFR"
     data_type: "float"
-    file_name: "db_filename"
     filt_name: null
     input_column_name: "logSFRtuple_50"
     input_units: "log Solar Masses per year"
