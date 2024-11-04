@@ -226,22 +226,6 @@ def populate_column_information(
 
         for c in columns:
 
-            # check for which file to look in for this column
-            # base_file = field_params[c]["file_name"]
-
-            # if base_file not in data_frames.keys():
-
-            #     # add the catalog to the dictionary of data frames
-            #     data_frames[base_file] = Catalogue(
-            #         file_name=config_params["file_names"][base_file],
-            #         file_path=get_cat_filepath(base_file, config_params),
-            #     )
-
-            #     # make sure that the id parameter is used for all files in addition to the main catalogue
-            #     data_frames[base_file].input_columns.append("id")
-            #     data_frames[base_file].output_columns.append("id")
-            #     data_frames[base_file].conversion_functions.append(None)
-
             # get column name that is in the input file and add to list of columns to use
             col_name = field_params[base_file]["columns"][c]["input_column_name"]
             data_frames[base_file].input_columns.append(col_name)
@@ -332,9 +316,9 @@ def process_column_data(cat: Catalogue, field_params: Dict) -> Catalogue:
 
         # if the column doesn't exist in the dataframe, add empty one to dictionary and move along
         if cat.input_columns[i] not in cat.df.columns:
-            new_cols[cat.output_columns[i]] = pd.Series()
+            # new_cols[cat.output_columns[i]] = pd.Series()
             print(
-                f"Column {cat.input_columns[i]} not found in dataframe, creating empty column {cat.output_columns[i]}."
+                f"Column {cat.input_columns[i]} not found in dataframe, {cat.output_columns[i]} will not be in output data file."
             )
             continue
 
@@ -430,12 +414,15 @@ def process_data(config_params: Mapping, field_params: Mapping) -> pd.DataFrame:
             else:
                 # dataframe failed to load, all columns from it will be empty
                 # get list of old columns + new columns and make new dataframe with old columns and empty columns
-                old_columns = list(new_df.columns)
-                data_frames[name].output_columns.remove(
-                    "id"
-                )  # make sure we don't have duplicate id columns
-                new_columns = old_columns + data_frames[name].output_columns
-                new_df = new_df.reindex(columns=new_columns)
+                # old_columns = list(new_df.columns)
+                # data_frames[name].output_columns.remove(
+                #     "id"
+                # )  # make sure we don't have duplicate id columns
+                # new_columns = old_columns + data_frames[name].output_columns
+                # new_df = new_df.reindex(columns=new_columns)
+                print(
+                    f"{data_frames[name]} was not properly loaded, its columns will not be present in the final dataframe."
+                )
 
     # write out the data to a csv file
     output_file_path = get_data_output_filepath(config_params)
