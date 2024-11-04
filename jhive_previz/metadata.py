@@ -95,6 +95,37 @@ def add_min_max_val_to_json(initial_json_dict: Dict, whole_cat: pd.DataFrame) ->
     return initial_json_dict
 
 
+def add_top_level_metadata(
+    initial_json_dict: Dict, config_params: Mapping, whole_cat: pd.DataFrame
+) -> Dict:
+    """Adds the top level metadata to the final output dictionary. Currently adds the field name and number of objects in the final dataframe.
+
+    Parameters
+    ----------
+    initial_json_dict : Dict
+        Dictionary of column metadata.
+    config_params : Mapping
+        Dictionary of configuration parameters.
+    whole_cat : pd.DataFrame
+        The dataframe of data.
+
+    Returns
+    -------
+    Dict
+        The final dictionary of metadata with top level metadata and column metadata under 'columns' key.
+    """
+
+    final_json_dict = {
+        "field_name": config_params["field_name"],
+        "columns": initial_json_dict,
+    }
+
+    # add number of objects
+    final_json_dict["num_objects"] = len(whole_cat)
+
+    return final_json_dict
+
+
 def write_json(output_metadata_path: Path, initial_json_dict: Dict):
     """Writes out a dictionary to a json file.
 
@@ -135,5 +166,10 @@ def create_metadata_file(
     )
     initial_json_dict = add_min_max_val_to_json(initial_json_dict, whole_cat)
 
+    # add top level metadata
+    final_json_dict = add_top_level_metadata(
+        initial_json_dict, config_params, whole_cat
+    )
+
     # write out file
-    write_json(output_metdata_path, initial_json_dict)
+    write_json(output_metdata_path, final_json_dict)

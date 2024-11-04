@@ -52,3 +52,22 @@ def test_add_min_max_val_to_json(load_config, get_processed_data):
 
     # check that the max value in the metadata matches what we expect
     assert updated_metadata["mass"]["max_val"] == get_processed_data["mass"].max()
+
+
+def test_add_top_level_metadata(load_config, get_processed_data):
+    """Test that add_top_level_metadata works as expected."""
+
+    new_metadata = metadata.get_desired_column_metadata(
+        load_config[1], load_config[0]["columns_to_use"]
+    )
+
+    final_metadata = metadata.add_top_level_metadata(
+        new_metadata, load_config[0], get_processed_data
+    )
+
+    # make sure metadata output is formatted as expected
+    assert "columns" in final_metadata.keys()
+    assert final_metadata["field_name"] == load_config[0]["field_name"]
+    assert set(final_metadata["columns"].keys()) == set(
+        load_config[0]["columns_to_use"]["cat_filename"]
+    )
