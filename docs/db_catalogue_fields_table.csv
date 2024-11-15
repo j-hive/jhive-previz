@@ -1,4 +1,4 @@
-column name,display,data type,output units,input column name,input units, description
+column name,display,data type,output units,input column name,input units,description
 id,DJA Source ID,int,,CAT_ID,, The DJA id of the galaxy
 ra,Right Ascension,float,Degrees,RA,Degrees, The right ascension of the galaxy in degrees
 dec,Declination,float,Degrees,DEC,Degrees, The declination of the galaxy in degrees
