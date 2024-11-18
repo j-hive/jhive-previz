@@ -416,3 +416,237 @@ columns:
     output_units: "magnitude"
     wl_micron: 4.834
     zero_point: 28.9
+  abmag_f090wn:
+    display: "Magnitude (F090WN)"
+    data_type: "float"
+    filt_name: "F090WN"
+    input_column_name: "f090wn_corr_1"
+    input_units: "microJansky"
+    is_magnitude: True
+    filt_max_val: null
+    filt_min_val: 0.0
+    output_num_decimals: 3
+    output_units: "magnitude"
+    wl_micron: 0.901
+    zero_point: 28.9
+  abmag_f1000w:
+    display: "Magnitude (F1000W)"
+    data_type: "float"
+    filt_name: "F1000W"
+    input_column_name: "f1000w_corr_1"
+    input_units: "microJansky"
+    is_magnitude: True
+    filt_max_val: null
+    filt_min_val: 0.0
+    output_num_decimals: 3
+    output_units: "magnitude"
+    wl_micron: 10.0
+    zero_point: 28.9
+  abmag_f110w:
+    display: "Magnitude (F110W)"
+    data_type: "float"
+    filt_name: "F110W"
+    input_column_name: "f110w_corr_1"
+    input_units: "microJansky"
+    is_magnitude: True
+    filt_max_val: null
+    filt_min_val: 0.0
+    output_num_decimals: 3
+    output_units: "magnitude"
+    wl_micron: 1.15
+    zero_point: 28.9
+  abmag_f115wn:
+    display: "Magnitude (F115WN)"
+    data_type: "float"
+    filt_name: "F115WN"
+    input_column_name: "f115wn_corr_1"
+    input_units: "microJansky"
+    is_magnitude: True
+    filt_max_val: null
+    filt_min_val: 0.0
+    output_num_decimals: 3
+    output_units: "magnitude"
+    wl_micron: 1.150
+    zero_point: 28.9
+  abmag_f1280w:
+    display: "Magnitude (F1280W)"
+    data_type: "float"
+    filt_name: "F1280W"
+    input_column_name: "f1280w_corr_1"
+    input_units: "microJansky"
+    is_magnitude: True
+    filt_max_val: null
+    filt_min_val: 0.0
+    output_num_decimals: 3
+    output_units: "magnitude"
+    wl_micron: 12.810
+    zero_point: 28.9
+  abmag_f140mn:
+    display: "Magnitude (F140MN)"
+    data_type: "float"
+    filt_name: "F140MN"
+    input_column_name: "f140mn_corr_1"
+    input_units: "microJansky"
+    is_magnitude: True
+    filt_max_val: null
+    filt_min_val: 0.0
+    output_num_decimals: 3
+    output_units: "magnitude"
+    wl_micron: 1.404
+    zero_point: 28.9
+  abmag_f1500w:
+    display: "Magnitude (F1500W)"
+    data_type: "float"
+    filt_name: "F1500W"
+    input_column_name: "f1500w_corr_1"
+    input_units: "microJansky"
+    is_magnitude: True
+    filt_max_val: null
+    filt_min_val: 0.0
+    output_num_decimals: 3
+    output_units: "magnitude"
+    wl_micron: 15.064
+    zero_point: 28.9
+  abmag_f150wn:
+    display: "Magnitude (F150WN)"
+    data_type: "float"
+    filt_name: "F150WN"
+    input_column_name: "f150wn_corr_1"
+    input_units: "microJansky"
+    is_magnitude: True
+    filt_max_val: null
+    filt_min_val: 0.0
+    output_num_decimals: 3
+    output_units: "magnitude"
+    wl_micron: 1.498
+    zero_point: 28.9
+  abmag_f158mn:
+    display: "Magnitude (F158MN)"
+    data_type: "float"
+    filt_name: "F158MN"
+    input_column_name: "f158mn_corr_1"
+    input_units: "microJansky"
+    is_magnitude: True
+    filt_max_val: null
+    filt_min_val: 0.0
+    output_num_decimals: 3
+    output_units: "magnitude"
+    wl_micron: 1.583
+    zero_point: 28.9
+  abmag_f1800w:
+    display: "Magnitude (F1800W)"
+    data_type: "float"
+    filt_name: "F1800W"
+    input_column_name: "f1800w_corr_1"
+    input_units: "microJansky"
+    is_magnitude: True
+    filt_max_val: null
+    filt_min_val: 0.0
+    output_num_decimals: 3
+    output_units: "magnitude"
+    wl_micron: 17.984
+    zero_point: 28.9
+  abmag_f200wn:
+    display: "Magnitude (F200WN)"
+    data_type: "float"
+    filt_name: "F200WN"
+    input_column_name: "f200wn_corr_1"
+    input_units: "microJansky"
+    is_magnitude: True
+    filt_max_val: null
+    filt_min_val: 0.0
+    output_num_decimals: 3
+    output_units: "magnitude"
+    wl_micron: 1.984
+    zero_point: 28.9
+  abmag_f2100w:
+    display: "Magnitude (F2100W)"
+    data_type: "float"
+    filt_name: "F2100W"
+    input_column_name: "f2100w_corr_1"
+    input_units: "microJansky"
+    is_magnitude: True
+    filt_max_val: null
+    filt_min_val: 0.0
+    output_num_decimals: 3
+    output_units: "magnitude"
+    wl_micron: 20.795
+    zero_point: 28.9
+  abmag_f350lpu:
+    display: "Magnitude (F350LPU)"
+    data_type: "float"
+    filt_name: "F350LPU"
+    input_column_name: "f350lpu_corr_1"
+    input_units: "microJansky"
+    is_magnitude: True
+    filt_max_val: null
+    filt_min_val: 0.0
+    output_num_decimals: 3
+    output_units: "magnitude"
+    wl_micron: 0.350
+    zero_point: 28.9
+  abmag_f560w:
+    display: "Magnitude (F560W)"
+    data_type: "float"
+    filt_name: "F560W"
+    input_column_name: "f560w_corr_1"
+    input_units: "microJansky"
+    is_magnitude: True
+    filt_max_val: null
+    filt_min_val: 0.0
+    output_num_decimals: 3
+    output_units: "magnitude"
+    wl_micron: 5.635
+    zero_point: 28.9
+  abmag_f606wu:
+    display: "Magnitude (F606WU)"
+    data_type: "float"
+    filt_name: "F606WU"
+    input_column_name: "f475wu_corr_1"
+    input_units: "microJansky"
+    is_magnitude: True
+    filt_max_val: null
+    filt_min_val: 0.0
+    output_num_decimals: 3
+    output_units: "magnitude"
+    wl_micron: 0.5956
+    zero_point: 28.9
+  abmag_f770w:
+    display: "Magnitude (F770W)"
+    data_type: "float"
+    filt_name: "F770W"
+    input_column_name: "f770w_corr_1"
+    input_units: "microJansky"
+    is_magnitude: True
+    filt_max_val: null
+    filt_min_val: 0.0
+    output_num_decimals: 3
+    output_units: "magnitude"
+    wl_micron: 7.639
+    zero_point: 28.9
+  abmag_f850lp:
+    display: "Magnitude (F850LP)"
+    data_type: "float"
+    filt_name: "F850LP"
+    input_column_name: "f850lp_corr_1"
+    input_units: "microJansky"
+    is_magnitude: True
+    filt_max_val: null
+    filt_min_val: 0.0
+    output_num_decimals: 3
+    output_units: "magnitude"
+    wl_micron: 0.832
+    zero_point: 28.9
+  abmag_f850lpu:
+    display: "Magnitude (F850LPU)"
+    data_type: "float"
+    filt_name: "F850LPU"
+    input_column_name: "f850lpu_corr_1"
+    input_units: "microJansky"
+    is_magnitude: True
+    filt_max_val: null
+    filt_min_val: 0.0
+    output_num_decimals: 3
+    output_units: "magnitude"
+    wl_micron: 0.8454
+    zero_point: 28.9
