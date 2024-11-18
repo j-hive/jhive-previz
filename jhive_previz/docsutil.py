@@ -3,6 +3,11 @@ from pathlib import Path
 import yaml
 import typer
 from typing_extensions import Annotated
+from importlib import resources as impresources
+from . import docs
+
+# get path to files
+out_filepath = impresources.files(docs)
 
 
 def convert_yaml_metadata_to_csv(
