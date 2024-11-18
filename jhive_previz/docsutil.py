@@ -69,7 +69,10 @@ def convert_table_to_markdown(
     # file_path = Path(file_path)
     file_path = out_filepath / file_name
     print(file_path)
-    df = pd.read_csv(file_path)
+    try:
+        df = pd.read_csv(file_path)
+    except:
+        print(f"Could not find table at {file_path}")
 
     # md_path = file_path.with_suffix(".md")
     df.to_markdown(new_path, index=False)
