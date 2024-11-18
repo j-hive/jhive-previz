@@ -47,8 +47,8 @@ def convert_yaml_metadata_to_csv(
 
 
 def convert_table_to_markdown(
-    file_path: Annotated[
-        str, typer.Argument(help="The full path to the .csv file to convert.")
+    file_name: Annotated[
+        str, typer.Argument(help="The name of the .csv file to convert.")
     ],
     new_path: Annotated[
         str,
@@ -67,6 +67,7 @@ def convert_table_to_markdown(
     """
 
     # file_path = Path(file_path)
+    file_path = out_filepath / file_name
     df = pd.read_csv(file_path)
 
     # md_path = file_path.with_suffix(".md")
