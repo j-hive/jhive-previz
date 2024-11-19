@@ -38,7 +38,7 @@ columns:
     filt_max_val: null
     filt_min_val: null
     input_column_name: "flux_radius"
-    output_num_decimals: 3
+    output_num_decimals: 6
   abmag_f435w:
     display: "Magnitude (F435W)"
     data_type: "float"
@@ -69,7 +69,7 @@ columns:
     display: "Magnitude (F606W)"
     data_type: "float"
     filt_name: "F606W"
-    input_column_name: "f475w_corr_1"
+    input_column_name: "f606w_corr_1"
     input_units: "microJansky"
     is_magnitude: True
     filt_max_val: null

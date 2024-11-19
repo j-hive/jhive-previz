@@ -33,8 +33,6 @@ columns_to_use:
     - "abmag_f277w"
     - "abmag_f356w"
     - "abmag_f444w"
-    - "abmag_f460m"
-    - "abmag_f480m"
     - "abmag_f350lpu"
     - "abmag_f850lp"
   db_filename:

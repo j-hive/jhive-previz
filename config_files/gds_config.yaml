@@ -3,9 +3,9 @@ paths:
   db_path: null
   mf_path: null
 
-field_name: "abell2744clu-grizli-v7.2"
+field_name: "gds-grizli-v7.2"
 file_names:
-  cat_filename: "abell2744clu-grizli-v7.2-fix_phot_apcorr.fits"
+  cat_filename: "gds-grizli-v7.2-fix_phot_apcorr.fits"
   db_filename: null
   mf_filename: null
 
@@ -47,7 +47,7 @@ columns_to_use:
     - "abmag_f444w"
     - "abmag_f460m"
     - "abmag_f480m"
-    - "abmag_f560m"
+    - "abmag_f560w"
     - "abmag_f770w"
     - "abmag_f1000w"
     - "abmag_f1280w"
