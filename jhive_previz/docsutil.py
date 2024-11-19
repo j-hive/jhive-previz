@@ -43,8 +43,19 @@ def convert_yaml_metadata_to_csv(
         ["display", "data_type", "output_units", "input_column_name", "input_units"]
     ]
 
+    # rename columns so that there are no underscores
+    new_df.rename(
+        columns={
+            "data_type": "data type",
+            "output_units": "output units",
+            "input_column_name": "input column name",
+            "input_units": "input units",
+        },
+        inplace=True,
+    )
+
     # save csv to file
-    new_df.to_csv(output_path)
+    new_df.to_csv(output_path, index_label="column name")
 
 
 def convert_tables_to_markdown(
@@ -122,12 +133,13 @@ def merge_doc_csvs(
     df_new = pd.read_csv(file_new)
 
     # get description from old table and merge with new
-    ind_colname = df_old[:, 0].name
+    # ind_colname = df_old[:, 0].name
+    ind_colname = "column name"
     desc = df_old[[ind_colname, "description"]]
     merge_df = pd.merge(df_new, desc, on=ind_colname, how="left")
 
     # write out the new table, fails if file already exists
-    merge_df.to_csv(file_write, mode="x")
+    merge_df.to_csv(file_write, mode="x", index=False)
 
 
 def convert_yaml_to_csv_and_merge(
@@ -151,9 +163,9 @@ def convert_yaml_to_csv_and_merge(
     file_name = file_path.stem
     file_part = file_name.split("_")[0]
 
-    table_filename = file_part + "catalogue_fields_table.csv"
-    new_filename = file_part + "catalogue_fields_table_tomerge.csv"
-    merge_filename = file_part + "catalogue_fields_table_toedit.csv"
+    table_filename = file_part + "_catalogue_fields_table.csv"
+    new_filename = file_part + "_catalogue_fields_table_tomerge.csv"
+    merge_filename = file_part + "_catalogue_fields_table_toedit.csv"
 
     table_path = out_filepath / table_filename
     write_path = out_filepath / new_filename
@@ -163,24 +175,32 @@ def convert_yaml_to_csv_and_merge(
 
         # convert the yaml and write the csv file
         convert_yaml_metadata_to_csv(file_path, write_path)
-        print(f"Converted yaml file {file_path} to {write_path}")
+        print(
+            f"Converted yaml file [magenta]{file_path}[/magenta] to [magenta]{write_path}[/magenta]"
+        )
 
         # merge with the old table file, keeping the descriptions, and write to a new csv
-        merge_doc_csvs(write_path, table_path, merge_path)
+        merge_doc_csvs(table_path, write_path, merge_path)
 
         # tell user what to do next
         print(
-            f"Merged {write_path.name} with {table_path.name} and wrote to {merge_path}."
+            f"Merged [magenta]{write_path.name}[/magenta] with [magenta]{table_path.name}[/magenta] and wrote to [magenta]{merge_path}[/magenta]."
         )
         print(
-            f"To ensure this file ends up in the documentation, check {merge_path.name} looks as expected, and edit as desired, adding any additional descriptions necessary. Then delete the old {table_path.name} file and rename {merge_path.name} to {table_path.name}."
+            f"To ensure this file ends up in the documentation, check [magenta]{merge_path.name}[/magenta] looks as expected, and edit as desired, adding any additional descriptions necessary."
+        )
+        print(
+            f"Then delete the old [magenta]{table_path.name}[/magenta] file and rename [magenta]{merge_path.name}[/magenta] to [magenta]{table_path.name}[/magenta]."
         )
 
     else:
         # write directly to the table filename, no need to merge
         convert_yaml_metadata_to_csv(file_path, table_path)
         print(
-            f"Converted {file_path.name} and wrote to {table_path}. Please add a 'description' column if it does not already exist."
+            f"Converted [magenta]{file_path.name}[/magenta] and wrote to [magenta]{table_path}[/magenta]."
+        )
+        print(
+            "Please add a [green]'description'[/green] column if it does not already exist."
         )
 
 
