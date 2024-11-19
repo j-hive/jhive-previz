@@ -159,7 +159,7 @@ def validate_config_paths(
         new_field_paths = [Path(field_paths[0])]
 
         if not new_field_paths[0].is_file():
-            raise FileExistsError(f"Fields file at {field_path} does not exist.")
+            raise FileExistsError(f"Fields file at {field_paths} does not exist.")
 
     else:
         # iterate through given field paths and check if they exist

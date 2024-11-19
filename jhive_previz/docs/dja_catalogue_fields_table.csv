@@ -17,7 +17,7 @@ abmag_f140w,Magnitude (F140W),float,magnitude,f140w_corr_1,microJansky, The magn
 abmag_f140m,Magnitude (F140M),float,magnitude,f140m_corr_1,microJansky, The magnitude of the object in filter F140M (NIRCam)
 abmag_f150w,Magnitude (F150W),float,magnitude,f150w_corr_1,microJansky, The magnitude of the object in filter F150W (NIRCam)
 abmag_f160w,Magnitude (F160W),float,magnitude,f160w_corr_1,microJansky, The magnitude of the object in filter F160W (NIRCam)
-abmag_f162m,Magnitude (F162M),float,magnitude,f162m_corr_1,microJansky, The magnitude of the object in filter F162M (NIRCam)
+abmag_f162m,Magnitude (F162M),float,magnitude,f150w2-f162m_corr_1,microJansky, The magnitude of the object in filter F162M with F150W2 blocking (NIRCam)
 abmag_f182m,Magnitude (F182M),float,magnitude,f182m_corr_1,microJansky, The magnitude of the object in filter F182M (NIRCam)
 abmag_f200w,Magnitude (F200W),float,magnitude,f200w_corr_1,microJansky, The magnitude of the object in filter F200W (NIRCam)
 abmag_f210m,Magnitude (F210M),float,magnitude,f210m_corr_1,microJansky, The magnitude of the object in filter F210M (NIRCam)

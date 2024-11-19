@@ -225,7 +225,7 @@ columns:
     display: "Magnitude (F162M)"
     data_type: "float"
     filt_name: "F162M"
-    input_column_name: "f162m_corr_1"
+    input_column_name: "f150w2-f162m_corr_1"
     input_units: "microJansky"
     is_magnitude: True
     filt_max_val: null
