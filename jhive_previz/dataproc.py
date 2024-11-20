@@ -69,13 +69,13 @@ def get_cat_filepath(filename_key: str, config_params: Mapping) -> Path:
     return file_path
 
 
-def get_data_output_filepath(config_params: Mapping) -> Path:
+def get_data_output_filepath(output_path: Path) -> Path:
     """Returns the path to output the .csv to.
 
     Parameters
     ----------
-    config_params : Mapping
-        The dictionary of config parameters from the config file.
+    output_path : Path
+        The path to the directory where the file will be saved.
 
     Returns
     -------
@@ -83,12 +83,7 @@ def get_data_output_filepath(config_params: Mapping) -> Path:
         The full path (including file name) to write the .csv output to.
     """
 
-    # turn the output base path into Path object
-    output_path = Path(config_params["output_path"])
-
-    data_output_filename = (
-        config_params["field_name"] + config_params["output_file_suffix"] + ".csv"
-    )
+    data_output_filename = "catalog.csv"
 
     return output_path / data_output_filename
 
@@ -351,7 +346,9 @@ def process_column_data(cat: Catalogue, field_params: Dict) -> Catalogue:
 ## Organizational functions
 
 
-def process_data(config_params: Mapping, field_params: Mapping) -> pd.DataFrame:
+def process_data(
+    config_params: Mapping, field_params: Mapping, output_path: Path
+) -> pd.DataFrame:
     """This is the main function that processes the data file and writes out the processed
     version to a .csv. The function converts columns as desired, filters them to be NaNs outside
     of a certain range (if the range is given in fields.yaml), and then takes only the columns
@@ -363,6 +360,8 @@ def process_data(config_params: Mapping, field_params: Mapping) -> pd.DataFrame:
         The config parameters from the config.yaml file
     field_params : Mapping
         The field parameters from the field.yaml file
+    output_path : Path
+        The full path to the directory where the output file will be saved.
 
     Returns
     -------
@@ -425,7 +424,7 @@ def process_data(config_params: Mapping, field_params: Mapping) -> pd.DataFrame:
                 )
 
     # write out the data to a csv file
-    output_file_path = get_data_output_filepath(config_params)
+    output_file_path = get_data_output_filepath(output_path)
     write_data(new_df, output_file_path)
 
     return new_df

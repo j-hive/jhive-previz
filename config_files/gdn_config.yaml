@@ -9,7 +9,7 @@ file_names:
   db_filename: null
   mf_filename: null
 
-output_file_suffix: "_jhive_viz_v1"
+version: "v1.0"
 output_path: "./output/"
 
 columns_to_use:

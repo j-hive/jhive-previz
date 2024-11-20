@@ -1,7 +1,13 @@
 {
     "abell2744clu-grizli-v7.2": {
-        "display": "Abell2744",
-        "data_file": "/abell2744clu-grizli-v7.2_jhive_viz_v1.csv",
-        "metadata_file": "/abell2744clu-grizli-v7.2_jhive_viz_v1.json"
-    }
+        "display": "Abell 2744",
+        "data_file": "v1.0/abell2744clu-grizli-v7.2/catalog.csv",
+        "metadata_file": "v1.0/abell2744clu-grizli-v7.2/metadata.json",
+        "cutouts": "v1.0/abell2744clu-grizli-v7.2/cutouts/",
+        "fitsmap_url": "https://s3.amazonaws.com/grizli-v2/ClusterTiles/Map/abell2744/jwst.html"
+    },
+    "ceers-full-grizli-v7.2": {},
+    "gdn-grizli-v7.3": {},
+    "gds-grizli-v7.2": {},
+    "ngdeep-grizli-v7.2": {}
 }

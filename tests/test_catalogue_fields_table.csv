@@ -1,6 +1,6 @@
-column name,display,data type,output units,input column name,input units,description
-id,DJA Source ID,int,,id,,descriptions here
-mass,Stellar Mass,float,log Solar Masses,stellar_mass,Solar Masses,descriptions here
-abmag_f333w,Magnitude (F333W),float,magnitude,f333w_corr_1,microJansky,descriptions here
-abmag_f444w,Magnitude (F444W),float,magnitude,f444w_corr_1,microJansky,descriptions here
-abmag_f480w,Magnitude (F480W),float,magnitude,f480w_corr_1,microJansky,descriptions here
+column name,display,data type,output units,input column name,input units
+id,DJA Source ID,int,,id,
+mass,Stellar Mass,float,log Solar Masses,stellar_mass,Solar Masses
+abmag_f333w,Magnitude (F333W),float,magnitude,f333w_corr_1,microJansky
+abmag_f444w,Magnitude (F444W),float,magnitude,f444w_corr_1,microJansky
+abmag_f480w,Magnitude (F480W),float,magnitude,f480w_corr_1,microJansky

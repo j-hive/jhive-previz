@@ -7,7 +7,7 @@ file_names:
   cat_filename: "test-data.csv"
   ez_filename: "test-data-2.csv"
 
-output_file_suffix: "_test_output"
+version: "testv1.0"
 output_path: "./tests/test_output/"
 
 columns_to_use:

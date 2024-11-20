@@ -5,14 +5,14 @@ import numpy as np
 from typing import Mapping, Union, Dict, List
 
 
-def get_metadata_output_path(config_params: Mapping) -> Path:
+def get_metadata_output_path(output_path: Path) -> Path:
     """Uses the config parameters to generate the full path to the metadata
     output file.
 
     Parameters
     ----------
-    config_params : Mapping
-        The dictionary of config parameters.
+    output_path : Path
+        The full path to the directory where the file will be saved.
 
     Returns
     -------
@@ -20,11 +20,7 @@ def get_metadata_output_path(config_params: Mapping) -> Path:
         The full path to the output metadata file.
     """
 
-    # turn output base path into Path object
-    output_path = Path(config_params["output_path"])
-    metadata_output_filename = (
-        config_params["field_name"] + config_params["output_file_suffix"] + ".json"
-    )
+    metadata_output_filename = "metadata.json"
     return output_path / metadata_output_filename
 
 
@@ -148,7 +144,10 @@ def write_json(output_metadata_path: Path, initial_json_dict: Dict):
 
 
 def create_metadata_file(
-    config_params: Mapping, field_params: Mapping, whole_cat: pd.DataFrame
+    config_params: Mapping,
+    field_params: Mapping,
+    whole_cat: pd.DataFrame,
+    output_path: Path,
 ):
     """Creates a metadata file for the given datatable, using metadata from field_params and generating additional values as necessary.
       It has keys for each column, and is written as a json.
@@ -161,10 +160,12 @@ def create_metadata_file(
         The field parameters dictionary.
     whole_cat : pd.DataFrame
         The dataframe to generate metadata for.
+    output_path : Path
+        The full path to the directory where the output files will be saved.
     """
 
     # get the full path to write out metadata to
-    output_metdata_path = get_metadata_output_path(config_params)
+    output_metdata_path = get_metadata_output_path(output_path)
 
     # get the relevant columns in the json
     initial_json_dict = get_desired_column_metadata(

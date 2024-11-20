@@ -38,7 +38,7 @@ def validate_cat_path(config_params: Mapping):
         )
 
 
-def validate_output_path(config_params: Mapping):
+def create_and_validate_output_path(config_params: Mapping) -> Path:
     """Validates that the output_path exists. If not, creates it.
 
     Parameters
@@ -46,23 +46,36 @@ def validate_output_path(config_params: Mapping):
     config_params : Mapping
         The dictionary of config parameters.
 
+    Returns
+    -------
+    output_path : Path
+        The full path to the directory where the output files will be saved.
+
     Raises
     ------
     ValueError
         Raises an error if no output path is given.
     """
 
-    if isinstance(config_params["output_path"], str):
-        output_path = Path(config_params["output_path"])
+    if isinstance(config_params["output_path"], str) or isinstance(
+        config_params["output_path"], Path
+    ):
+        output_path = (
+            Path(config_params["output_path"])
+            / config_params["version"]
+            / config_params["field_name"]
+        )
         # make sure that output file path exists
         if not output_path.is_dir():
 
             # if it doesn't, create it
-            output_path.parent.mkdir()
+            output_path.mkdir(parents=True)
     else:
         raise ValueError(
             "output_path is a required argument in config.yaml, please enter the path to the output directory."
         )
+
+    return output_path
 
 
 # Loading functions
@@ -202,13 +215,13 @@ def process_data_and_write_metadata(
 
     # validate and create the output path if necessary
     validate_cat_path(config_params)
-    validate_output_path(config_params)
+    output_path = create_and_validate_output_path(config_params)
 
     # create the csv file
-    cat_df = dataproc.process_data(config_params, field_params)
+    cat_df = dataproc.process_data(config_params, field_params, output_path)
 
     # create the metadata json file
-    metadata.create_metadata_file(config_params, field_params, cat_df)
+    metadata.create_metadata_file(config_params, field_params, cat_df, output_path)
 
 
 def main():

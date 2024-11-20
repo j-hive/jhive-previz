@@ -26,6 +26,13 @@ def test_output_path(monkeypatch, load_config, tmp_path):
     monkeypatch.setitem(load_config[0], "output_path", tmp_path)
 
 
+@pytest.fixture(autouse=True)
+def create_output_path(test_output_path, load_config):
+
+    output_path = main.create_and_validate_output_path(load_config[0])
+    return output_path
+
+
 @pytest.fixture
-def get_processed_data(load_config, test_output_path):
-    return dataproc.process_data(load_config[0], load_config[1])
+def get_processed_data(load_config, test_output_path, create_output_path):
+    return dataproc.process_data(load_config[0], load_config[1], create_output_path)

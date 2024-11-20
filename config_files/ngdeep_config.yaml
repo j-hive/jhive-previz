@@ -9,7 +9,7 @@ file_names:
   db_filename: "ngdeep_v7.2_DB_catalog_small.cat"
   mf_filename: "file.csv"
 
-output_file_suffix: "_jhive_viz_v1"
+version: "v1.0"
 output_path: "./output/"
 
 columns_to_use:
