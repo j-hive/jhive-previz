@@ -1,122 +1,146 @@
-,display,data_type,output_units,input_column_name,input_units
-id,DJA Source ID,int,,object,
-f150w-clear-use,Useablity (F150W),bool,,use (f150w-clear),
-f150w-clear-sb,Surface Brightness (F150W),float,,surface brightness (f150w-clear),mag/arcsec^2
-f150w-clear-reff,Effective Radius (F150W),float,,effective radius (f150w-clear),pixels
-f150w-clear-sersic,Sersic (n) (F150W),float,,sersic (f150w-clear),
-f150w-clear-axratio,Model Axis Ratio (F150W),float,,axis ratio (f150w-clear),
-clearp-f277w-use,Useablity (F277W),bool,,use (clearp-f277w),
-clearp-f277w-sb,Surface Brightness (F277W),float,,surface brightness (clearp-f277w),mag/arcsec^2
-clearp-f277w-reff,Effective Radius (F277W),float,,effective radius (clearp-f277w),pixels
-clearp-f277w-sersic,Sersic (n) (F277W),float,,sersic (clearp-f277w),
-clearp-f277w-axratio,Model Axis Ratio (F277W),float,,axis ratio (clearp-f277w),
-clearp-f356w-use,Useablity (F356W),bool,,use (clearp-f356w),
-clearp-f356w-sb,Surface Brightness (F356W),float,,surface brightness (clearp-f356w),mag/arcsec^2
-clearp-f356w-reff,Effective Radius (F356W),float,,effective radius (clearp-f356w),pixels
-clearp-f356w-sersic,Sersic (n) (F356W),float,,sersic (clearp-f356w),
-clearp-f356w-axratio,Model Axis Ratio (F356W),float,,axis ratio (clearp-f356w),
-clearp-f430m-use,Useablity (F430M),bool,,use (clearp-f430m),
-clearp-f430m-sb,Surface Brightness (F430M),float,,surface brightness (clearp-f430m),mag/arcsec^2
-clearp-f430m-reff,Effective Radius (F430M),float,,effective radius (clearp-f430m),pixels
-clearp-f430m-sersic,Sersic (n) (F430M),float,,sersic (clearp-f430m),
-clearp-f430m-axratio,Model Axis Ratio (F430M),float,,axis ratio (clearp-f430m),
-clearp-f444w-use,Useablity (F444W),bool,,use (clearp-f444w),
-clearp-f444w-sb,Surface Brightness (F444W),float,,surface brightness (clearp-f444w),mag/arcsec^2
-clearp-f444w-reff,Effective Radius (F444W),float,,effective radius (clearp-f444w),pixels
-clearp-f444w-sersic,Sersic (n) (F444W),float,,sersic (clearp-f444w),
-clearp-f444w-axratio,Model Axis Ratio (F444W),float,,axis ratio (clearp-f444w),
-clearp-f480m-use,Useablity (F480M),bool,,use (clearp-f480m),
-clearp-f480m-sb,Surface Brightness (F480M),float,,surface brightness (clearp-f480m),mag/arcsec^2
-clearp-f480m-reff,Effective Radius (F480M),float,,effective radius (clearp-f480m),pixels
-clearp-f480m-sersic,Sersic (n) (F480M),float,,sersic (clearp-f480m),
-clearp-f480m-axratio,Model Axis Ratio (F480M),float,,axis ratio (clearp-f480m),
-f070w-clear-use,Useablity (F070W),bool,,use (f070w-clear),
-f070w-clear-sb,Surface Brightness (F070W),float,,surface brightness (f070w-clear),mag/arcsec^2
-f070w-clear-reff,Effective Radius (F070W),float,,effective radius (f070w-clear),pixels
-f070w-clear-sersic,Sersic (n) (F070W),float,,sersic (f070w-clear),
-f070w-clear-axratio,Model Axis Ratio (F070W),float,,axis ratio (f070w-clear),
-f090w-clear-use,Useablity (F090W),bool,,use (f090w-clear),
-f090w-clear-sb,Surface Brightness (F090W),float,,surface brightness (f090w-clear),mag/arcsec^2
-f090w-clear-reff,Effective Radius (F090W),float,,effective radius (f090w-clear),pixels
-f090w-clear-sersic,Sersic (n) (F090W),float,,sersic (f090w-clear),
-f090w-clear-axratio,Model Axis Ratio (F090W),float,,axis ratio (f090w-clear),
-f115w-clear-use,Useablity (F115W),bool,,use (f115w-clear),
-f115w-clear-sb,Surface Brightness (F115W),float,,surface brightness (f115w-clear),mag/arcsec^2
-f115w-clear-reff,Effective Radius (F115W),float,,effective radius (f115w-clear),pixels
-f115w-clear-sersic,Sersic (n) (F115W),float,,sersic (f115w-clear),
-f115w-clear-axratio,Model Axis Ratio (F115W),float,,axis ratio (f115w-clear),
-f140m-clear-use,Useablity (F140M),bool,,use (f140m-clear),
-f140m-clear-sb,Surface Brightness (F140M),float,,surface brightness (f140m-clear),mag/arcsec^2
-f140m-clear-reff,Effective Radius (F140M),float,,effective radius (f140m-clear),pixels
-f140m-clear-sersic,Sersic (n) (F140M),float,,sersic (f140m-clear),
-f140m-clear-axratio,Model Axis Ratio (F140M),float,,axis ratio (f140m-clear),
-f182m-clear-use,Useablity (F182M),bool,,use (f182m-clear),
-f182m-clear-sb,Surface Brightness (F182M),float,,surface brightness (f182m-clear),mag/arcsec^2
-f182m-clear-reff,Effective Radius (F182M),float,,effective radius (f182m-clear),pixels
-f182m-clear-sersic,Sersic (n) (F182M),float,,sersic (f182m-clear),
-f182m-clear-axratio,Model Axis Ratio (F182M),float,,axis ratio (f182m-clear),
-f200w-clear-use,Useablity (F200W),bool,,use (f200w-clear),
-f200w-clear-sb,Surface Brightness (F200W),float,,surface brightness (f200w-clear),mag/arcsec^2
-f200w-clear-reff,Effective Radius (F200W),float,,effective radius (f200w-clear),pixels
-f200w-clear-sersic,Sersic (n) (F200W),float,,sersic (f200w-clear),
-f200w-clear-axratio,Model Axis Ratio (F200W),float,,axis ratio (f200w-clear),
-f210m-clear-use,Useablity (F210M),bool,,use (f210m-clear),
-f210m-clear-sb,Surface Brightness (F210M),float,,surface brightness (f210m-clear),mag/arcsec^2
-f210m-clear-reff,Effective Radius (F210M),float,,effective radius (f210m-clear),pixels
-f210m-clear-sersic,Sersic (n) (F210M),float,,sersic (f210m-clear),
-f210m-clear-axratio,Model Axis Ratio (F210M),float,,axis ratio (f210m-clear),
-f250m-clear-use,Useablity (F250M),bool,,use (f250m-clear),
-f250m-clear-sb,Surface Brightness (F250M),float,,surface brightness (f250m-clear),mag/arcsec^2
-f250m-clear-reff,Effective Radius (F250M),float,,effective radius (f250m-clear),pixels
-f250m-clear-sersic,Sersic (n) (F250M),float,,sersic (f250m-clear),
-f250m-clear-axratio,Model Axis Ratio (F250M),float,,axis ratio (f250m-clear),
-f277w-clear-use,Useablity (F277W),bool,,use (f277w-clear),
-f277w-clear-sb,Surface Brightness (F277W),float,,surface brightness (f277w-clear),mag/arcsec^2
-f277w-clear-reff,Effective Radius (F277W),float,,effective radius (f277w-clear),pixels
-f277w-clear-sersic,Sersic (n) (F277W),float,,sersic (f277w-clear),
-f277w-clear-axratio,Model Axis Ratio (F277W),float,,axis ratio (f277w-clear),
-f300m-clear-use,Useablity (F300M),bool,,use (f300m-clear),
-f300m-clear-sb,Surface Brightness (F300M),float,,surface brightness (f300m-clear),mag/arcsec^2
-f300m-clear-reff,Effective Radius (F300M),float,,effective radius (f300m-clear),pixels
-f300m-clear-sersic,Sersic (n) (F300M),float,,sersic (f300m-clear),
-f300m-clear-axratio,Model Axis Ratio (F300M),float,,axis ratio (f300m-clear),
-f335m-clear-use,Useablity (F335M),bool,,use (f335m-clear),
-f335m-clear-sb,Surface Brightness (F335M),float,,surface brightness (f335m-clear),mag/arcsec^2
-f335m-clear-reff,Effective Radius (F335M),float,,effective radius (f335m-clear),pixels
-f335m-clear-sersic,Sersic (n) (F335M),float,,sersic (f335m-clear),
-f335m-clear-axratio,Model Axis Ratio (F335M),float,,axis ratio (f335m-clear),
-f356w-clear-use,Useablity (F356W),bool,,use (f356w-clear),
-f356w-clear-sb,Surface Brightness (F356W),float,,surface brightness (f356w-clear),mag/arcsec^2
-f356w-clear-reff,Effective Radius (F356W),float,,effective radius (f356w-clear),pixels
-f356w-clear-sersic,Sersic (n) (F356W),float,,sersic (f356w-clear),
-f356w-clear-axratio,Model Axis Ratio (F356W),float,,axis ratio (f356w-clear),
-f360m-clear-use,Useablity (F360M),bool,,use (f360m-clear),
-f360m-clear-sb,Surface Brightness (F360M),float,,surface brightness (f360m-clear),mag/arcsec^2
-f360m-clear-reff,Effective Radius (F360M),float,,effective radius (f360m-clear),pixels
-f360m-clear-sersic,Sersic (n) (F360M),float,,sersic (f360m-clear),
-f360m-clear-axratio,Model Axis Ratio (F360M),float,,axis ratio (f360m-clear),
-f410m-clear-use,Useablity (F410M),bool,,use (f410m-clear),
-f410m-clear-sb,Surface Brightness (F410M),float,,surface brightness (f410m-clear),mag/arcsec^2
-f410m-clear-reff,Effective Radius (F410M),float,,effective radius (f410m-clear),pixels
-f410m-clear-sersic,Sersic (n) (F410M),float,,sersic (f410m-clear),
-f410m-clear-axratio,Model Axis Ratio (F410M),float,,axis ratio (f410m-clear),
-f430m-clear-use,Useablity (F430M),bool,,use (f430m-clear),
-f430m-clear-sb,Surface Brightness (F430M),float,,surface brightness (f430m-clear),mag/arcsec^2
-f430m-clear-reff,Effective Radius (F430M),float,,effective radius (f430m-clear),pixels
-f430m-clear-sersic,Sersic (n) (F430M),float,,sersic (f430m-clear),
-f430m-clear-axratio,Model Axis Ratio (F430M),float,,axis ratio (f430m-clear),
-f444w-clear-use,Useablity (F444W),bool,,use (f444w-clear),
-f444w-clear-sb,Surface Brightness (F444W),float,,surface brightness (f444w-clear),mag/arcsec^2
-f444w-clear-reff,Effective Radius (F444W),float,,effective radius (f444w-clear),pixels
-f444w-clear-sersic,Sersic (n) (F444W),float,,sersic (f444w-clear),
-f444w-clear-axratio,Model Axis Ratio (F444W),float,,axis ratio (f444w-clear),
-f460m-clear-use,Useablity (F460M),bool,,use (f460m-clear),
-f460m-clear-sb,Surface Brightness (F460M),float,,surface brightness (f460m-clear),mag/arcsec^2
-f460m-clear-reff,Effective Radius (F460M),float,,effective radius (f460m-clear),pixels
-f460m-clear-sersic,Sersic (n) (F460M),float,,sersic (f460m-clear),
-f460m-clear-axratio,Model Axis Ratio (F460M),float,,axis ratio (f460m-clear),
-f480m-clear-use,Useablity (F480M),bool,,use (f480m-clear),
-f480m-clear-sb,Surface Brightness (F480M),float,,surface brightness (f480m-clear),mag/arcsec^2
-f480m-clear-reff,Effective Radius (F480M),float,,effective radius (f480m-clear),pixels
-f480m-clear-sersic,Sersic (n) (F480M),float,,sersic (f480m-clear),
-f480m-clear-axratio,Model Axis Ratio (F480M),float,,axis ratio (f480m-clear),
+column name,display,data type,output units,input column name,input units,description
+id,DJA Source ID,int,,object,,
+f150w-clear-use,Useablity (F150W),bool,,use (f150w-clear),,If the fit is considered useable based on the outputs from GALFIT and if the effective radius $\geq 2 \times$ the error on the radius See MorphFITS documentation for more details.  
+f150w-clear-chi,Reduced Chi Squared (F150W),float,,chi^2/nu (f150w-clear),,The reduced chi squared of the fit.
+f150w-clear-sb,Surface Brightness (F150W),float,,surface brightness (f150w-clear),mag/arcsec^2, The surface brightness of the galaxy in the given filter.
+f150w-clear-reff,Effective Radius (F150W),float,,effective radius (f150w-clear),pixels, The effective radius in pixels of the galaxy.
+f150w-clear-sersic,Sersic (n) (F150W),float,,sersic (f150w-clear),, The best fit sersic parameter for the galaxy.
+f150w-clear-axratio,Model Axis Ratio (F150W),float,,axis ratio (f150w-clear),, The axis ratio (b/a) of the galaxy. 
+clearp-f277w-use,Useablity (F277W),bool,,use (clearp-f277w),,
+clearp-f277w-chi,Reduced Chi Squared (F277W),float,,chi^2/nu (clearp-f277w),,
+clearp-f277w-sb,Surface Brightness (F277W),float,,surface brightness (clearp-f277w),mag/arcsec^2,
+clearp-f277w-reff,Effective Radius (F277W),float,,effective radius (clearp-f277w),pixels,
+clearp-f277w-sersic,Sersic (n) (F277W),float,,sersic (clearp-f277w),,
+clearp-f277w-axratio,Model Axis Ratio (F277W),float,,axis ratio (clearp-f277w),,
+clearp-f356w-use,Useablity (F356W),bool,,use (clearp-f356w),,
+clearp-f356w-chi,Reduced Chi Squared (F356W),float,,chi^2/nu (clearp-f356w),,
+clearp-f356w-sb,Surface Brightness (F356W),float,,surface brightness (clearp-f356w),mag/arcsec^2,
+clearp-f356w-reff,Effective Radius (F356W),float,,effective radius (clearp-f356w),pixels,
+clearp-f356w-sersic,Sersic (n) (F356W),float,,sersic (clearp-f356w),,
+clearp-f356w-axratio,Model Axis Ratio (F356W),float,,axis ratio (clearp-f356w),,
+clearp-f430m-use,Useablity (F430M),bool,,use (clearp-f430m),,
+clearp-f430m-chi,Reduced Chi Squared (F430M),float,,chi^2/nu (clearp-f430m),,
+clearp-f430m-sb,Surface Brightness (F430M),float,,surface brightness (clearp-f430m),mag/arcsec^2,
+clearp-f430m-reff,Effective Radius (F430M),float,,effective radius (clearp-f430m),pixels,
+clearp-f430m-sersic,Sersic (n) (F430M),float,,sersic (clearp-f430m),,
+clearp-f430m-axratio,Model Axis Ratio (F430M),float,,axis ratio (clearp-f430m),,
+clearp-f444w-use,Useablity (F444W),bool,,use (clearp-f444w),,
+clearp-f444w-chi,Reduced Chi Squared (F444W),float,,chi^2/nu (clearp-f444w),,
+clearp-f444w-sb,Surface Brightness (F444W),float,,surface brightness (clearp-f444w),mag/arcsec^2,
+clearp-f444w-reff,Effective Radius (F444W),float,,effective radius (clearp-f444w),pixels,
+clearp-f444w-sersic,Sersic (n) (F444W),float,,sersic (clearp-f444w),,
+clearp-f444w-axratio,Model Axis Ratio (F444W),float,,axis ratio (clearp-f444w),,
+clearp-f480m-use,Useablity (F480M),bool,,use (clearp-f480m),,
+clearp-480m-chi,Reduced Chi Squared (F480M),float,,chi^2/nu (clearp-480m),,
+clearp-f480m-sb,Surface Brightness (F480M),float,,surface brightness (clearp-f480m),mag/arcsec^2,
+clearp-f480m-reff,Effective Radius (F480M),float,,effective radius (clearp-f480m),pixels,
+clearp-f480m-sersic,Sersic (n) (F480M),float,,sersic (clearp-f480m),,
+clearp-f480m-axratio,Model Axis Ratio (F480M),float,,axis ratio (clearp-f480m),,
+f070w-clear-use,Useablity (F070W),bool,,use (f070w-clear),,
+f070w-clear-chi,Reduced Chi Squared (F070W),float,,chi^2/nu (f070w-clear),,
+f070w-clear-sb,Surface Brightness (F070W),float,,surface brightness (f070w-clear),mag/arcsec^2,
+f070w-clear-reff,Effective Radius (F070W),float,,effective radius (f070w-clear),pixels,
+f070w-clear-sersic,Sersic (n) (F070W),float,,sersic (f070w-clear),,
+f070w-clear-axratio,Model Axis Ratio (F070W),float,,axis ratio (f070w-clear),,
+f090w-clear-use,Useablity (F090W),bool,,use (f090w-clear),,
+f090w-clear-chi,Reduced Chi Squared (F090W),float,,chi^2/nu (f090w-clear),,
+f090w-clear-sb,Surface Brightness (F090W),float,,surface brightness (f090w-clear),mag/arcsec^2,
+f090w-clear-reff,Effective Radius (F090W),float,,effective radius (f090w-clear),pixels,
+f090w-clear-sersic,Sersic (n) (F090W),float,,sersic (f090w-clear),,
+f090w-clear-axratio,Model Axis Ratio (F090W),float,,axis ratio (f090w-clear),,
+f115w-clear-use,Useablity (F115W),bool,,use (f115w-clear),,
+f115w-clear-chi,Reduced Chi Squared (F115W),float,,chi^2/nu (f115w-clear),,
+f115w-clear-sb,Surface Brightness (F115W),float,,surface brightness (f115w-clear),mag/arcsec^2,
+f115w-clear-reff,Effective Radius (F115W),float,,effective radius (f115w-clear),pixels,
+f115w-clear-sersic,Sersic (n) (F115W),float,,sersic (f115w-clear),,
+f115w-clear-axratio,Model Axis Ratio (F115W),float,,axis ratio (f115w-clear),,
+f140m-clear-use,Useablity (F140M),bool,,use (f140m-clear),,
+f140m-clear-chi,Reduced Chi Squared (F140M),float,,chi^2/nu (f140m-clear),,
+f140m-clear-sb,Surface Brightness (F140M),float,,surface brightness (f140m-clear),mag/arcsec^2,
+f140m-clear-reff,Effective Radius (F140M),float,,effective radius (f140m-clear),pixels,
+f140m-clear-sersic,Sersic (n) (F140M),float,,sersic (f140m-clear),,
+f140m-clear-axratio,Model Axis Ratio (F140M),float,,axis ratio (f140m-clear),,
+f182m-clear-use,Useablity (F182M),bool,,use (f182m-clear),,
+f182m-clear-chi,Reduced Chi Squared (F182M),float,,chi^2/nu (f182m-clear),,
+f182m-clear-sb,Surface Brightness (F182M),float,,surface brightness (f182m-clear),mag/arcsec^2,
+f182m-clear-reff,Effective Radius (F182M),float,,effective radius (f182m-clear),pixels,
+f182m-clear-sersic,Sersic (n) (F182M),float,,sersic (f182m-clear),,
+f182m-clear-axratio,Model Axis Ratio (F182M),float,,axis ratio (f182m-clear),,
+f200w-clear-use,Useablity (F200W),bool,,use (f200w-clear),,
+f200w-clear-chi,Reduced Chi Squared (F200W),float,,chi^2/nu (f200w-clear),,
+f200w-clear-sb,Surface Brightness (F200W),float,,surface brightness (f200w-clear),mag/arcsec^2,
+f200w-clear-reff,Effective Radius (F200W),float,,effective radius (f200w-clear),pixels,
+f200w-clear-sersic,Sersic (n) (F200W),float,,sersic (f200w-clear),,
+f200w-clear-axratio,Model Axis Ratio (F200W),float,,axis ratio (f200w-clear),,
+f210m-clear-use,Useablity (F210M),bool,,use (f210m-clear),,
+f210m-clear-chi,Reduced Chi Squared (F210M),float,,chi^2/nu (f210m-clear),,
+f210m-clear-sb,Surface Brightness (F210M),float,,surface brightness (f210m-clear),mag/arcsec^2,
+f210m-clear-reff,Effective Radius (F210M),float,,effective radius (f210m-clear),pixels,
+f210m-clear-sersic,Sersic (n) (F210M),float,,sersic (f210m-clear),,
+f210m-clear-axratio,Model Axis Ratio (F210M),float,,axis ratio (f210m-clear),,
+f250m-clear-use,Useablity (F250M),bool,,use (f250m-clear),,
+f250m-clear-chi,Reduced Chi Squared (F250M),float,,chi^2/nu (f250m-clear),,
+f250m-clear-sb,Surface Brightness (F250M),float,,surface brightness (f250m-clear),mag/arcsec^2,
+f250m-clear-reff,Effective Radius (F250M),float,,effective radius (f250m-clear),pixels,
+f250m-clear-sersic,Sersic (n) (F250M),float,,sersic (f250m-clear),,
+f250m-clear-axratio,Model Axis Ratio (F250M),float,,axis ratio (f250m-clear),,
+f277w-clear-use,Useablity (F277W),bool,,use (f277w-clear),,
+f277w-clear-chi,Reduced Chi Squared (F277W),float,,chi^2/nu (f277w-clear),,
+f277w-clear-sb,Surface Brightness (F277W),float,,surface brightness (f277w-clear),mag/arcsec^2,
+f277w-clear-reff,Effective Radius (F277W),float,,effective radius (f277w-clear),pixels,
+f277w-clear-sersic,Sersic (n) (F277W),float,,sersic (f277w-clear),,
+f277w-clear-axratio,Model Axis Ratio (F277W),float,,axis ratio (f277w-clear),,
+f300m-clear-use,Useablity (F300M),bool,,use (f300m-clear),,
+f300m-clear-chi,Reduced Chi Squared (F300M),float,,chi^2/nu (f300m-clear),,
+f300m-clear-sb,Surface Brightness (F300M),float,,surface brightness (f300m-clear),mag/arcsec^2,
+f300m-clear-reff,Effective Radius (F300M),float,,effective radius (f300m-clear),pixels,
+f300m-clear-sersic,Sersic (n) (F300M),float,,sersic (f300m-clear),,
+f300m-clear-axratio,Model Axis Ratio (F300M),float,,axis ratio (f300m-clear),,
+f335m-clear-use,Useablity (F335M),bool,,use (f335m-clear),,
+f335m-clear-chi,Reduced Chi Squared (F335M),float,,chi^2/nu (f335m-clear),,
+f335m-clear-sb,Surface Brightness (F335M),float,,surface brightness (f335m-clear),mag/arcsec^2,
+f335m-clear-reff,Effective Radius (F335M),float,,effective radius (f335m-clear),pixels,
+f335m-clear-sersic,Sersic (n) (F335M),float,,sersic (f335m-clear),,
+f335m-clear-axratio,Model Axis Ratio (F335M),float,,axis ratio (f335m-clear),,
+f356w-clear-use,Useablity (F356W),bool,,use (f356w-clear),,
+f356w-clear-chi,Reduced Chi Squared (F356W),float,,chi^2/nu (f356w-clear),,
+f356w-clear-sb,Surface Brightness (F356W),float,,surface brightness (f356w-clear),mag/arcsec^2,
+f356w-clear-reff,Effective Radius (F356W),float,,effective radius (f356w-clear),pixels,
+f356w-clear-sersic,Sersic (n) (F356W),float,,sersic (f356w-clear),,
+f356w-clear-axratio,Model Axis Ratio (F356W),float,,axis ratio (f356w-clear),,
+f360m-clear-use,Useablity (F360M),bool,,use (f360m-clear),,
+f360m-clear-chi,Reduced Chi Squared (F360M),float,,chi^2/nu (f360m-clear),,
+f360m-clear-sb,Surface Brightness (F360M),float,,surface brightness (f360m-clear),mag/arcsec^2,
+f360m-clear-reff,Effective Radius (F360M),float,,effective radius (f360m-clear),pixels,
+f360m-clear-sersic,Sersic (n) (F360M),float,,sersic (f360m-clear),,
+f360m-clear-axratio,Model Axis Ratio (F360M),float,,axis ratio (f360m-clear),,
+f410m-clear-use,Useablity (F410M),bool,,use (f410m-clear),,
+f410m-clear-chi,Reduced Chi Squared (F410M),float,,chi^2/nu (f410m-clear),,
+f410m-clear-sb,Surface Brightness (F410M),float,,surface brightness (f410m-clear),mag/arcsec^2,
+f410m-clear-reff,Effective Radius (F410M),float,,effective radius (f410m-clear),pixels,
+f410m-clear-sersic,Sersic (n) (F410M),float,,sersic (f410m-clear),,
+f410m-clear-axratio,Model Axis Ratio (F410M),float,,axis ratio (f410m-clear),,
+f430m-clear-use,Useablity (F430M),bool,,use (f430m-clear),,
+f430m-clear-chi,Reduced Chi Squared (F430M),float,,chi^2/nu (f430m-clear),,
+f430m-clear-sb,Surface Brightness (F430M),float,,surface brightness (f430m-clear),mag/arcsec^2,
+f430m-clear-reff,Effective Radius (F430M),float,,effective radius (f430m-clear),pixels,
+f430m-clear-sersic,Sersic (n) (F430M),float,,sersic (f430m-clear),,
+f430m-clear-axratio,Model Axis Ratio (F430M),float,,axis ratio (f430m-clear),,
+f444w-clear-use,Useablity (F444W),bool,,use (f444w-clear),,
+f444w-clear-chi,Reduced Chi Squared (F444W),float,,chi^2/nu (f444w-clear),,
+f444w-clear-sb,Surface Brightness (F444W),float,,surface brightness (f444w-clear),mag/arcsec^2,
+f444w-clear-reff,Effective Radius (F444W),float,,effective radius (f444w-clear),pixels,
+f444w-clear-sersic,Sersic (n) (F444W),float,,sersic (f444w-clear),,
+f444w-clear-axratio,Model Axis Ratio (F444W),float,,axis ratio (f444w-clear),,
+f460m-clear-use,Useablity (F460M),bool,,use (f460m-clear),,
+f460m-clear-chi,Reduced Chi Squared (F460M),float,,chi^2/nu (f460m-clear),,
+f460m-clear-sb,Surface Brightness (F460M),float,,surface brightness (f460m-clear),mag/arcsec^2,
+f460m-clear-reff,Effective Radius (F460M),float,,effective radius (f460m-clear),pixels,
+f460m-clear-sersic,Sersic (n) (F460M),float,,sersic (f460m-clear),,
+f460m-clear-axratio,Model Axis Ratio (F460M),float,,axis ratio (f460m-clear),,
+f480m-clear-use,Useablity (F480M),bool,,use (f480m-clear),,
+f480m-clear-chi,Reduced Chi Squared (F480M),float,,chi^2/nu (f480m-clear),,
+f480m-clear-sb,Surface Brightness (F480M),float,,surface brightness (f480m-clear),mag/arcsec^2,
+f480m-clear-reff,Effective Radius (F480M),float,,effective radius (f480m-clear),pixels,
+f480m-clear-sersic,Sersic (n) (F480M),float,,sersic (f480m-clear),,
+f480m-clear-axratio,Model Axis Ratio (F480M),float,,axis ratio (f480m-clear),,

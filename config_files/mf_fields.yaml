@@ -27,6 +27,19 @@ columns:
     output_num_decimals: null
     wl_micron: null
     zero_point: null
+  f150w-clear-chi:
+    display: "Reduced Chi Squared (F150W)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: null
+    input_column_name: "chi^2/nu (f150w-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F150W"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
   f150w-clear-sb:
     display: "Surface Brightness (F150W)"
     is_magnitude: false
@@ -90,6 +103,19 @@ columns:
     filt_min_val: null
     filt_name: "F277W"
     output_num_decimals: null
+    wl_micron: null
+    zero_point: null
+  clearp-f277w-chi:
+    display: "Reduced Chi Squared (F277W)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: null
+    input_column_name: "chi^2/nu (clearp-f277w)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F277W"
+    output_num_decimals: 3
     wl_micron: null
     zero_point: null
   clearp-f277w-sb:
@@ -157,6 +183,19 @@ columns:
     output_num_decimals: null
     wl_micron: null
     zero_point: null
+  clearp-f356w-chi:
+    display: "Reduced Chi Squared (F356W)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: null
+    input_column_name: "chi^2/nu (clearp-f356w)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F356W"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
   clearp-f356w-sb:
     display: "Surface Brightness (F356W)"
     is_magnitude: false
@@ -220,6 +259,19 @@ columns:
     filt_min_val: null
     filt_name: "F430M"
     output_num_decimals: null
+    wl_micron: null
+    zero_point: null
+  clearp-f430m-chi:
+    display: "Reduced Chi Squared (F430M)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: null
+    input_column_name: "chi^2/nu (clearp-f430m)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F430M"
+    output_num_decimals: 3
     wl_micron: null
     zero_point: null
   clearp-f430m-sb:
@@ -287,6 +339,19 @@ columns:
     output_num_decimals: null
     wl_micron: null
     zero_point: null
+  clearp-f444w-chi:
+    display: "Reduced Chi Squared (F444W)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: null
+    input_column_name: "chi^2/nu (clearp-f444w)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F444W"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
   clearp-f444w-sb:
     display: "Surface Brightness (F444W)"
     is_magnitude: false
@@ -346,6 +411,19 @@ columns:
     output_units: null
     input_units: null
     input_column_name: "use (clearp-f480m)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F480M"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
+  clearp-480m-chi:
+    display: "Reduced Chi Squared (F480M)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: null
+    input_column_name: "chi^2/nu (clearp-480m)"
     filt_max_val: null
     filt_min_val: null
     filt_name: "F480M"
@@ -417,6 +495,19 @@ columns:
     output_num_decimals: null
     wl_micron: null
     zero_point: null
+  f070w-clear-chi:
+    display: "Reduced Chi Squared (F070W)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: null
+    input_column_name: "chi^2/nu (f070w-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F070W"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
   f070w-clear-sb:
     display: "Surface Brightness (F070W)"
     is_magnitude: false
@@ -480,6 +571,19 @@ columns:
     filt_min_val: null
     filt_name: "F090W"
     output_num_decimals: null
+    wl_micron: null
+    zero_point: null
+  f090w-clear-chi:
+    display: "Reduced Chi Squared (F090W)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: null
+    input_column_name: "chi^2/nu (f090w-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F090W"
+    output_num_decimals: 3
     wl_micron: null
     zero_point: null
   f090w-clear-sb:
@@ -547,6 +651,19 @@ columns:
     output_num_decimals: null
     wl_micron: null
     zero_point: null
+  f115w-clear-chi:
+    display: "Reduced Chi Squared (F115W)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: null
+    input_column_name: "chi^2/nu (f115w-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F115W"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
   f115w-clear-sb:
     display: "Surface Brightness (F115W)"
     is_magnitude: false
@@ -610,6 +727,19 @@ columns:
     filt_min_val: null
     filt_name: "F140M"
     output_num_decimals: null
+    wl_micron: null
+    zero_point: null
+  f140m-clear-chi:
+    display: "Reduced Chi Squared (F140M)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: null
+    input_column_name: "chi^2/nu (f140m-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F140M"
+    output_num_decimals: 3
     wl_micron: null
     zero_point: null
   f140m-clear-sb:
@@ -677,6 +807,19 @@ columns:
     output_num_decimals: null
     wl_micron: null
     zero_point: null
+  f182m-clear-chi:
+    display: "Reduced Chi Squared (F182M)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: null
+    input_column_name: "chi^2/nu (f182m-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F182M"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
   f182m-clear-sb:
     display: "Surface Brightness (F182M)"
     is_magnitude: false
@@ -740,6 +883,19 @@ columns:
     filt_min_val: null
     filt_name: "F200W"
     output_num_decimals: null
+    wl_micron: null
+    zero_point: null
+  f200w-clear-chi:
+    display: "Reduced Chi Squared (F200W)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: null
+    input_column_name: "chi^2/nu (f200w-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F200W"
+    output_num_decimals: 3
     wl_micron: null
     zero_point: null
   f200w-clear-sb:
@@ -807,6 +963,19 @@ columns:
     output_num_decimals: null
     wl_micron: null
     zero_point: null
+  f210m-clear-chi:
+    display: "Reduced Chi Squared (F210M)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: null
+    input_column_name: "chi^2/nu (f210m-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F210M"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
   f210m-clear-sb:
     display: "Surface Brightness (F210M)"
     is_magnitude: false
@@ -870,6 +1039,19 @@ columns:
     filt_min_val: null
     filt_name: "F250M"
     output_num_decimals: null
+    wl_micron: null
+    zero_point: null
+  f250m-clear-chi:
+    display: "Reduced Chi Squared (F250M)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: null
+    input_column_name: "chi^2/nu (f250m-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F250M"
+    output_num_decimals: 3
     wl_micron: null
     zero_point: null
   f250m-clear-sb:
@@ -937,6 +1119,19 @@ columns:
     output_num_decimals: null
     wl_micron: null
     zero_point: null
+  f277w-clear-chi:
+    display: "Reduced Chi Squared (F277W)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: null
+    input_column_name: "chi^2/nu (f277w-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F277W"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
   f277w-clear-sb:
     display: "Surface Brightness (F277W)"
     is_magnitude: false
@@ -1000,6 +1195,19 @@ columns:
     filt_min_val: null
     filt_name: "F300M"
     output_num_decimals: null
+    wl_micron: null
+    zero_point: null
+  f300m-clear-chi:
+    display: "Reduced Chi Squared (F300M)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: null
+    input_column_name: "chi^2/nu (f300m-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F300M"
+    output_num_decimals: 3
     wl_micron: null
     zero_point: null
   f300m-clear-sb:
@@ -1067,6 +1275,19 @@ columns:
     output_num_decimals: null
     wl_micron: null
     zero_point: null
+  f335m-clear-chi:
+    display: "Reduced Chi Squared (F335M)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: null
+    input_column_name: "chi^2/nu (f335m-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F335M"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
   f335m-clear-sb:
     display: "Surface Brightness (F335M)"
     is_magnitude: false
@@ -1130,6 +1351,19 @@ columns:
     filt_min_val: null
     filt_name: "F356W"
     output_num_decimals: null
+    wl_micron: null
+    zero_point: null
+  f356w-clear-chi:
+    display: "Reduced Chi Squared (F356W)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: null
+    input_column_name: "chi^2/nu (f356w-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F356W"
+    output_num_decimals: 3
     wl_micron: null
     zero_point: null
   f356w-clear-sb:
@@ -1197,6 +1431,19 @@ columns:
     output_num_decimals: null
     wl_micron: null
     zero_point: null
+  f360m-clear-chi:
+    display: "Reduced Chi Squared (F360M)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: null
+    input_column_name: "chi^2/nu (f360m-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F360M"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
   f360m-clear-sb:
     display: "Surface Brightness (F360M)"
     is_magnitude: false
@@ -1260,6 +1507,19 @@ columns:
     filt_min_val: null
     filt_name: "F410M"
     output_num_decimals: null
+    wl_micron: null
+    zero_point: null
+  f410m-clear-chi:
+    display: "Reduced Chi Squared (F410M)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: null
+    input_column_name: "chi^2/nu (f410m-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F410M"
+    output_num_decimals: 3
     wl_micron: null
     zero_point: null
   f410m-clear-sb:
@@ -1327,6 +1587,19 @@ columns:
     output_num_decimals: null
     wl_micron: null
     zero_point: null
+  f430m-clear-chi:
+    display: "Reduced Chi Squared (F430M)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: null
+    input_column_name: "chi^2/nu (f430m-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F430M"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
   f430m-clear-sb:
     display: "Surface Brightness (F430M)"
     is_magnitude: false
@@ -1390,6 +1663,19 @@ columns:
     filt_min_val: null
     filt_name: "F444W"
     output_num_decimals: null
+    wl_micron: null
+    zero_point: null
+  f444w-clear-chi:
+    display: "Reduced Chi Squared (F444W)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: null
+    input_column_name: "chi^2/nu (f444w-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F444W"
+    output_num_decimals: 3
     wl_micron: null
     zero_point: null
   f444w-clear-sb:
@@ -1457,6 +1743,19 @@ columns:
     output_num_decimals: null
     wl_micron: null
     zero_point: null
+  f460m-clear-chi:
+    display: "Reduced Chi Squared (F460M)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: null
+    input_column_name: "chi^2/nu (f460m-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F460M"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
   f460m-clear-sb:
     display: "Surface Brightness (F460M)"
     is_magnitude: false
@@ -1520,6 +1819,19 @@ columns:
     filt_min_val: null
     filt_name: "F480M"
     output_num_decimals: null
+    wl_micron: null
+    zero_point: null
+  f480m-clear-chi:
+    display: "Reduced Chi Squared (F480M)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: null
+    input_column_name: "chi^2/nu (f480m-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F480M"
+    output_num_decimals: 3
     wl_micron: null
     zero_point: null
   f480m-clear-sb:

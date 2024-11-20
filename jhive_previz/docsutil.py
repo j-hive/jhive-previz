@@ -41,7 +41,7 @@ def convert_yaml_metadata_to_csv(
     df = pd.DataFrame.from_dict(config["columns"], orient="index")
     new_df = df[
         ["display", "data_type", "output_units", "input_column_name", "input_units"]
-    ]
+    ].copy()
 
     # rename columns so that there are no underscores
     new_df.rename(
@@ -176,7 +176,7 @@ def convert_yaml_to_csv_and_merge(
         # convert the yaml and write the csv file
         convert_yaml_metadata_to_csv(file_path, write_path)
         print(
-            f"Converted yaml file [magenta]{file_path}[/magenta] to [magenta]{write_path}[/magenta]"
+            f"Converted yaml file [magenta]{file_path}[/magenta] to [magenta]{write_path.name}[/magenta]"
         )
 
         # merge with the old table file, keeping the descriptions, and write to a new csv
@@ -187,10 +187,10 @@ def convert_yaml_to_csv_and_merge(
             f"Merged [magenta]{write_path.name}[/magenta] with [magenta]{table_path.name}[/magenta] and wrote to [magenta]{merge_path}[/magenta]."
         )
         print(
-            f"To ensure this file ends up in the documentation, check [magenta]{merge_path.name}[/magenta] looks as expected, and edit as desired, adding any additional descriptions necessary."
+            f"To ensure this file ends up in the documentation, check [magenta]{merge_path.name}[/magenta] looks as expected, and edit as desired. Make sure to add any additional descriptions necessary."
         )
         print(
-            f"Then delete the old [magenta]{table_path.name}[/magenta] file and rename [magenta]{merge_path.name}[/magenta] to [magenta]{table_path.name}[/magenta]."
+            f"Then [red]delete the old {table_path.name} file[/red] and [green]rename {merge_path.name} to {table_path.name}[/green]."
         )
 
     else:
