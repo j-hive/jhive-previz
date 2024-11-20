@@ -5,11 +5,11 @@ from jhive_previz import metadata
 from jhive_previz import dataproc
 
 
-def test_get_desired_column_metadata(load_config):
+def test_get_desired_column_metadata(load_config, get_processed_data):
     """Make sure that get_desired_column_metadata works as expected"""
 
     new_metadata = metadata.get_desired_column_metadata(
-        load_config[1], load_config[0]["columns_to_use"]
+        load_config[1], load_config[0]["columns_to_use"], get_processed_data
     )
 
     # make sure we got all the metadata we wanted
@@ -38,7 +38,7 @@ def test_add_min_max_val_to_json(load_config, get_processed_data):
 
     # turn config file into json
     new_metadata = metadata.get_desired_column_metadata(
-        load_config[1], load_config[0]["columns_to_use"]
+        load_config[1], load_config[0]["columns_to_use"], get_processed_data
     )
 
     # add min and max to json
@@ -58,7 +58,7 @@ def test_add_top_level_metadata(load_config, get_processed_data):
     """Test that add_top_level_metadata works as expected."""
 
     new_metadata = metadata.get_desired_column_metadata(
-        load_config[1], load_config[0]["columns_to_use"]
+        load_config[1], load_config[0]["columns_to_use"], get_processed_data
     )
 
     final_metadata = metadata.add_top_level_metadata(
