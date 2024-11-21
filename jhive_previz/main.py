@@ -190,11 +190,11 @@ def validate_config_paths(
 def process_data_and_write_metadata(
     config_path: Annotated[
         str, typer.Option(help="The full path and file name of the base config file.")
-    ] = "./config_files/base_config.yaml",
+    ] = "./config_files/abell2744_config.yaml",
     field_paths: Annotated[
         List[str],
         typer.Option(help="A list of full paths to the field config files."),
-    ] = ["./config_files/fields.yaml", "./config_files/db_fields.yaml"],
+    ] = ["./config_files/dja_fields.yaml", "./config_files/db_fields.yaml"],
 ):
     """The main function. This reads in the two config files, validates that
     the required parameters exist, and then creates the new filtered and converted

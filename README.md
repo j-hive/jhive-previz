@@ -25,8 +25,10 @@ poetry run jhive_previz --config-path [config_path]
 To run using config files other than the defaults, run the same command as above, but provide the paths to the `config.yaml` file and all of the desired `fields.yaml` files using the following format: 
 
 ```
-poetry run jhive_previz --config-path [config_path] --field-paths [field_path_1 field_path_2]
+poetry run jhive_previz --config-path [config_path] --field-paths [field_path_1] --field-paths [field_path_2]
 ```
+
+You can add additional field paths as desired by adding an extra instance of the argument to the end of the command (i.e. `--field-paths [field_path_3]`).
 
 For more help running this script, you can run:
 ```
