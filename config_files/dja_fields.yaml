@@ -583,7 +583,7 @@ columns:
     filt_min_val: 0.0
     output_num_decimals: 3
     output_units: "magnitude"
-    wl_micron: 0.350
+    wl_micron: 0.58518
     zero_point: 28.9
   abmag_f560w:
     display: "Magnitude (F560W)"
@@ -602,7 +602,7 @@ columns:
     display: "Magnitude (F606WU)"
     data_type: "float"
     filt_name: "F606WU"
-    input_column_name: "f475wu_corr_1"
+    input_column_name: "f606wu_corr_1"
     input_units: "microJansky"
     is_magnitude: True
     filt_max_val: null
@@ -635,7 +635,7 @@ columns:
     filt_min_val: 0.0
     output_num_decimals: 3
     output_units: "magnitude"
-    wl_micron: 0.832
+    wl_micron: 0.903148
     zero_point: 28.9
   abmag_f850lpu:
     display: "Magnitude (F850LPU)"
@@ -648,5 +648,5 @@ columns:
     filt_min_val: 0.0
     output_num_decimals: 3
     output_units: "magnitude"
-    wl_micron: 0.8454
+    wl_micron: 0.916995
     zero_point: 28.9

@@ -25,6 +25,7 @@ columns_to_use:
     - "abmag_f814w"
     - "abmag_f090w"
     - "abmag_f105w"
+    - "abmag_f110w"
     - "abmag_f115w"
     - "abmag_f115wn"
     - "abmag_f125w"
