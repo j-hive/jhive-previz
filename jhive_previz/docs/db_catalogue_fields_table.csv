@@ -1,0 +1,22 @@
+column name,display,data type,output units,input column name,input units,description
+id,DJA Source ID,int,,CAT_ID,, The DJA id of the galaxy
+ra,Right Ascension,float,Degrees,RA,Degrees, The right ascension of the galaxy in degrees
+dec,Declination,float,Degrees,DEC,Degrees, The declination of the galaxy in degrees
+z_phot,Photometric Redshift,float,,z_phot,, The photometric redshift of the galaxy taken from the ez catalog
+logM_50,Current Stellar Mass,float,log Solar Masses,logM_50,log Solar Masses, The median of the current stellar mass of the galaxy in solar masses in log units
+logSFRinst_50,SFR,float,log Solar Masses per year,logSFRinst_50,log Solar Masses per year, The median of the instantaneous star formation rate of the galaxy in log units
+logZsol_50,Metallicity,float,log Solar,logZsol_50,log Solar, The median of the metallicity with respect to solar metallicity in log units
+Av_50,Extinction (V),float,magnitudes,Av_50,magnitudes, V-band extinction in magnitudes 
+logMt_50,Total Stellar Mass Formed,float,log Solar Masses,logMt_50,log Solar Masses, The median total mass of stars formed by the galaxy over its lifetime in log units
+logSFR10_50,Average SFR (10 Myr),float,log Solar Masses per year,logSFR10_50,log Solar Masses per year, The median of the galaxy's star formation rate over the last 10 Myr in log units
+logSFR100_50,Average SFR (100 Myr),float,log Solar Masses per year,logSFR100_50,log Solar Masses per year, The median of the galaxy's star formation rate over the last 100 Myr in log units
+logSFR300_50,Average SFR (300 Myr),float,log Solar Masses per year,logSFR300_50,log Solar Masses per year, The median of the galaxy's star formation rate over the last 300 Myr in log units
+logSFR1000_50,Average SFR (1000 Myr),float,log Solar Masses per year,logSFR1000_50,log Solar Masses per year, The median of the galaxy's star formation rate over the last 1000 Myr in log units
+t25_50,t (25%),float,t/t0,t25_50,t/t0, The median fraction of the age of the Universe at which the galaxy formed 25% of its mass 
+t50_50,t (50%),float,t/t0,t50_50,t/t0, The median fraction of the age of the Universe at which the galaxy formed 50% of its mass
+t75_50,t (75%),float,t/t0,t75_50,t/t0, The median fraction of the age of the Universe at which the galaxy formed 75% of its mass
+chi2,Chi Squared,float,,chi2,,The likelihood of the fit used
+fit_flags,Fit Flags,float,,fit_flags,, A number corresponding to the goodness of the fit. If the number is greater than 0 one or more flags have been raised. A value of 1 means the fit has a NaN value for mass. 2 means they have SFR uncertainties greater than the cutoff. 3 means they are flagged as a star. 4 means they have extremely large chi squared. 
+nbands,Nbands,int,,nbands,, The number of good photometreic bands used for the fit
+zfit_50,Photometric Redshift,float,,zfit_50,,The fitted redshift of the galaxy (usually equivalent to z_phot)
+logSFRtuple_50,SFR,float,log Solar Masses per year,logSFRtuple_50,log Solar Masses per year, An internal quantity mostly equivalent to the logSFRinst_50 that is used by the code to calculate star formation history

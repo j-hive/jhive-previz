@@ -1,0 +1,65 @@
+file_name: "cat_filename"
+file_format: "ascii.csv"
+columns:
+  id:
+    display: "DJA Source ID"
+    is_magnitude: false,
+    data_type: "int"
+    output_units: null
+    input_units: null
+    file_name: "cat_filename"
+    input_column_name: "id"
+    output_num_decimals: null
+  mass:
+    display: "Stellar Mass"
+    data_type: "float"
+    file_name: "cat_filename"
+    input_column_name: "stellar_mass"
+    input_units: "Solar Masses"
+    is_magnitude: False
+    filt_max_val: null
+    filt_min_val: 0.0
+    output_num_decimals: 3
+    output_units: "log Solar Masses"
+  abmag_f333w:
+    display: "Magnitude (F333W)"
+    data_type: "float"
+    file_name: "cat_filename"
+    filt_name: "F333W"
+    input_column_name: "f333w_corr_1"
+    input_units: "microJansky"
+    is_magnitude: True
+    filt_max_val: null
+    filt_min_val: 0.0
+    output_num_decimals: 3
+    output_units: "magnitude"
+    wl_micron: 0.330
+    zero_point: 28.9
+  abmag_f444w:
+    display: "Magnitude (F444W)"
+    data_type: "float"
+    file_name: "cat_filename"
+    filt_name: "F444W"
+    input_column_name: "f444w_corr_1"
+    input_units: "microJansky"
+    is_magnitude: True
+    filt_max_val: 45.
+    filt_min_val: 0.0
+    output_num_decimals: 3
+    output_units: "magnitude"
+    wl_micron: 0.430
+    zero_point: 28.9
+  abmag_f480w:
+    display: "Magnitude (F480W)"
+    data_type: "float"
+    file_name: "ez_filename"
+    filt_name: "F480W"
+    input_column_name: "f480w_corr_1"
+    input_units: "microJansky"
+    is_magnitude: True
+    filt_max_val: null
+    filt_min_val: 0.0
+    output_num_decimals: 3
+    output_units: "magnitude"
+    wl_micron: 0.480
+    zero_point: 28.9

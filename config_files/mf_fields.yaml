@@ -1,0 +1,1888 @@
+file_name: "mf_filename"
+file_format: "ascii"
+columns:
+  id:
+    display: "DJA Source ID"
+    is_magnitude: false
+    data_type: "int"
+    output_units: null
+    input_units: null
+    input_column_name: "object"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: null
+    output_num_decimals: null
+    wl_micron: null
+    zero_point: null
+  f150w-clear-use:
+    display: "Useablity (F150W)"
+    is_magnitude: false
+    data_type: "bool"
+    output_units: null
+    input_units: null
+    input_column_name: "use (f150w-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F150W"
+    output_num_decimals: null
+    wl_micron: null
+    zero_point: null
+  f150w-clear-chi:
+    display: "Reduced Chi Squared (F150W)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: null
+    input_column_name: "chi^2/nu (f150w-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F150W"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
+  f150w-clear-sb:
+    display: "Surface Brightness (F150W)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: "mag/arcsec^2"
+    input_column_name: "surface brightness (f150w-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F150W"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
+  f150w-clear-reff:
+    display: "Effective Radius (F150W)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: "pixels"
+    input_column_name: "effective radius (f150w-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F150W"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
+  f150w-clear-sersic:
+    display: "Sersic (n) (F150W)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: null
+    input_column_name: "sersic (f150w-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F150W"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
+  f150w-clear-axratio:
+    display: "Model Axis Ratio (F150W)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: null
+    input_column_name: "axis ratio (f150w-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F150W"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
+  clearp-f277w-use:
+    display: "Useablity (F277W)"
+    is_magnitude: false
+    data_type: "bool"
+    output_units: null
+    input_units: null
+    input_column_name: "use (clearp-f277w)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F277W"
+    output_num_decimals: null
+    wl_micron: null
+    zero_point: null
+  clearp-f277w-chi:
+    display: "Reduced Chi Squared (F277W)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: null
+    input_column_name: "chi^2/nu (clearp-f277w)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F277W"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
+  clearp-f277w-sb:
+    display: "Surface Brightness (F277W)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: "mag/arcsec^2"
+    input_column_name: "surface brightness (clearp-f277w)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F277W"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
+  clearp-f277w-reff:
+    display: "Effective Radius (F277W)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: "pixels"
+    input_column_name: "effective radius (clearp-f277w)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F277W"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
+  clearp-f277w-sersic:
+    display: "Sersic (n) (F277W)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: null
+    input_column_name: "sersic (clearp-f277w)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F277W"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
+  clearp-f277w-axratio:
+    display: "Model Axis Ratio (F277W)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: null
+    input_column_name: "axis ratio (clearp-f277w)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F277W"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
+  clearp-f356w-use:
+    display: "Useablity (F356W)"
+    is_magnitude: false
+    data_type: "bool"
+    output_units: null
+    input_units: null
+    input_column_name: "use (clearp-f356w)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F356W"
+    output_num_decimals: null
+    wl_micron: null
+    zero_point: null
+  clearp-f356w-chi:
+    display: "Reduced Chi Squared (F356W)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: null
+    input_column_name: "chi^2/nu (clearp-f356w)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F356W"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
+  clearp-f356w-sb:
+    display: "Surface Brightness (F356W)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: "mag/arcsec^2"
+    input_column_name: "surface brightness (clearp-f356w)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F356W"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
+  clearp-f356w-reff:
+    display: "Effective Radius (F356W)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: "pixels"
+    input_column_name: "effective radius (clearp-f356w)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F356W"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
+  clearp-f356w-sersic:
+    display: "Sersic (n) (F356W)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: null
+    input_column_name: "sersic (clearp-f356w)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F356W"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
+  clearp-f356w-axratio:
+    display: "Model Axis Ratio (F356W)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: null
+    input_column_name: "axis ratio (clearp-f356w)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F356W"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
+  clearp-f430m-use:
+    display: "Useablity (F430M)"
+    is_magnitude: false
+    data_type: "bool"
+    output_units: null
+    input_units: null
+    input_column_name: "use (clearp-f430m)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F430M"
+    output_num_decimals: null
+    wl_micron: null
+    zero_point: null
+  clearp-f430m-chi:
+    display: "Reduced Chi Squared (F430M)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: null
+    input_column_name: "chi^2/nu (clearp-f430m)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F430M"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
+  clearp-f430m-sb:
+    display: "Surface Brightness (F430M)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: "mag/arcsec^2"
+    input_column_name: "surface brightness (clearp-f430m)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F430M"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
+  clearp-f430m-reff:
+    display: "Effective Radius (F430M)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: "pixels"
+    input_column_name: "effective radius (clearp-f430m)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F430M"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
+  clearp-f430m-sersic:
+    display: "Sersic (n) (F430M)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: null
+    input_column_name: "sersic (clearp-f430m)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F430M"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
+  clearp-f430m-axratio:
+    display: "Model Axis Ratio (F430M)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: null
+    input_column_name: "axis ratio (clearp-f430m)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F430M"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
+  clearp-f444w-use:
+    display: "Useablity (F444W)"
+    is_magnitude: false
+    data_type: "bool"
+    output_units: null
+    input_units: null
+    input_column_name: "use (clearp-f444w)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F444W"
+    output_num_decimals: null
+    wl_micron: null
+    zero_point: null
+  clearp-f444w-chi:
+    display: "Reduced Chi Squared (F444W)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: null
+    input_column_name: "chi^2/nu (clearp-f444w)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F444W"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
+  clearp-f444w-sb:
+    display: "Surface Brightness (F444W)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: "mag/arcsec^2"
+    input_column_name: "surface brightness (clearp-f444w)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F444W"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
+  clearp-f444w-reff:
+    display: "Effective Radius (F444W)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: "pixels"
+    input_column_name: "effective radius (clearp-f444w)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F444W"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
+  clearp-f444w-sersic:
+    display: "Sersic (n) (F444W)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: null
+    input_column_name: "sersic (clearp-f444w)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F444W"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
+  clearp-f444w-axratio:
+    display: "Model Axis Ratio (F444W)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: null
+    input_column_name: "axis ratio (clearp-f444w)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F444W"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
+  clearp-f480m-use:
+    display: "Useablity (F480M)"
+    is_magnitude: false
+    data_type: "bool"
+    output_units: null
+    input_units: null
+    input_column_name: "use (clearp-f480m)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F480M"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
+  clearp-480m-chi:
+    display: "Reduced Chi Squared (F480M)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: null
+    input_column_name: "chi^2/nu (clearp-480m)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F480M"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
+  clearp-f480m-sb:
+    display: "Surface Brightness (F480M)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: "mag/arcsec^2"
+    input_column_name: "surface brightness (clearp-f480m)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F480M"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
+  clearp-f480m-reff:
+    display: "Effective Radius (F480M)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: "pixels"
+    input_column_name: "effective radius (clearp-f480m)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F480M"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
+  clearp-f480m-sersic:
+    display: "Sersic (n) (F480M)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: null
+    input_column_name: "sersic (clearp-f480m)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F480M"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
+  clearp-f480m-axratio:
+    display: "Model Axis Ratio (F480M)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: null
+    input_column_name: "axis ratio (clearp-f480m)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F480M"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
+  f070w-clear-use:
+    display: "Useablity (F070W)"
+    is_magnitude: false
+    data_type: "bool"
+    output_units: null
+    input_units: null
+    input_column_name: "use (f070w-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F070W"
+    output_num_decimals: null
+    wl_micron: null
+    zero_point: null
+  f070w-clear-chi:
+    display: "Reduced Chi Squared (F070W)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: null
+    input_column_name: "chi^2/nu (f070w-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F070W"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
+  f070w-clear-sb:
+    display: "Surface Brightness (F070W)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: "mag/arcsec^2"
+    input_column_name: "surface brightness (f070w-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F070W"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
+  f070w-clear-reff:
+    display: "Effective Radius (F070W)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: "pixels"
+    input_column_name: "effective radius (f070w-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F070W"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
+  f070w-clear-sersic:
+    display: "Sersic (n) (F070W)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: null
+    input_column_name: "sersic (f070w-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F070W"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
+  f070w-clear-axratio:
+    display: "Model Axis Ratio (F070W)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: null
+    input_column_name: "axis ratio (f070w-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F070W"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
+  f090w-clear-use:
+    display: "Useablity (F090W)"
+    is_magnitude: false
+    data_type: "bool"
+    output_units: null
+    input_units: null
+    input_column_name: "use (f090w-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F090W"
+    output_num_decimals: null
+    wl_micron: null
+    zero_point: null
+  f090w-clear-chi:
+    display: "Reduced Chi Squared (F090W)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: null
+    input_column_name: "chi^2/nu (f090w-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F090W"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
+  f090w-clear-sb:
+    display: "Surface Brightness (F090W)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: "mag/arcsec^2"
+    input_column_name: "surface brightness (f090w-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F090W"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
+  f090w-clear-reff:
+    display: "Effective Radius (F090W)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: "pixels"
+    input_column_name: "effective radius (f090w-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F090W"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
+  f090w-clear-sersic:
+    display: "Sersic (n) (F090W)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: null
+    input_column_name: "sersic (f090w-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F070W"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
+  f090w-clear-axratio:
+    display: "Model Axis Ratio (F090W)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: null
+    input_column_name: "axis ratio (f090w-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F090W"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
+  f115w-clear-use:
+    display: "Useablity (F115W)"
+    is_magnitude: false
+    data_type: "bool"
+    output_units: null
+    input_units: null
+    input_column_name: "use (f115w-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F115W"
+    output_num_decimals: null
+    wl_micron: null
+    zero_point: null
+  f115w-clear-chi:
+    display: "Reduced Chi Squared (F115W)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: null
+    input_column_name: "chi^2/nu (f115w-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F115W"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
+  f115w-clear-sb:
+    display: "Surface Brightness (F115W)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: "mag/arcsec^2"
+    input_column_name: "surface brightness (f115w-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F115W"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
+  f115w-clear-reff:
+    display: "Effective Radius (F115W)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: "pixels"
+    input_column_name: "effective radius (f115w-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F115W"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
+  f115w-clear-sersic:
+    display: "Sersic (n) (F115W)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: null
+    input_column_name: "sersic (f115w-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F115W"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
+  f115w-clear-axratio:
+    display: "Model Axis Ratio (F115W)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: null
+    input_column_name: "axis ratio (f115w-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F115W"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
+  f140m-clear-use:
+    display: "Useablity (F140M)"
+    is_magnitude: false
+    data_type: "bool"
+    output_units: null
+    input_units: null
+    input_column_name: "use (f140m-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F140M"
+    output_num_decimals: null
+    wl_micron: null
+    zero_point: null
+  f140m-clear-chi:
+    display: "Reduced Chi Squared (F140M)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: null
+    input_column_name: "chi^2/nu (f140m-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F140M"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
+  f140m-clear-sb:
+    display: "Surface Brightness (F140M)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: "mag/arcsec^2"
+    input_column_name: "surface brightness (f140m-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F140M"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
+  f140m-clear-reff:
+    display: "Effective Radius (F140M)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: "pixels"
+    input_column_name: "effective radius (f140m-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F140M"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
+  f140m-clear-sersic:
+    display: "Sersic (n) (F140M)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: null
+    input_column_name: "sersic (f140m-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F140M"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
+  f140m-clear-axratio:
+    display: "Model Axis Ratio (F140M)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: null
+    input_column_name: "axis ratio (f140m-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F140M"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
+  f182m-clear-use:
+    display: "Useablity (F182M)"
+    is_magnitude: false
+    data_type: "bool"
+    output_units: null
+    input_units: null
+    input_column_name: "use (f182m-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F182M"
+    output_num_decimals: null
+    wl_micron: null
+    zero_point: null
+  f182m-clear-chi:
+    display: "Reduced Chi Squared (F182M)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: null
+    input_column_name: "chi^2/nu (f182m-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F182M"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
+  f182m-clear-sb:
+    display: "Surface Brightness (F182M)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: "mag/arcsec^2"
+    input_column_name: "surface brightness (f182m-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F182M"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
+  f182m-clear-reff:
+    display: "Effective Radius (F182M)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: "pixels"
+    input_column_name: "effective radius (f182m-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F182M"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
+  f182m-clear-sersic:
+    display: "Sersic (n) (F182M)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: null
+    input_column_name: "sersic (f182m-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F182M"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
+  f182m-clear-axratio:
+    display: "Model Axis Ratio (F182M)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: null
+    input_column_name: "axis ratio (f182m-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F182M"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
+  f200w-clear-use:
+    display: "Useablity (F200W)"
+    is_magnitude: false
+    data_type: "bool"
+    output_units: null
+    input_units: null
+    input_column_name: "use (f200w-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F200W"
+    output_num_decimals: null
+    wl_micron: null
+    zero_point: null
+  f200w-clear-chi:
+    display: "Reduced Chi Squared (F200W)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: null
+    input_column_name: "chi^2/nu (f200w-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F200W"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
+  f200w-clear-sb:
+    display: "Surface Brightness (F200W)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: "mag/arcsec^2"
+    input_column_name: "surface brightness (f200w-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F200W"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
+  f200w-clear-reff:
+    display: "Effective Radius (F200W)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: "pixels"
+    input_column_name: "effective radius (f200w-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F200W"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
+  f200w-clear-sersic:
+    display: "Sersic (n) (F200W)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: null
+    input_column_name: "sersic (f200w-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F200W"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
+  f200w-clear-axratio:
+    display: "Model Axis Ratio (F200W)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: null
+    input_column_name: "axis ratio (f200w-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F200W"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
+  f210m-clear-use:
+    display: "Useablity (F210M)"
+    is_magnitude: false
+    data_type: "bool"
+    output_units: null
+    input_units: null
+    input_column_name: "use (f210m-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F210M"
+    output_num_decimals: null
+    wl_micron: null
+    zero_point: null
+  f210m-clear-chi:
+    display: "Reduced Chi Squared (F210M)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: null
+    input_column_name: "chi^2/nu (f210m-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F210M"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
+  f210m-clear-sb:
+    display: "Surface Brightness (F210M)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: "mag/arcsec^2"
+    input_column_name: "surface brightness (f210m-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F210M"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
+  f210m-clear-reff:
+    display: "Effective Radius (F210M)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: "pixels"
+    input_column_name: "effective radius (f210m-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F210M"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
+  f210m-clear-sersic:
+    display: "Sersic (n) (F210M)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: null
+    input_column_name: "sersic (f210m-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F210M"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
+  f210m-clear-axratio:
+    display: "Model Axis Ratio (F210M)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: null
+    input_column_name: "axis ratio (f210m-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F210M"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
+  f250m-clear-use:
+    display: "Useablity (F250M)"
+    is_magnitude: false
+    data_type: "bool"
+    output_units: null
+    input_units: null
+    input_column_name: "use (f250m-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F250M"
+    output_num_decimals: null
+    wl_micron: null
+    zero_point: null
+  f250m-clear-chi:
+    display: "Reduced Chi Squared (F250M)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: null
+    input_column_name: "chi^2/nu (f250m-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F250M"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
+  f250m-clear-sb:
+    display: "Surface Brightness (F250M)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: "mag/arcsec^2"
+    input_column_name: "surface brightness (f250m-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F250M"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
+  f250m-clear-reff:
+    display: "Effective Radius (F250M)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: "pixels"
+    input_column_name: "effective radius (f250m-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F250M"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
+  f250m-clear-sersic:
+    display: "Sersic (n) (F250M)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: null
+    input_column_name: "sersic (f250m-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F250M"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
+  f250m-clear-axratio:
+    display: "Model Axis Ratio (F250M)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: null
+    input_column_name: "axis ratio (f250m-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F250M"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
+  f277w-clear-use:
+    display: "Useablity (F277W)"
+    is_magnitude: false
+    data_type: "bool"
+    output_units: null
+    input_units: null
+    input_column_name: "use (f277w-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F277W"
+    output_num_decimals: null
+    wl_micron: null
+    zero_point: null
+  f277w-clear-chi:
+    display: "Reduced Chi Squared (F277W)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: null
+    input_column_name: "chi^2/nu (f277w-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F277W"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
+  f277w-clear-sb:
+    display: "Surface Brightness (F277W)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: "mag/arcsec^2"
+    input_column_name: "surface brightness (f277w-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F277W"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
+  f277w-clear-reff:
+    display: "Effective Radius (F277W)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: "pixels"
+    input_column_name: "effective radius (f277w-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F277W"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
+  f277w-clear-sersic:
+    display: "Sersic (n) (F277W)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: null
+    input_column_name: "sersic (f277w-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F277W"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
+  f277w-clear-axratio:
+    display: "Model Axis Ratio (F277W)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: null
+    input_column_name: "axis ratio (f277w-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F277W"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
+  f300m-clear-use:
+    display: "Useablity (F300M)"
+    is_magnitude: false
+    data_type: "bool"
+    output_units: null
+    input_units: null
+    input_column_name: "use (f300m-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F300M"
+    output_num_decimals: null
+    wl_micron: null
+    zero_point: null
+  f300m-clear-chi:
+    display: "Reduced Chi Squared (F300M)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: null
+    input_column_name: "chi^2/nu (f300m-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F300M"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
+  f300m-clear-sb:
+    display: "Surface Brightness (F300M)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: "mag/arcsec^2"
+    input_column_name: "surface brightness (f300m-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F300M"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
+  f300m-clear-reff:
+    display: "Effective Radius (F300M)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: "pixels"
+    input_column_name: "effective radius (f300m-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F300M"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
+  f300m-clear-sersic:
+    display: "Sersic (n) (F300M)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: null
+    input_column_name: "sersic (f300m-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F300M"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
+  f300m-clear-axratio:
+    display: "Model Axis Ratio (F300M)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: null
+    input_column_name: "axis ratio (f300m-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F300M"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
+  f335m-clear-use:
+    display: "Useablity (F335M)"
+    is_magnitude: false
+    data_type: "bool"
+    output_units: null
+    input_units: null
+    input_column_name: "use (f335m-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F335M"
+    output_num_decimals: null
+    wl_micron: null
+    zero_point: null
+  f335m-clear-chi:
+    display: "Reduced Chi Squared (F335M)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: null
+    input_column_name: "chi^2/nu (f335m-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F335M"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
+  f335m-clear-sb:
+    display: "Surface Brightness (F335M)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: "mag/arcsec^2"
+    input_column_name: "surface brightness (f335m-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F335M"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
+  f335m-clear-reff:
+    display: "Effective Radius (F335M)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: "pixels"
+    input_column_name: "effective radius (f335m-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F335M"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
+  f335m-clear-sersic:
+    display: "Sersic (n) (F335M)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: null
+    input_column_name: "sersic (f335m-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F335M"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
+  f335m-clear-axratio:
+    display: "Model Axis Ratio (F335M)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: null
+    input_column_name: "axis ratio (f335m-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F335M"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
+  f356w-clear-use:
+    display: "Useablity (F356W)"
+    is_magnitude: false
+    data_type: "bool"
+    output_units: null
+    input_units: null
+    input_column_name: "use (f356w-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F356W"
+    output_num_decimals: null
+    wl_micron: null
+    zero_point: null
+  f356w-clear-chi:
+    display: "Reduced Chi Squared (F356W)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: null
+    input_column_name: "chi^2/nu (f356w-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F356W"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
+  f356w-clear-sb:
+    display: "Surface Brightness (F356W)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: "mag/arcsec^2"
+    input_column_name: "surface brightness (f356w-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F356W"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
+  f356w-clear-reff:
+    display: "Effective Radius (F356W)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: "pixels"
+    input_column_name: "effective radius (f356w-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F356W"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
+  f356w-clear-sersic:
+    display: "Sersic (n) (F356W)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: null
+    input_column_name: "sersic (f356w-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F356W"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
+  f356w-clear-axratio:
+    display: "Model Axis Ratio (F356W)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: null
+    input_column_name: "axis ratio (f356w-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F356W"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
+  f360m-clear-use:
+    display: "Useablity (F360M)"
+    is_magnitude: false
+    data_type: "bool"
+    output_units: null
+    input_units: null
+    input_column_name: "use (f360m-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F360M"
+    output_num_decimals: null
+    wl_micron: null
+    zero_point: null
+  f360m-clear-chi:
+    display: "Reduced Chi Squared (F360M)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: null
+    input_column_name: "chi^2/nu (f360m-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F360M"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
+  f360m-clear-sb:
+    display: "Surface Brightness (F360M)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: "mag/arcsec^2"
+    input_column_name: "surface brightness (f360m-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F360M"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
+  f360m-clear-reff:
+    display: "Effective Radius (F360M)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: "pixels"
+    input_column_name: "effective radius (f360m-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F360M"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
+  f360m-clear-sersic:
+    display: "Sersic (n) (F360M)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: null
+    input_column_name: "sersic (f360m-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F360M"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
+  f360m-clear-axratio:
+    display: "Model Axis Ratio (F360M)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: null
+    input_column_name: "axis ratio (f360m-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F360M"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
+  f410m-clear-use:
+    display: "Useablity (F410M)"
+    is_magnitude: false
+    data_type: "bool"
+    output_units: null
+    input_units: null
+    input_column_name: "use (f410m-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F410M"
+    output_num_decimals: null
+    wl_micron: null
+    zero_point: null
+  f410m-clear-chi:
+    display: "Reduced Chi Squared (F410M)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: null
+    input_column_name: "chi^2/nu (f410m-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F410M"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
+  f410m-clear-sb:
+    display: "Surface Brightness (F410M)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: "mag/arcsec^2"
+    input_column_name: "surface brightness (f410m-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F410M"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
+  f410m-clear-reff:
+    display: "Effective Radius (F410M)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: "pixels"
+    input_column_name: "effective radius (f410m-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F410M"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
+  f410m-clear-sersic:
+    display: "Sersic (n) (F410M)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: null
+    input_column_name: "sersic (f410m-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F410M"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
+  f410m-clear-axratio:
+    display: "Model Axis Ratio (F410M)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: null
+    input_column_name: "axis ratio (f410m-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F410M"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
+  f430m-clear-use:
+    display: "Useablity (F430M)"
+    is_magnitude: false
+    data_type: "bool"
+    output_units: null
+    input_units: null
+    input_column_name: "use (f430m-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F430M"
+    output_num_decimals: null
+    wl_micron: null
+    zero_point: null
+  f430m-clear-chi:
+    display: "Reduced Chi Squared (F430M)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: null
+    input_column_name: "chi^2/nu (f430m-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F430M"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
+  f430m-clear-sb:
+    display: "Surface Brightness (F430M)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: "mag/arcsec^2"
+    input_column_name: "surface brightness (f430m-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F430M"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
+  f430m-clear-reff:
+    display: "Effective Radius (F430M)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: "pixels"
+    input_column_name: "effective radius (f430m-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F430M"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
+  f430m-clear-sersic:
+    display: "Sersic (n) (F430M)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: null
+    input_column_name: "sersic (f430m-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F430M"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
+  f430m-clear-axratio:
+    display: "Model Axis Ratio (F430M)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: null
+    input_column_name: "axis ratio (f430m-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F430M"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
+  f444w-clear-use:
+    display: "Useablity (F444W)"
+    is_magnitude: false
+    data_type: "bool"
+    output_units: null
+    input_units: null
+    input_column_name: "use (f444w-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F444W"
+    output_num_decimals: null
+    wl_micron: null
+    zero_point: null
+  f444w-clear-chi:
+    display: "Reduced Chi Squared (F444W)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: null
+    input_column_name: "chi^2/nu (f444w-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F444W"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
+  f444w-clear-sb:
+    display: "Surface Brightness (F444W)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: "mag/arcsec^2"
+    input_column_name: "surface brightness (f444w-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F444W"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
+  f444w-clear-reff:
+    display: "Effective Radius (F444W)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: "pixels"
+    input_column_name: "effective radius (f444w-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F444W"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
+  f444w-clear-sersic:
+    display: "Sersic (n) (F444W)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: null
+    input_column_name: "sersic (f444w-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F444W"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
+  f444w-clear-axratio:
+    display: "Model Axis Ratio (F444W)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: null
+    input_column_name: "axis ratio (f444w-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F444W"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
+  f460m-clear-use:
+    display: "Useablity (F460M)"
+    is_magnitude: false
+    data_type: "bool"
+    output_units: null
+    input_units: null
+    input_column_name: "use (f460m-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F460M"
+    output_num_decimals: null
+    wl_micron: null
+    zero_point: null
+  f460m-clear-chi:
+    display: "Reduced Chi Squared (F460M)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: null
+    input_column_name: "chi^2/nu (f460m-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F460M"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
+  f460m-clear-sb:
+    display: "Surface Brightness (F460M)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: "mag/arcsec^2"
+    input_column_name: "surface brightness (f460m-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F460M"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
+  f460m-clear-reff:
+    display: "Effective Radius (F460M)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: "pixels"
+    input_column_name: "effective radius (f460m-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F460M"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
+  f460m-clear-sersic:
+    display: "Sersic (n) (F460M)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: null
+    input_column_name: "sersic (f460m-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F460M"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
+  f460m-clear-axratio:
+    display: "Model Axis Ratio (F460M)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: null
+    input_column_name: "axis ratio (f460m-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F460M"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
+  f480m-clear-use:
+    display: "Useablity (F480M)"
+    is_magnitude: false
+    data_type: "bool"
+    output_units: null
+    input_units: null
+    input_column_name: "use (f480m-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F480M"
+    output_num_decimals: null
+    wl_micron: null
+    zero_point: null
+  f480m-clear-chi:
+    display: "Reduced Chi Squared (F480M)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: null
+    input_column_name: "chi^2/nu (f480m-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F480M"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
+  f480m-clear-sb:
+    display: "Surface Brightness (F480M)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: "mag/arcsec^2"
+    input_column_name: "surface brightness (f480m-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F480M"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
+  f480m-clear-reff:
+    display: "Effective Radius (F480M)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: "pixels"
+    input_column_name: "effective radius (f480m-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F480M"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
+  f480m-clear-sersic:
+    display: "Sersic (n) (F480M)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: null
+    input_column_name: "sersic (f480m-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F480M"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
+  f480m-clear-axratio:
+    display: "Model Axis Ratio (F480M)"
+    is_magnitude: false
+    data_type: "float"
+    output_units: null
+    input_units: null
+    input_column_name: "axis ratio (f480m-clear)"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: "F480M"
+    output_num_decimals: 3
+    wl_micron: null
+    zero_point: null
