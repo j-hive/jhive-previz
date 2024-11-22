@@ -82,6 +82,5 @@ def get_conversion_function(input_unit: str, output_unit: str):
                 if input_split == output_split:
                     return log_values
 
-            # TODO: should we have an 'unlog' function too?
-            # TODO: raise warning or cause code to break?
+            # raise error, there is no conversion function that matches
             raise ValueError(f"{input_unit} cannot be converted to {output_unit}")

@@ -411,14 +411,7 @@ def process_data(
                 new_df = new_df.join(data_frames[name].df.set_index("id"), on="id")
 
             else:
-                # dataframe failed to load, all columns from it will be empty
-                # get list of old columns + new columns and make new dataframe with old columns and empty columns
-                # old_columns = list(new_df.columns)
-                # data_frames[name].output_columns.remove(
-                #     "id"
-                # )  # make sure we don't have duplicate id columns
-                # new_columns = old_columns + data_frames[name].output_columns
-                # new_df = new_df.reindex(columns=new_columns)
+                # dataframe failed to load
                 print(
                     f"{data_frames[name]} was not properly loaded, its columns will not be present in the final dataframe."
                 )
