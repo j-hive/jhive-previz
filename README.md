@@ -1,6 +1,6 @@
 # jhive-previz
 
-This code processes input JWST catalogs from a given DJA field, and outputs a combined data table and metadata file in formats required for use in jhive-viz.
+This code processes input JWST catalogs from a given DJA field, and outputs a combined data table and metadata file in formats required for use in the J-HIVE Visualization Tool. For detailed documentation of the input and output data structures, visit the [J-HIVE Docs](https://j-hive.github.io/jhive-docs/previz/index.html).
 
 ## Installation
 To install this code, clone the repository, enter it, and install using poetry as follows:
