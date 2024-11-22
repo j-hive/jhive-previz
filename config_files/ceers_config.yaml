@@ -2,12 +2,14 @@ paths:
   cat_path: "./data/"
   db_path: "./data/"
   mf_path: "./data/"
+  umap_path: null
 
 field_name: "ceers-full-grizli-v7.2"
 file_names:
   cat_filename: "ceers-full-grizli-v7.2-fix_phot_apcorr.fits"
   db_filename: "ceers-full_v7.2_DB_catalog_small.cat"
-  mf_filename: "file.csv"
+  mf_filename: null
+  umap_filename: null
 
 version: "v1.0"
 output_path: "./output/"

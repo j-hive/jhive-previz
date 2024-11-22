@@ -2,12 +2,14 @@ paths:
   cat_path: "./data/"
   db_path: null
   mf_path: null
+  umap_path: null
 
 field_name: "gdn-grizli-v7.3"
 file_names:
   cat_filename: "gdn-grizli-v7.3-fix_phot_apcorr.fits"
   db_filename: null
   mf_filename: null
+  umap_filename: null
 
 version: "v1.0"
 output_path: "./output/"
