@@ -1,0 +1,57 @@
+paths:
+  cat_path: "./data/"
+  db_path: "./data/"
+  mf_path: "./data/"
+  umap_path: null
+
+field_name: "ngdeep-grizli-v7.2"
+file_names:
+  cat_filename: "ngdeep-grizli-v7.2-fix_phot_apcorr.fits"
+  db_filename: "ngdeep_v7.2_DB_catalog_small.cat"
+  mf_filename: null
+  umap_filename: null
+
+version: "v1.0"
+output_path: "./output/"
+
+columns_to_use:
+  cat_filename:
+    - "id"
+    - "ra"
+    - "dec"
+    - "flux_radius"
+    - "abmag_f435w"
+    - "abmag_f475w"
+    - "abmag_f606w"
+    - "abmag_f775w"
+    - "abmag_f814w"
+    - "abmag_f105w"
+    - "abmag_f115w"
+    - "abmag_f125w"
+    - "abmag_f140w"
+    - "abmag_f150w"
+    - "abmag_f160w"
+    - "abmag_f200w"
+    - "abmag_f277w"
+    - "abmag_f356w"
+    - "abmag_f444w"
+    - "abmag_f350lpu"
+    - "abmag_f850lp"
+  db_filename:
+    - "id"
+    - "zfit_50"
+    - "logM_50"
+    - "logSFRinst_50"
+    - "logZsol_50"
+    - "Av_50"
+    - "logMt_50"
+    - "logSFR10_50"
+    - "logSFR100_50"
+    - "logSFR300_50"
+    - "logSFR1000_50"
+    - "t25_50"
+    - "t50_50"
+    - "t75_50"
+    - "chi2"
+    - "fit_flags"
+    - "nbands"

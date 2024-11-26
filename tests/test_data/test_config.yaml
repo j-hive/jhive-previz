@@ -1,0 +1,18 @@
+paths:
+  cat_path: "./tests/test_data/"
+  ez_path: "./tests/test_data/"
+
+field_name: "test-field"
+file_names:
+  cat_filename: "test-data.csv"
+  ez_filename: "test-data-2.csv"
+
+version: "testv1.0"
+output_path: "./tests/test_output/"
+
+columns_to_use:
+  cat_filename:
+    - "id"
+    - "mass"
+    - "abmag_f333w"
+    - "abmag_f444w"
