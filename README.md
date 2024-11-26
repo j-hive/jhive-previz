@@ -43,7 +43,12 @@ poetry run jhive_previz --help
 The schema documentation `.csv` files are located in the `docs` folder. These are turned into Markdown files by the J-HIVE docs code, and should only be updated when one of the `[catalogue]_fields.yaml` files in the `metadata` folder is updated. 
 
 To update the schema documentation for a specific fields file that has been changed, follow the steps below:
-1. Run the following poetry script: ` poetry run make_docs_csv [path_to_yaml_file] ` where `path_to_yaml_file` is the full path to the `fields.yaml` file that you wish to update the schema for. This will create a new `.csv` file from the `yaml` file, and if there is an existing `csv` file for that catalogue in the `docs` folder, it will merge the descriptions column of the old `csv` with the new `csv`, and place the new merged `csv` file in the `docs` folder as `*_toedit.csv`. 
+1. Run the following poetry script: 
+```
+poetry run make_docs_csv [path_to_yaml_file]
+```
+ where `path_to_yaml_file` is the full path to the `fields.yaml` file that you wish to update the schema for. This will create a new `.csv` file from the `yaml` file, and if there is an existing `csv` file for that catalogue in the `docs` folder, it will merge the descriptions column of the old `csv` with the new `csv`, and place the new merged `csv` file in the `docs` folder as `*_toedit.csv`. 
+
 2. Check that the merged file in `*_toedit.csv` looks as expected, then edit the file as necessary. Make sure to add descriptions for any new rows in the table. 
 3. Once you are happy with the new file, delete the old `csv` file and rename the `*_toedit.csv` file to match the name of the old `csv`.
 4. Push the changes to the github repo. To immediately update the docs, run the `Build Sphinx Docs` Action on the `jhive-docs` repo. If you have added a new `fields.yaml` file, then you will have to update the `conf.py` of the `jhive-docs` to add this file to the list of files to convert from `csv` to `md`.
