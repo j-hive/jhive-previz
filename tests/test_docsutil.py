@@ -5,7 +5,7 @@ from jhive_previz import docsutil
 
 def test_convert_yaml_metadata_to_csv(tmp_path):
     """Make sure that convert_yaml_metadata_to_csv is working as intended."""
-    input_file = "./tests/test_fields.yaml"
+    input_file = "./tests/test_data/test_fields.yaml"
     output_path = tmp_path / "dja_catalogue_fields_table_tomerge.csv"
 
     docsutil.convert_yaml_metadata_to_csv(input_file, output_path)
@@ -15,20 +15,16 @@ def test_convert_yaml_metadata_to_csv(tmp_path):
     # read in file and check that it makes sense
     # the merged file should look like this, compare to that
     df = pd.read_csv(output_path)
-    test_path = "./tests/test_catalogue_fields_table.csv"
+    test_path = "./tests/test_data/test_catalogue_fields_table.csv"
     test_df = pd.read_csv(test_path)
 
     pd.testing.assert_frame_equal(test_df, df)
-    # assert "data type" in df.columns
-    # assert "abmag_f444w" in df["column name"].values
-    # l = len(df)
-    # assert df["display"].iloc[l - 1] == "Magnitude (F480W)"
 
 
 def test_merge_doc_csvs(tmp_path):
     """Testing that merge_doc_csvs is working as intended"""
 
-    input_path = "./tests/test_catalogue_fields_table.csv"
+    input_path = "./tests/test_data/test_catalogue_fields_table.csv"
     old_path = tmp_path / "test_catalogue_fields_table.csv"
 
     df = pd.read_csv(input_path)

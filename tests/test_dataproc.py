@@ -10,7 +10,7 @@ from jhive_previz import conversions as conv
 
 @pytest.fixture
 def setup_dataframes(load_config):
-    # Create dictionary to store all file names and data frames once loaded
+    """Create the dictionary to store all Catalogue objects."""
     data_frames = {}
     # load in main catalogue file
     data_frames["cat_filename"] = dataproc.Catalogue(
@@ -23,6 +23,7 @@ def setup_dataframes(load_config):
 
 @pytest.fixture
 def create_cat(load_config):
+    """Creates a catalogue object for the cat_filename catalogue."""
     file_path = dataproc.get_cat_filepath("cat_filename", load_config[0])
     return dataproc.Catalogue(
         file_name=load_config[0]["file_names"]["cat_filename"],
@@ -32,19 +33,21 @@ def create_cat(load_config):
 
 
 def test_load_dataframe(create_cat):
-    """Test that load_dataframe works as expected"""
+    """Test that load_dataframe works as expected. Tests that it updates the loaded parameter, and that the loaded dataframe in the catalogue matches the dataframe loaded in just via pandas in the test."""
 
     create_cat = dataproc.load_dataframe("cat_filename", create_cat)
 
+    # load in the catalogue here to test they're the same
+    test_df = pd.read_csv("./tests/test_data/test-data.csv")
+
+    pd.testing.assert_frame_equal(test_df, create_cat.df)
+
     # test that the catalog has been updated
     assert create_cat.loaded == True
-    # test that there is actually a dataframe with one of the relevant columns
-    assert "id" in create_cat.df.columns
-    assert len(create_cat.df.columns) == 5
 
 
 def test_populate_columns(setup_dataframes, load_config):
-    """Make sure populate columns works as expected"""
+    """Make sure populate columns works as expected. Test that the Catalogue variables are all being populated as expected for the main catalogue file."""
 
     setup_dataframes = dataproc.populate_column_information(
         setup_dataframes, load_config[0], load_config[1]
@@ -52,10 +55,14 @@ def test_populate_columns(setup_dataframes, load_config):
 
     assert "stellar_mass" in setup_dataframes["cat_filename"].input_columns
     assert len(setup_dataframes["cat_filename"].input_columns) == 4
+    assert setup_dataframes["cat_filename"].decimals_to_round["abmag_f444w"] == 3
+    assert len(setup_dataframes["cat_filename"].conversion_functions) == 4
+    assert setup_dataframes["cat_filename"].conversion_functions[0] == None
+    assert "abmag_f480w" not in setup_dataframes["cat_filename"].output_columns
 
 
 def test_filter_columns(load_config):
-    """Make sure that filter_columns is working as expected"""
+    """Make sure that filter_columns is working as expected when given a minimum value. Tests that the column minimum becomes nan when filtering, and that the minimum value that is not nan is above the minimum given when filtering."""
 
     # pick a column with a minimum value
     col_name = "f333w_corr_1"
@@ -84,7 +91,7 @@ def test_filter_columns(load_config):
 
 
 def test_process_column_data(load_config, setup_dataframes):
-    """Make sure that convert columns is working as expected"""
+    """Make sure that process_columns converts and filters the column data for the main catalogue file as expected."""
 
     # populate columns
     setup_dataframes = dataproc.populate_column_information(
@@ -134,7 +141,7 @@ def test_process_column_data(load_config, setup_dataframes):
 
 
 def test_process_data(get_processed_data, load_config):
-    """Make sure that process_data is working as expected."""
+    """Make sure that the processed catalogue has the same number of columns as given in the columns_to_use parameter."""
 
     assert len(load_config[0]["columns_to_use"]["cat_filename"]) == len(
         get_processed_data.columns

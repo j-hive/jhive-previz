@@ -1,6 +1,6 @@
 paths:
-  cat_path: "./tests/"
-  ez_path: "./tests/"
+  cat_path: "./tests/test_data/"
+  ez_path: "./tests/test_data/"
 
 field_name: "test-field"
 file_names:

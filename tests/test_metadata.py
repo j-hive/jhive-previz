@@ -6,7 +6,7 @@ from jhive_previz import dataproc
 
 
 def test_get_desired_column_metadata(load_config, get_processed_data):
-    """Make sure that get_desired_column_metadata works as expected"""
+    """Make sure that get_desired_column_metadata works as expected. Makes sure that it gets all the columns given in the config file into the dictionary."""
 
     new_metadata = metadata.get_desired_column_metadata(
         load_config[1], load_config[0]["columns_to_use"], get_processed_data
@@ -21,7 +21,7 @@ def test_get_desired_column_metadata(load_config, get_processed_data):
 
 @pytest.mark.xfail
 def test_fail_get_desired_column_metadata(load_config):
-    """Test that the function fails when calling for a column that doesn't exist"""
+    """Test that the function fails when calling for a column that doesn't exist in the yaml file."""
 
     # try other columns to use
     new_cols_to_use = load_config[0]["columns_to_use"]
@@ -34,7 +34,7 @@ def test_fail_get_desired_column_metadata(load_config):
 
 
 def test_add_min_max_val_to_json(load_config, get_processed_data):
-    """Test that add_min_max_val_to_json works as expected"""
+    """Test that add_min_max_val_to_json works as expected. Checks that "min_val" and "max_val" keys exist in the new dictionary and that the max value for one of the items matches what we expect."""
 
     # turn config file into json
     new_metadata = metadata.get_desired_column_metadata(
@@ -55,7 +55,7 @@ def test_add_min_max_val_to_json(load_config, get_processed_data):
 
 
 def test_add_top_level_metadata(load_config, get_processed_data):
-    """Test that add_top_level_metadata works as expected."""
+    """Test that add_top_level_metadata works as expected. Make sure that the output dictionary has the columns under the "columns" key, and that it has a "field_name" key."""
 
     new_metadata = metadata.get_desired_column_metadata(
         load_config[1], load_config[0]["columns_to_use"], get_processed_data

@@ -14,7 +14,7 @@ from jhive_previz import dataproc
     ],
 )
 def test_get_conversion_function(input_unit, output_unit, expected):
-    """Make sure that get_conversion_function works as expected"""
+    """Make sure that get_conversion_function works as expected. Tests that it returns the flux_to_mag function when given the right input and output units, and fails when those units don't match any conversion functions."""
 
     test = conv.get_conversion_function(input_unit, output_unit)
 
@@ -22,7 +22,7 @@ def test_get_conversion_function(input_unit, output_unit, expected):
 
 
 def test_flux_to_mag(load_config):
-    """Make sure that flux_to_mag works as expected"""
+    """Make sure that flux_to_mag works as expected. Test that the flux to mag conversion function converts the items in a column as expected."""
 
     # read in test data
     file_path = dataproc.get_cat_filepath("cat_filename", load_config[0])
