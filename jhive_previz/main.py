@@ -195,10 +195,10 @@ def process_data_and_write_metadata(
         List[str],
         typer.Option(help="A list of full paths to the field config files."),
     ] = [
-        "./metadata_files/dja_fields.yaml",
-        "./metadata_files/db_fields.yaml",
-        "./metadata_files/mf_fields.yaml",
-        "./metadata_files/umap_fields.yaml",
+        "./metadata_files/v1.0/dja_fields.yaml",
+        "./metadata_files/v1.0/db_fields.yaml",
+        "./metadata_files/v1.0/mf_fields.yaml",
+        "./metadata_files/v1.0/umap_fields.yaml",
     ],
 ):
     """The main function. This reads in the two config files, validates that
@@ -208,12 +208,12 @@ def process_data_and_write_metadata(
 
     Parameters
     ----------
-    config_path: str, default = './abell2744_config.yaml'
+    config_path: str, default = './config_files/v1.0/abell2744_config.yaml'
         The full path and file name of the base config yaml file.
-    field_path: List[str], default = ["./metadata_files/dja_fields.yaml",
-        "./metadata_files/db_fields.yaml",
-        "./metadata_files/mf_fields.yaml",
-        "./metadata_files/umap_fields.yaml",]
+    field_path: List[str], default = ["./metadata_files/v1.0/dja_fields.yaml",
+        "./metadata_files/v1.0/db_fields.yaml",
+        "./metadata_files/v1.0/mf_fields.yaml",
+        "./metadata_files/v1.0/umap_fields.yaml",]
         The full path and file name of the fields yaml file.
     """
 
