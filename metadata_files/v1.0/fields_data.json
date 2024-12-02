@@ -1,0 +1,36 @@
+{
+    "abell2744clu-grizli-v7.2": {
+        "display": "Abell 2744",
+        "data_file": "v1.0/abell2744clu-grizli-v7.2/catalog.csv",
+        "metadata_file": "v1.0/abell2744clu-grizli-v7.2/metadata.json",
+        "cutouts_dir": "v1.0/abell2744clu-grizli-v7.2/cutouts/",
+        "fitsmap_url": "https://s3.amazonaws.com/grizli-v2/ClusterTiles/Map/abell2744/jwst.html"
+    },
+    "ceers-full-grizli-v7.2": {
+        "display": "CEERS",
+        "data_file": "v1.0/ceers-full-grizli-v7.2/catalog.csv",
+        "metadata_file": "v1.0/ceers-full-grizli-v7.2/metadata.json",
+        "cutouts_dir": "v1.0/ceers-full-grizli-v7.2/cutouts/",
+        "fitsmap_url": "https://s3.amazonaws.com/grizli-v2/ClusterTiles/Map/egs-v2/index.html"
+    },
+    "gdn-grizli-v7.3": {
+        "display": "GOODS-North",
+        "data_file": "v1.0/gdn-grizli-v7.3/catalog.csv",
+        "metadata_file": "v1.0/gdn-grizli-v7.3/metadata.json",
+        "cutouts_dir": "v1.0/gdn-grizli-v7.3/cutouts/",
+        "fitsmap_url": "https://s3.amazonaws.com/grizli-v2/ClusterTiles/Map/gdn/jwst.html"
+    },
+    "gds-grizli-v7.2": {
+        "display": "GOODS-South",
+        "data_file": "v1.0/gds-grizli-v7.2/catalog.csv",
+        "metadata_file": "v1.0/gds-grizli-v7.2/metadata.json",
+        "cutouts_dir": "v1.0/gds-grizli-v7.2/cutouts/",
+        "fitsmap_url": "https://s3.amazonaws.com/grizli-v2/ClusterTiles/Map/gds/jwst.html"
+    },
+    "ngdeep-grizli-v7.2": {
+        "display": "NGDEEP",
+        "data_file": "v1.0/ngdeep-grizli-v7.2/catalog.csv",
+        "metadata_file": "v1.0/ngdeep-grizli-v7.2/metadata.json",
+        "cutouts_dir": "v1.0/ngdeep-grizli-v7.2/cutouts/"
+    }
+}

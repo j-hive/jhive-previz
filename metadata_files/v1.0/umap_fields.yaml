@@ -1,0 +1,68 @@
+file_name: "umap_filename"
+file_format: "fits"
+columns:
+  id:
+    display: "DJA Source ID"
+    data_type: "int"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: null
+    is_magnitude: false
+    input_units: null
+    input_column_name: "id"
+    output_num_decimals: null
+    output_units: null
+    wl_micron: null
+    zero_point: null
+  umap_x:
+    display: "UMAPx"
+    data_type: "float"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: null
+    is_magnitude: false
+    input_units: null
+    input_column_name: "umap_x"
+    output_num_decimals: null
+    output_units: null
+    wl_micron: null
+    zero_point: null
+  umap_y:
+    display: "UMAPy"
+    data_type: "float"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: null
+    is_magnitude: false
+    input_units: null
+    input_column_name: "umap_y"
+    output_num_decimals: null
+    output_units: null
+    wl_micron: null
+    zero_point: null
+  delta_umap_x:
+    display: "delta UMAPx"
+    data_type: "int"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: null
+    is_magnitude: false
+    input_units: null
+    input_column_name: "delta_umap_x"
+    output_num_decimals: null
+    output_units: null
+    wl_micron: null
+    zero_point: null
+  delta_umap_y:
+    display: "delta UMAPy"
+    data_type: "int"
+    filt_max_val: null
+    filt_min_val: null
+    filt_name: null
+    is_magnitude: false
+    input_units: null
+    input_column_name: "delta_umap_y"
+    output_num_decimals: null
+    output_units: null
+    wl_micron: null
+    zero_point: null
