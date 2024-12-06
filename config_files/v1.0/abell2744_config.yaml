@@ -1,13 +1,13 @@
 paths:
   cat_path: "./data/"
-  db_path: null
+  db_path: "./data/"
   mf_path: null
   umap_path: null
 
 field_name: "abell2744clu-grizli-v7.2"
 file_names:
   cat_filename: "abell2744clu-grizli-v7.2-fix_phot_apcorr.fits"
-  db_filename: null
+  db_filename: "abell2744clu_v7.2_DB_catalog_small.cat"
   mf_filename: null
   umap_filename: null
 
@@ -55,3 +55,21 @@ columns_to_use:
     - "abmag_f444w"
     - "abmag_f460m"
     - "abmag_f480m"
+  db_filename:
+    - "id"
+    - "zfit_50"
+    - "logM_50"
+    - "logSFRinst_50"
+    - "logZsol_50"
+    - "Av_50"
+    - "logMt_50"
+    - "logSFR10_50"
+    - "logSFR100_50"
+    - "logSFR300_50"
+    - "logSFR1000_50"
+    - "t25_50"
+    - "t50_50"
+    - "t75_50"
+    - "chi2"
+    - "fit_flags"
+    - "nbands"
