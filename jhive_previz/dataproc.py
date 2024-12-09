@@ -7,6 +7,7 @@ from pydantic import BaseModel, ConfigDict
 from typing import Union, Mapping, List, Tuple, Optional, Dict, TypeVar
 
 from . import conversions as conversions
+from . import utils
 
 # Custom pandas datatype
 PandasDataFrame = TypeVar("pandas.core.frame.DataFrame")
@@ -40,35 +41,6 @@ class Catalogue(BaseModel):
 ## Utility functions
 
 
-def get_cat_filepath(filename_key: str, config_params: Mapping) -> Path:
-    """Function to get the full path to the catalogue as given in the config file.
-
-    Parameters
-    ----------
-    filename_key : str
-        The filename key used in the config file
-    config_params : Mapping
-        The dictionary of config parameters from the config file.
-
-    Returns
-    -------
-    Path
-        The full path as a Path object to the relevant file.
-    """
-
-    filepath_key = filename_key.split("_")[0] + "_path"
-
-    if config_params["paths"][filepath_key] is not None:
-        file_path = (
-            Path(config_params["paths"][filepath_key])
-            / config_params["file_names"][filename_key]
-        )
-    else:
-        file_path = None
-
-    return file_path
-
-
 def get_data_output_filepath(output_path: Path) -> Path:
     """Returns the path to output the .csv to.
 
@@ -86,29 +58,6 @@ def get_data_output_filepath(output_path: Path) -> Path:
     data_output_filename = "catalog.csv"
 
     return output_path / data_output_filename
-
-
-def read_table(data_file_path: Path, file_format: str) -> pd.DataFrame:
-    """Reads the data fits file into a pandas dataframe via astropy.
-
-    Parameters
-    ----------
-    data_file_path : Path
-        The full path to the data file.
-
-    Returns
-    -------
-    pd.DataFrame
-        A dataframe with the data from the file.
-    """
-
-    # read in table as astropy table
-    phot_cat = Table.read(data_file_path, format=file_format)
-
-    # now convert to pandas
-    cat_df = phot_cat.to_pandas()
-
-    return cat_df
 
 
 def write_data(df_cat: pd.DataFrame, output_file_path: Path):
@@ -160,7 +109,7 @@ def load_dataframe(file_name: str, cat: Catalogue) -> Catalogue:
     if cat.file_path is not None:
         # try to load in file
         try:
-            df = read_table(cat.file_path, cat.file_format)
+            df = utils.read_table(cat.file_path, cat.file_format)
 
             # if successful, update the data_frames dictionary with the dataframe
             cat.loaded = True
@@ -215,7 +164,7 @@ def populate_column_information(
             # add the catalog to the dictionary of data frames
             data_frames[base_file] = Catalogue(
                 file_name=config_params["file_names"][base_file],
-                file_path=get_cat_filepath(base_file, config_params),
+                file_path=utils.get_cat_filepath(base_file, config_params),
                 file_format=field_params[base_file]["file_format"],
             )
 
@@ -375,7 +324,7 @@ def process_data(
     # load in main catalogue file and populate columns to use per file and load in any additional data files
     data_frames["cat_filename"] = Catalogue(
         file_name=config_params["file_names"]["cat_filename"],
-        file_path=get_cat_filepath("cat_filename", config_params),
+        file_path=utils.get_cat_filepath("cat_filename", config_params),
         file_format=field_params["cat_filename"]["file_format"],
     )
     data_frames = populate_column_information(data_frames, config_params, field_params)

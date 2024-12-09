@@ -6,6 +6,7 @@ from typing_extensions import Annotated
 
 from . import dataproc
 from . import metadata
+from . import filterobjects
 
 
 # Validation functions
@@ -186,7 +187,7 @@ def validate_config_paths(
     return config_path, new_field_paths
 
 
-# Organizational function
+# Organizational functions
 def process_data_and_write_metadata(
     config_path: Annotated[
         str, typer.Option(help="The full path and file name of the base config file.")
@@ -232,5 +233,27 @@ def process_data_and_write_metadata(
     metadata.create_metadata_file(config_params, field_params, cat_df, output_path)
 
 
-def main():
+def generate_flag_file(
+    config_path: Annotated[
+        str, typer.Option(help="The full path and file name of the base config file.")
+    ] = "./config_files/v1.0/abell2744_config.yaml",
+    field_path: Annotated[
+        str, typer.Option(help="The full path and file name of the DJA fields file.")
+    ] = "./metadata_files/v1.0/dja_fields.yaml",
+):
+
+    # get the config parameters
+    config_path, [field_paths] = validate_config_paths(config_path, field_paths)
+    config_params, field_params = load_config(config_path, field_paths)
+
+    # validate and create the output path if necessary
+    validate_cat_path(config_params)
+    output_path = create_and_validate_output_path(config_params)
+
+    filterobjects.create_and_write_flag_file(config_params, field_params, output_path)
+
+    pass
+
+
+def process_data_and_write_metadata_entrypoint():
     typer.run(process_data_and_write_metadata)

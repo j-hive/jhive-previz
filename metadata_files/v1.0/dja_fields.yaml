@@ -5,47 +5,61 @@ columns:
     display: "DJA Source ID"
     is_magnitude: false
     data_type: "int"
+    filt_name: null
+    filt_max_val: null
+    filt_min_val: null
     output_units: null
     input_units: null
     input_column_name: "id"
     output_num_decimals: null
+    wl_micron: 0.430
+    zero_point: 23.9
   ra:
     display: "Right Ascension"
     output_units: "Degrees"
     is_magnitude: false
     data_type: "float"
     input_units: "Degrees"
+    filt_name: null
     filt_max_val: null
     filt_min_val: null
     input_column_name: "ra"
     output_num_decimals: 6
+    wl_micron: 0.430
+    zero_point: 23.9
   dec:
     display: "Declination"
     output_units: "Degrees"
     is_magnitude: false
     data_type: "float"
     input_units: "Degrees"
+    filt_name: null
     filt_max_val: null
     filt_min_val: null
     input_column_name: "dec"
     output_num_decimals: 6
+    wl_micron: 0.430
+    zero_point: 23.9
   flux_radius:
     display: "Flux Radius"
-    output_units: "arcseconds"
-    is_magnitude: false
     data_type: "float"
-    input_units: "arcseconds"
+    filt_name: null
     filt_max_val: null
     filt_min_val: null
     input_column_name: "flux_radius"
+    input_units: "arcseconds"
+    is_magnitude: false
     output_num_decimals: 6
+    output_units: "arcseconds"
+    wl_micron: 0.430
+    zero_point: 23.9
   abmag_f435w:
     display: "Magnitude (F435W)"
     data_type: "float"
     filt_name: "F435W"
     input_column_name: "f435w_corr_1"
     input_units: "microJansky"
-    is_magnitude: True
+    is_magnitude: true
     filt_max_val: null
     filt_min_val: 0.0
     output_num_decimals: 3
