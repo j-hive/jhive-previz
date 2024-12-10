@@ -3,7 +3,7 @@ file_format: "ascii.csv"
 columns:
   id:
     display: "DJA Source ID"
-    is_magnitude: false,
+    is_magnitude: false
     data_type: "int"
     output_units: null
     input_units: null
@@ -16,7 +16,7 @@ columns:
     file_name: "cat_filename"
     input_column_name: "stellar_mass"
     input_units: "Solar Masses"
-    is_magnitude: False
+    is_magnitude: false
     filt_max_val: null
     filt_min_val: 0.0
     output_num_decimals: 3
