@@ -6,7 +6,7 @@ import pandas as pd
 from . import utils
 
 SNR_MAG = 5
-NUM_FLAGS = 1
+NUM_FLAGS = 4
 
 
 def get_flagfile_filepath(output_path: Path) -> Path:
@@ -83,8 +83,11 @@ def filter_catalog(
         # get the relevant error column name
         err_colname = get_err_column_name(col_name)
 
+        # replace negative fluxes with nans
+        data_col = cat[col_name].mask(cat[col_name] <= 0, pd.NA)
+
         # check if flux column is SNR_MAG times the error column and put that data in to the dict
-        flag_col = cat[col_name] > (cat[err_colname] * SNR_MAG)
+        flag_col = data_col > (cat[err_colname] * SNR_MAG)
         flag_dict[col_name] = flag_col
 
     df_ingest = pd.DataFrame.from_dict(flag_dict)
@@ -120,6 +123,7 @@ def create_and_write_flag_file(
     )
 
     # get a column that has the number of truth values in that row
+    # TODO: might need to do a dropna before this if this is the line causing the problem
     flag_values = df_ingest.sum(axis=1)
 
     # create viz flag column based on the number of positive flags in flag_values

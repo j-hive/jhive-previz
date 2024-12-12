@@ -35,4 +35,6 @@ def create_output_path(test_output_path, load_config):
 
 @pytest.fixture
 def get_processed_data(load_config, test_output_path, create_output_path):
-    return dataproc.process_data(load_config[0], load_config[1], create_output_path)
+    return dataproc.process_data(
+        load_config[0], load_config[1], create_output_path, use_flag_file=False
+    )

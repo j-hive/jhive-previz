@@ -5,7 +5,7 @@ import numpy as np
 from typing import Mapping, Union, Dict, List
 
 
-def get_metadata_output_path(output_path: Path) -> Path:
+def get_metadata_output_path(output_path: Path, prefix: str) -> Path:
     """Uses the config parameters to generate the full path to the metadata
     output file.
 
@@ -20,7 +20,7 @@ def get_metadata_output_path(output_path: Path) -> Path:
         The full path to the output metadata file.
     """
 
-    metadata_output_filename = "metadata.json"
+    metadata_output_filename = prefix + "_metadata.json"
     return output_path / metadata_output_filename
 
 
@@ -148,8 +148,9 @@ def create_metadata_file(
     field_params: Mapping,
     whole_cat: pd.DataFrame,
     output_path: Path,
+    prefix: str,
 ):
-    """Creates a metadata file for the given datatable, using metadata from field_params and generating additional values as necessary.
+    """Creates a metadata file for the given data table, using metadata from field_params and generating additional values as necessary.
       It has keys for each column, and is written as a json.
 
     Parameters
@@ -162,10 +163,12 @@ def create_metadata_file(
         The dataframe to generate metadata for.
     output_path : Path
         The full path to the directory where the output files will be saved.
+    prefix : str
+        The prefix to add to the metadata file name
     """
 
     # get the full path to write out metadata to
-    output_metdata_path = get_metadata_output_path(output_path)
+    output_metdata_path = get_metadata_output_path(output_path, prefix)
 
     # get the relevant columns in the json
     initial_json_dict = get_desired_column_metadata(

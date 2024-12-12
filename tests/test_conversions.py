@@ -3,7 +3,7 @@ import pandas as pd
 import numpy as np
 
 from jhive_previz import conversions as conv
-from jhive_previz import dataproc
+from jhive_previz import dataproc, utils
 
 
 @pytest.mark.parametrize(
@@ -25,8 +25,8 @@ def test_flux_to_mag(load_config):
     """Make sure that flux_to_mag works as expected. Test that the flux to mag conversion function converts the items in a column as expected."""
 
     # read in test data
-    file_path = dataproc.get_cat_filepath("cat_filename", load_config[0])
-    df = dataproc.read_table(file_path, "ascii.csv")
+    file_path = utils.get_cat_filepath("cat_filename", load_config[0])
+    df = utils.read_table(file_path, "ascii.csv")
 
     # convert a column
     converted = conv.flux_to_mag(

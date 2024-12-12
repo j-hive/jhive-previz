@@ -30,6 +30,7 @@ class Catalogue(BaseModel):
     file_format: str
     loaded: bool = False
     df: PandasDataFrame | None = None
+    df_good: PandasDataFrame | None = None
     input_columns: List = []
     output_columns: List = []
     conversion_functions: List = []
@@ -41,7 +42,7 @@ class Catalogue(BaseModel):
 ## Utility functions
 
 
-def get_data_output_filepath(output_path: Path) -> Path:
+def get_data_output_filepath(output_path: Path, prefix: str) -> Path:
     """Returns the path to output the .csv to.
 
     Parameters
@@ -55,7 +56,7 @@ def get_data_output_filepath(output_path: Path) -> Path:
         The full path (including file name) to write the .csv output to.
     """
 
-    data_output_filename = "catalog.csv"
+    data_output_filename = prefix + "_catalog.csv"
 
     return output_path / data_output_filename
 
@@ -296,7 +297,11 @@ def process_column_data(cat: Catalogue, field_params: Dict) -> Catalogue:
 
 
 def process_data(
-    config_params: Mapping, field_params: Mapping, output_path: Path
+    config_params: Mapping,
+    field_params: Mapping,
+    output_path: Path,
+    use_flag_file: bool,
+    flag_file_path: Optional[Path] = None,
 ) -> pd.DataFrame:
     """This is the main function that processes the data file and writes out the processed
     version to a .csv. The function converts columns as desired, filters them to be NaNs outside
@@ -311,12 +316,20 @@ def process_data(
         The field parameters from the field.yaml file
     output_path : Path
         The full path to the directory where the output file will be saved.
+    use_flag_file: bool
+        If True, we will create two catalogues, a 'core' and a 'raw', where 'core' consists of objects that have 'ingest_viz' flags that are True.
+    flag_file_path: Optional[Path]
+        The full path to the flag file that has the 'ingest_viz' column. Required if use_flag_file is True, None if not.
 
     Returns
     -------
     pd.DataFrame
         The new dataframe.
     """
+
+    # read in flag file if it's being used
+    if use_flag_file:
+        df_ingest = utils.read_table(flag_file_path, file_format="fits")
 
     # Create dictionary to store all file names and data frames once loaded
     data_frames: Dict[str, Catalogue] = {}
@@ -333,12 +346,19 @@ def process_data(
     data_frames["cat_filename"] = load_dataframe(
         "cat_filename", data_frames["cat_filename"]
     )
+
     data_frames["cat_filename"] = process_column_data(
         data_frames["cat_filename"], field_params["cat_filename"]
     )
 
-    # start by making subtable of catalogue table columns
-    new_df = data_frames["cat_filename"].df
+    if use_flag_file:
+        # get two catalogues, one with good object and one with raw
+        df_core = data_frames["cat_filename"].df[df_ingest["ingest_viz"]]
+        df_raw = data_frames["cat_filename"].df[~df_ingest["ingest_viz"]]
+
+    else:
+        # just get one catalogue with everything
+        df_raw = data_frames["cat_filename"].df
 
     # if there is one or more additional dfs loaded
     if len(data_frames.keys()) > 1:
@@ -350,14 +370,21 @@ def process_data(
                 continue
 
             # load in data frame
-            data_frames[name] = load_dataframe(data_frames[name], data_frames[name])
+            data_frames[name] = load_dataframe(name, data_frames[name])
 
             if data_frames[name].loaded:
                 # if data frame is loaded, convert any columns needed and join to previous table
                 data_frames[name] = process_column_data(
                     data_frames[name], field_params[name]
                 )
-                new_df = new_df.join(data_frames[name].df.set_index("id"), on="id")
+
+                if use_flag_file:
+                    # only add to the core dataframe if it exists
+                    df_core = df_core.join(
+                        data_frames[name].df.set_index("id"), on="id"
+                    )
+
+                df_raw = df_raw.join(data_frames[name].df.set_index("id"), on="id")
 
             else:
                 # dataframe failed to load
@@ -366,7 +393,14 @@ def process_data(
                 )
 
     # write out the data to a csv file
-    output_file_path = get_data_output_filepath(output_path)
-    write_data(new_df, output_file_path)
+    output_file_path_raw = get_data_output_filepath(output_path, "raw")
+    write_data(df_raw, output_file_path_raw)
 
-    return new_df
+    # write out core data if necessary
+    if use_flag_file:
+        output_file_path_core = get_data_output_filepath(output_path, "core")
+        write_data(df_core, output_file_path_core)
+
+        return df_raw, df_core
+    else:
+        return df_raw
