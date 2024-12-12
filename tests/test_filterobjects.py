@@ -2,6 +2,7 @@ import pandas as pd
 import numpy as np
 from astropy.table import Table
 from jhive_previz import filterobjects as fo
+from jhive_previz import utils
 
 
 def test_filter_catalog(
@@ -35,9 +36,8 @@ def test_create_and_write_flag_file(load_config, create_output_path):
     assert out_filepath.is_file()
 
     # read in file
-    tab = Table.read(out_filepath)
+    created_df = utils.read_table(out_filepath, "fits")
 
-    # check some of the values
-    assert tab["ingest_viz"][0] == True
-    assert tab["ingest_viz"][3] == False
-    assert tab["ingest_viz"][16] == True
+    # test that it's equal to the pre-created ingest_flags.fits
+    test_df = utils.read_table("./tests/test_data/ingest_flags.fits", "fits")
+    pd.testing.assert_frame_equal(created_df, test_df)

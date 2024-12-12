@@ -162,3 +162,21 @@ def test_with_two_catalogues(load_config, test_output_path, create_output_path):
     assert "abmag_f480w" in new_df.columns
     assert np.isnan(new_df["abmag_f480w"].iloc[27])
     assert "mass" in new_df.columns
+
+
+def test_with_ingest_flags(load_config, test_output_path, create_output_path):
+    """Test that the process data function works as expected when use_flag_file = True."""
+
+    flag_file_path = Path("./tests/test_data/ingest_flags.fits")
+    df_raw, df_core = dataproc.process_data(
+        load_config[0],
+        load_config[1],
+        create_output_path,
+        use_flag_file=True,
+        flag_file_path=flag_file_path,
+    )
+
+    assert len(df_core) == 47
+    assert len(df_raw) == 4
+    assert 1 in df_raw["id"].values
+    assert 51 in df_core["id"].values
