@@ -176,7 +176,7 @@ def test_with_ingest_flags(load_config, test_output_path, create_output_path):
         flag_file_path=flag_file_path,
     )
 
-    assert len(df_core) == 47
-    assert len(df_raw) == 4
+    assert len(df_core) == 49
+    assert len(df_raw) == 2
     assert 1 in df_raw["id"].values
     assert 51 in df_core["id"].values

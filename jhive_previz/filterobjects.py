@@ -5,8 +5,8 @@ import pandas as pd
 
 from . import utils
 
-SNR_MAG = 5
-NUM_FLAGS = 1
+SNR_MAG = 10
+NUM_FLAGS = 4
 
 
 def get_flagfile_filepath(output_path: Path) -> Path:

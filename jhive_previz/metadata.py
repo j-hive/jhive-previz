@@ -5,7 +5,7 @@ import numpy as np
 from typing import Mapping, Union, Dict, List
 
 
-def get_metadata_output_path(output_path: Path, prefix: str) -> Path:
+def get_metadata_output_path(output_path: Path, suffix: str) -> Path:
     """Uses the config parameters to generate the full path to the metadata
     output file.
 
@@ -13,6 +13,8 @@ def get_metadata_output_path(output_path: Path, prefix: str) -> Path:
     ----------
     output_path : Path
         The full path to the directory where the file will be saved.
+    suffix : str
+        The suffix string to add to the metadata file name.
 
     Returns
     -------
@@ -20,7 +22,7 @@ def get_metadata_output_path(output_path: Path, prefix: str) -> Path:
         The full path to the output metadata file.
     """
 
-    metadata_output_filename = prefix + "_metadata.json"
+    metadata_output_filename = "metadata_" + suffix + ".json"
     return output_path / metadata_output_filename
 
 

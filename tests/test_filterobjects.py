@@ -1,3 +1,4 @@
+import pytest
 import pandas as pd
 import numpy as np
 from astropy.table import Table
@@ -5,9 +6,13 @@ from jhive_previz import filterobjects as fo
 from jhive_previz import utils
 
 
-def test_filter_catalog(
-    load_config,
-):
+@pytest.fixture
+def change_SNR_cut(monkeypatch):
+    monkeypatch.setattr(fo, "SNR_MAG", 4)
+    monkeypatch.setattr(fo, "NUM_FLAGS", 1)
+
+
+def test_filter_catalog(load_config, change_SNR_cut):
     """Test that the filter_catalog function results in a dataframe of the correct size, and checks a few of the values to make sure they are as expected."""
 
     # load in the catalogue here to test they're the same
@@ -26,7 +31,7 @@ def test_filter_catalog(
     assert ingest_df.loc[4, "f444w_corr_1"] == True
 
 
-def test_create_and_write_flag_file(load_config, create_output_path):
+def test_create_and_write_flag_file(load_config, create_output_path, change_SNR_cut):
     """Test that the create_and_write_flag_file function writes the flag file out correctly. Also checks that some of the values are as expected."""
 
     fo.create_and_write_flag_file(load_config[0], load_config[1], create_output_path)

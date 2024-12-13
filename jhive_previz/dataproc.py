@@ -42,13 +42,15 @@ class Catalogue(BaseModel):
 ## Utility functions
 
 
-def get_data_output_filepath(output_path: Path, prefix: str) -> Path:
+def get_data_output_filepath(output_path: Path, suffix: str) -> Path:
     """Returns the path to output the .csv to.
 
     Parameters
     ----------
     output_path : Path
         The path to the directory where the file will be saved.
+    suffix : str
+        The suffix string to add to the file name.
 
     Returns
     -------
@@ -56,7 +58,7 @@ def get_data_output_filepath(output_path: Path, prefix: str) -> Path:
         The full path (including file name) to write the .csv output to.
     """
 
-    data_output_filename = prefix + "_catalog.csv"
+    data_output_filename = "catalog_" + suffix + ".csv"
 
     return output_path / data_output_filename
 
