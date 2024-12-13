@@ -63,30 +63,6 @@ def get_data_output_filepath(output_path: Path, suffix: str) -> Path:
     return output_path / data_output_filename
 
 
-def write_data(df_cat: pd.DataFrame, output_file_path: Path):
-    """Writes out the dataframe to a csv file at the given output path. Ensures the parent directory exists. The csv is written without the pandas index, and cuts off all floats at 6 decimal places.
-
-    Parameters
-    ----------
-    df_cat : pd.DataFrame
-        The pandas dataframe to write out.
-    output_file_path : Path
-        The full path of the csv file to write to.
-    """
-
-    # make sure that output file path exists
-    if not output_file_path.parent.is_dir():
-        # if it doesn't, create it
-        output_file_path.parent.mkdir()
-
-    # write data and set floats to have no more than 6 decimal places
-    df_cat.to_csv(
-        output_file_path,
-        float_format="%.6f",
-        index=False,
-    )
-
-
 def load_dataframe(file_name: str, cat: Catalogue) -> Catalogue:
     """Loads in a dataframe as a variable of a Catalogue object, and updates the 'loaded' variable.
 
@@ -396,12 +372,12 @@ def process_data(
 
     # write out the data to a csv file
     output_file_path_raw = get_data_output_filepath(output_path, "raw")
-    write_data(df_raw, output_file_path_raw)
+    utils.write_data(df_raw, output_file_path_raw)
 
     # write out core data if necessary
     if use_flag_file:
         output_file_path_core = get_data_output_filepath(output_path, "core")
-        write_data(df_core, output_file_path_core)
+        utils.write_data(df_core, output_file_path_core)
 
         return df_raw, df_core
     else:
