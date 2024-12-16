@@ -1,15 +1,16 @@
 paths:
   cat_path: "./data/"
-  db_path: null
+  db_path: "./data/"
   mf_path: null
   umap_path: null
 
 field_name: "gdn-grizli-v7.3"
 file_names:
   cat_filename: "gdn-grizli-v7.3-fix_phot_apcorr.fits"
-  db_filename: null
+  db_filename: "gdn_v7.3_DB_catalog_small.cat"
   mf_filename: null
   umap_filename: null
+flag_file_name: "ingest_flags.fits"
 
 version: "v1.0"
 output_path: "./output/"
@@ -43,3 +44,21 @@ columns_to_use:
     - "abmag_f1280w"
     - "abmag_f850lp"
     - "abmag_f850lpu"
+  db_filename:
+    - "id"
+    - "zfit_50"
+    - "logM_50"
+    - "logSFRinst_50"
+    - "logZsol_50"
+    - "Av_50"
+    - "logMt_50"
+    - "logSFR10_50"
+    - "logSFR100_50"
+    - "logSFR300_50"
+    - "logSFR1000_50"
+    - "t25_50"
+    - "t50_50"
+    - "t75_50"
+    - "chi2"
+    - "fit_flags"
+    - "nbands"

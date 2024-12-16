@@ -6,6 +6,7 @@ from typing_extensions import Annotated
 
 from . import dataproc
 from . import metadata
+from . import filterobjects
 
 
 # Validation functions
@@ -186,7 +187,7 @@ def validate_config_paths(
     return config_path, new_field_paths
 
 
-# Organizational function
+# Organizational functions
 def process_data_and_write_metadata(
     config_path: Annotated[
         str, typer.Option(help="The full path and file name of the base config file.")
@@ -200,6 +201,12 @@ def process_data_and_write_metadata(
         "./metadata_files/v1.0/mf_fields.yaml",
         "./metadata_files/v1.0/umap_fields.yaml",
     ],
+    use_flag_file: Annotated[
+        bool,
+        typer.Option(
+            help="If True, use the given flag file. If False, will put all objects into raw catalog."
+        ),
+    ] = True,
 ):
     """The main function. This reads in the two config files, validates that
     the required parameters exist, and then creates the new filtered and converted
@@ -225,12 +232,66 @@ def process_data_and_write_metadata(
     validate_cat_path(config_params)
     output_path = create_and_validate_output_path(config_params)
 
-    # create the csv file
-    cat_df = dataproc.process_data(config_params, field_params, output_path)
+    # validate the flag file path if necessary
+    if use_flag_file:
+        flag_file_path = output_path / config_params["flag_file_name"]
+        if not flag_file_path.is_file():
+            raise FileNotFoundError(
+                f"The ingest flag file does not exist at {flag_file_path}, please make sure that this file exists or set use_flag_file to False."
+            )
 
-    # create the metadata json file
-    metadata.create_metadata_file(config_params, field_params, cat_df, output_path)
+    # create the csv file(s) and related metadata file(s)
+    if use_flag_file:
+        df_raw, df_core = dataproc.process_data(
+            config_params, field_params, output_path, use_flag_file, flag_file_path
+        )
+        metadata.create_metadata_file(
+            config_params, field_params, df_raw, output_path, "raw"
+        )
+        metadata.create_metadata_file(
+            config_params, field_params, df_core, output_path, "core"
+        )
+    else:
+        df_raw = dataproc.process_data(
+            config_params, field_params, output_path, use_flag_file
+        )
+        metadata.create_metadata_file(
+            config_params, field_params, df_raw, output_path, "raw"
+        )
 
 
-def main():
+def generate_flag_file(
+    config_path: Annotated[
+        str, typer.Option(help="The full path and file name of the base config file.")
+    ] = "./config_files/v1.0/abell2744_config.yaml",
+    field_path: Annotated[
+        str, typer.Option(help="The full path and file name of the DJA fields file.")
+    ] = "./metadata_files/v1.0/dja_fields.yaml",
+):
+    """The script that generates a flag file for a specific field and writes it to 'ingest_flag.fits' in the output directory. This flag file contains a flag for each object in the field for each filter available in that field, which is True if the flux detected in the filter is SNR_MAG (currently 5) times the flux error. There is also an 'ingest_viz' column, which identifies if the object is considered 'good' for the JHIVE Visualization Tool. This flag is True if the object has at least NUM_FLAGS (currently 1) True flags in any of the filters it was observed in.
+
+    Parameters
+    ----------
+    config_path : str,
+        The full path and file name of the base config file, by default "./config_files/v1.0/abell2744_config.yaml"
+    field_path : str
+        The full path and file name of the DJA fields file, by default "./metadata_files/v1.0/dja_fields.yaml"
+    """
+
+    # get the config parameters
+    config_path, field_path = validate_config_paths(config_path, [field_path])
+    config_params, field_params = load_config(config_path, field_path)
+
+    # validate and create the output path if necessary
+    validate_cat_path(config_params)
+    output_path = create_and_validate_output_path(config_params)
+
+    filterobjects.create_and_write_flag_file(config_params, field_params, output_path)
+
+
+def process_data_and_write_metadata_entrypoint():
     typer.run(process_data_and_write_metadata)
+
+
+def generate_flag_file_entrypoint():
+    typer.run(generate_flag_file)

@@ -10,6 +10,7 @@ file_names:
   db_filename: null
   mf_filename: null
   umap_filename: null
+flag_file_name: "ingest_flags.fits"
 
 version: "v1.0"
 output_path: "./output/"

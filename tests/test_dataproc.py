@@ -3,7 +3,7 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
-from jhive_previz import dataproc as dataproc
+from jhive_previz import dataproc, utils
 from jhive_previz import main as main
 from jhive_previz import conversions as conv
 
@@ -15,7 +15,7 @@ def setup_dataframes(load_config):
     # load in main catalogue file
     data_frames["cat_filename"] = dataproc.Catalogue(
         file_name=load_config[0]["file_names"]["cat_filename"],
-        file_path=dataproc.get_cat_filepath("cat_filename", load_config[0]),
+        file_path=utils.get_cat_filepath("cat_filename", load_config[0]),
         file_format=load_config[1]["cat_filename"]["file_format"],
     )
     return data_frames
@@ -24,7 +24,7 @@ def setup_dataframes(load_config):
 @pytest.fixture
 def create_cat(load_config):
     """Creates a catalogue object for the cat_filename catalogue."""
-    file_path = dataproc.get_cat_filepath("cat_filename", load_config[0])
+    file_path = utils.get_cat_filepath("cat_filename", load_config[0])
     return dataproc.Catalogue(
         file_name=load_config[0]["file_names"]["cat_filename"],
         file_path=file_path,
@@ -69,8 +69,8 @@ def test_filter_columns(load_config):
     out_col_name = "abmag_f333w"
 
     # test data frame
-    cat_path = dataproc.get_cat_filepath("cat_filename", load_config[0])
-    df = dataproc.read_table(cat_path, load_config[1]["cat_filename"]["file_format"])
+    cat_path = utils.get_cat_filepath("cat_filename", load_config[0])
+    df = utils.read_table(cat_path, load_config[1]["cat_filename"]["file_format"])
 
     # test that there were values less than min value
     assert (
@@ -154,9 +154,29 @@ def test_with_two_catalogues(load_config, test_output_path, create_output_path):
     # alter the config to include columns from second data file
     load_config[0]["columns_to_use"]["ez_filename"] = ["id", "abmag_f480w"]
 
-    new_df = dataproc.process_data(load_config[0], load_config[1], create_output_path)
+    new_df = dataproc.process_data(
+        load_config[0], load_config[1], create_output_path, use_flag_file=False
+    )
 
     # make sure the column was added to the table correctly and there are blanks where there was no data
     assert "abmag_f480w" in new_df.columns
     assert np.isnan(new_df["abmag_f480w"].iloc[27])
     assert "mass" in new_df.columns
+
+
+def test_with_ingest_flags(load_config, test_output_path, create_output_path):
+    """Test that the process data function works as expected when use_flag_file = True."""
+
+    flag_file_path = Path("./tests/test_data/ingest_flags.fits")
+    df_raw, df_core = dataproc.process_data(
+        load_config[0],
+        load_config[1],
+        create_output_path,
+        use_flag_file=True,
+        flag_file_path=flag_file_path,
+    )
+
+    assert len(df_core) == 49
+    assert len(df_raw) == 2
+    assert 1 in df_raw["id"].values
+    assert 51 in df_core["id"].values

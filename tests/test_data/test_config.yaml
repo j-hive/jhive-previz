@@ -6,6 +6,7 @@ field_name: "test-field"
 file_names:
   cat_filename: "test-data.csv"
   ez_filename: "test-data-2.csv"
+flag_file_name: "ingest_flags.fits"
 
 version: "testv1.0"
 output_path: "./tests/test_output/"

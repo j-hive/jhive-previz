@@ -7,6 +7,7 @@ from pydantic import BaseModel, ConfigDict
 from typing import Union, Mapping, List, Tuple, Optional, Dict, TypeVar
 
 from . import conversions as conversions
+from . import utils
 
 # Custom pandas datatype
 PandasDataFrame = TypeVar("pandas.core.frame.DataFrame")
@@ -29,6 +30,7 @@ class Catalogue(BaseModel):
     file_format: str
     loaded: bool = False
     df: PandasDataFrame | None = None
+    df_good: PandasDataFrame | None = None
     input_columns: List = []
     output_columns: List = []
     conversion_functions: List = []
@@ -40,42 +42,15 @@ class Catalogue(BaseModel):
 ## Utility functions
 
 
-def get_cat_filepath(filename_key: str, config_params: Mapping) -> Path:
-    """Function to get the full path to the catalogue as given in the config file.
-
-    Parameters
-    ----------
-    filename_key : str
-        The filename key used in the config file
-    config_params : Mapping
-        The dictionary of config parameters from the config file.
-
-    Returns
-    -------
-    Path
-        The full path as a Path object to the relevant file.
-    """
-
-    filepath_key = filename_key.split("_")[0] + "_path"
-
-    if config_params["paths"][filepath_key] is not None:
-        file_path = (
-            Path(config_params["paths"][filepath_key])
-            / config_params["file_names"][filename_key]
-        )
-    else:
-        file_path = None
-
-    return file_path
-
-
-def get_data_output_filepath(output_path: Path) -> Path:
+def get_data_output_filepath(output_path: Path, suffix: str) -> Path:
     """Returns the path to output the .csv to.
 
     Parameters
     ----------
     output_path : Path
         The path to the directory where the file will be saved.
+    suffix : str
+        The suffix string to add to the file name.
 
     Returns
     -------
@@ -83,56 +58,9 @@ def get_data_output_filepath(output_path: Path) -> Path:
         The full path (including file name) to write the .csv output to.
     """
 
-    data_output_filename = "catalog.csv"
+    data_output_filename = "catalog_" + suffix + ".csv"
 
     return output_path / data_output_filename
-
-
-def read_table(data_file_path: Path, file_format: str) -> pd.DataFrame:
-    """Reads the data fits file into a pandas dataframe via astropy.
-
-    Parameters
-    ----------
-    data_file_path : Path
-        The full path to the data file.
-
-    Returns
-    -------
-    pd.DataFrame
-        A dataframe with the data from the file.
-    """
-
-    # read in table as astropy table
-    phot_cat = Table.read(data_file_path, format=file_format)
-
-    # now convert to pandas
-    cat_df = phot_cat.to_pandas()
-
-    return cat_df
-
-
-def write_data(df_cat: pd.DataFrame, output_file_path: Path):
-    """Writes out the dataframe to a csv file at the given output path. Ensures the parent directory exists. The csv is written without the pandas index, and cuts off all floats at 6 decimal places.
-
-    Parameters
-    ----------
-    df_cat : pd.DataFrame
-        The pandas dataframe to write out.
-    output_file_path : Path
-        The full path of the csv file to write to.
-    """
-
-    # make sure that output file path exists
-    if not output_file_path.parent.is_dir():
-        # if it doesn't, create it
-        output_file_path.parent.mkdir()
-
-    # write data and set floats to have no more than 6 decimal places
-    df_cat.to_csv(
-        output_file_path,
-        float_format="%.6f",
-        index=False,
-    )
 
 
 def load_dataframe(file_name: str, cat: Catalogue) -> Catalogue:
@@ -160,7 +88,7 @@ def load_dataframe(file_name: str, cat: Catalogue) -> Catalogue:
     if cat.file_path is not None:
         # try to load in file
         try:
-            df = read_table(cat.file_path, cat.file_format)
+            df = utils.read_table(cat.file_path, cat.file_format)
 
             # if successful, update the data_frames dictionary with the dataframe
             cat.loaded = True
@@ -215,7 +143,7 @@ def populate_column_information(
             # add the catalog to the dictionary of data frames
             data_frames[base_file] = Catalogue(
                 file_name=config_params["file_names"][base_file],
-                file_path=get_cat_filepath(base_file, config_params),
+                file_path=utils.get_cat_filepath(base_file, config_params),
                 file_format=field_params[base_file]["file_format"],
             )
 
@@ -347,7 +275,11 @@ def process_column_data(cat: Catalogue, field_params: Dict) -> Catalogue:
 
 
 def process_data(
-    config_params: Mapping, field_params: Mapping, output_path: Path
+    config_params: Mapping,
+    field_params: Mapping,
+    output_path: Path,
+    use_flag_file: bool,
+    flag_file_path: Optional[Path] = None,
 ) -> pd.DataFrame:
     """This is the main function that processes the data file and writes out the processed
     version to a .csv. The function converts columns as desired, filters them to be NaNs outside
@@ -362,6 +294,10 @@ def process_data(
         The field parameters from the field.yaml file
     output_path : Path
         The full path to the directory where the output file will be saved.
+    use_flag_file: bool
+        If True, we will create two catalogues, a 'core' and a 'raw', where 'core' consists of objects that have 'ingest_viz' flags that are True.
+    flag_file_path: Optional[Path]
+        The full path to the flag file that has the 'ingest_viz' column. Required if use_flag_file is True, None if not.
 
     Returns
     -------
@@ -369,13 +305,17 @@ def process_data(
         The new dataframe.
     """
 
+    # read in flag file if it's being used
+    if use_flag_file:
+        df_ingest = utils.read_table(flag_file_path, file_format="fits")
+
     # Create dictionary to store all file names and data frames once loaded
     data_frames: Dict[str, Catalogue] = {}
 
     # load in main catalogue file and populate columns to use per file and load in any additional data files
     data_frames["cat_filename"] = Catalogue(
         file_name=config_params["file_names"]["cat_filename"],
-        file_path=get_cat_filepath("cat_filename", config_params),
+        file_path=utils.get_cat_filepath("cat_filename", config_params),
         file_format=field_params["cat_filename"]["file_format"],
     )
     data_frames = populate_column_information(data_frames, config_params, field_params)
@@ -384,12 +324,19 @@ def process_data(
     data_frames["cat_filename"] = load_dataframe(
         "cat_filename", data_frames["cat_filename"]
     )
+
     data_frames["cat_filename"] = process_column_data(
         data_frames["cat_filename"], field_params["cat_filename"]
     )
 
-    # start by making subtable of catalogue table columns
-    new_df = data_frames["cat_filename"].df
+    if use_flag_file:
+        # get two catalogues, one with good object and one with raw
+        df_core = data_frames["cat_filename"].df[df_ingest["ingest_viz"]]
+        df_raw = data_frames["cat_filename"].df[~df_ingest["ingest_viz"]]
+
+    else:
+        # just get one catalogue with everything
+        df_raw = data_frames["cat_filename"].df
 
     # if there is one or more additional dfs loaded
     if len(data_frames.keys()) > 1:
@@ -401,14 +348,21 @@ def process_data(
                 continue
 
             # load in data frame
-            data_frames[name] = load_dataframe(data_frames[name], data_frames[name])
+            data_frames[name] = load_dataframe(name, data_frames[name])
 
             if data_frames[name].loaded:
                 # if data frame is loaded, convert any columns needed and join to previous table
                 data_frames[name] = process_column_data(
                     data_frames[name], field_params[name]
                 )
-                new_df = new_df.join(data_frames[name].df.set_index("id"), on="id")
+
+                if use_flag_file:
+                    # only add to the core dataframe if it exists
+                    df_core = df_core.join(
+                        data_frames[name].df.set_index("id"), on="id"
+                    )
+
+                df_raw = df_raw.join(data_frames[name].df.set_index("id"), on="id")
 
             else:
                 # dataframe failed to load
@@ -417,7 +371,14 @@ def process_data(
                 )
 
     # write out the data to a csv file
-    output_file_path = get_data_output_filepath(output_path)
-    write_data(new_df, output_file_path)
+    output_file_path_raw = get_data_output_filepath(output_path, "raw")
+    utils.write_data(df_raw, output_file_path_raw)
 
-    return new_df
+    # write out core data if necessary
+    if use_flag_file:
+        output_file_path_core = get_data_output_filepath(output_path, "core")
+        utils.write_data(df_core, output_file_path_core)
+
+        return df_raw, df_core
+    else:
+        return df_raw

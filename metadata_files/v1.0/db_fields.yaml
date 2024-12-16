@@ -3,7 +3,7 @@ file_format: "ascii.commented_header"
 columns:
   id:
     display: "DJA Source ID"
-    is_magnitude: false,
+    is_magnitude: false
     data_type: "int"
     output_units: null
     input_units: null
@@ -51,7 +51,7 @@ columns:
     wl_micron: null
     zero_point: null
   logM_50:
-    display: "Current Stellar Mass"
+    display: "Stellar Mass"
     data_type: "float"
     filt_name: null
     input_column_name: "logM_50"
