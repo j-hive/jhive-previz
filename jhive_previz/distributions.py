@@ -76,11 +76,6 @@ def plot_2d_distribution(col_x, col_y, base_output_path: Path, cmap: str = "bone
     return output_path
 
 
-# for the distribution csvs:
-# function to get the histogram bin values
-# maybe turn 'write_data' from dataproc into a utils function and use that
-
-
 # function that creates the distribution plots
 
 
@@ -103,8 +98,8 @@ def create_dist_csvs(
         utils.write_data(df_dist, out_path)
 
         # update the metadata dict
-        metadata_dict["dist"][c] = str(out_path)
-        metadata_dict["limits"][c] = [min, max]
+        metadata_dict["dist"][c] = str(out_path.relative_to("output"))
+        metadata_dict["limits"][c] = [int(min), int(max)]
 
 
 def generate_distributions_and_write_output(
@@ -138,7 +133,9 @@ def generate_distributions_and_write_output(
         )
 
         # add to metadata file
-        metadata_dict["plots"][f"{TO_PLOT[i][0]}_{TO_PLOT[i][1]}"] = str(plot_path)
+        metadata_dict["plots"][f"{TO_PLOT[i][0]}-{TO_PLOT[i][1]}"] = str(
+            plot_path.relative_to("output")
+        )
 
     # write out metadata file
     utils.write_json(metadata_dict, output_path, "metadata")

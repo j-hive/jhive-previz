@@ -97,7 +97,7 @@ def write_json(data: dict, base_output_path: Path, filename: str):
 
     write_path = base_output_path / f"{filename}.json"
     with open(write_path, "w") as f:
-        json.dump(data, f)
+        json.dump(data, f, indent=4)
 
 
 def validate_path(given_path: Union[str, Path]):
