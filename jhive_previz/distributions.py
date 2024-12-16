@@ -4,15 +4,26 @@ import json
 import matplotlib.pyplot as plt
 import typer
 from pathlib import Path
-from typing_extensions import Annotated
+from typing_extensions import Annotated, Tuple
 
 from . import utils
 
 TO_PLOT = [("logSFRinst_50", "logM_50"), ("zfit_50", "logM_50")]
 
 
-def read_files_to_dataframe(input_path: Path):
-    # function to read in all the catalog files into one large file
+def read_files_to_dataframe(input_path: Path) -> pd.DataFrame:
+    """Reads in all catalog files contained in the input path called 'catalog_core.csv' and concatenates them into one long dataframe.
+
+    Parameters
+    ----------
+    input_path : Path
+        The path to search for catalog files.
+
+    Returns
+    -------
+    pd.DataFrame
+        A dataframe of all the catalogs concatenated together (one on top of the other).
+    """
 
     # create generator of files to import
     core_datafile_list = input_path.glob("*/catalog_core.csv")
@@ -25,12 +36,26 @@ def read_files_to_dataframe(input_path: Path):
 
         full_df = pd.concat([full_df, tmp_df])
 
-    # if the dataframe is still empty, do something here or in main function?
     return full_df
 
 
-# function to get the minimum and maximum of a given column
-def get_limits_and_bins(column: pd.Series, num_bins: int = 100):
+def get_limits_and_bins(
+    column: pd.Series, num_bins: int = 100
+) -> Tuple[float, float, np.ndarray]:
+    """Takes a column and returns the maximum and minimum non-Nan values, and an array of bins generated between those two limits. The number of bins is set by num_bins.
+
+    Parameters
+    ----------
+    column : pd.Series
+        A column of float or int data from a pandas dataframe.
+    num_bins : int, optional
+        The number of bins to generate, by default 100
+
+    Returns
+    -------
+    Tuple[float, float, np.ndarray]
+        The minimum, maximum, and array of bins.
+    """
 
     min = np.nanmin(column)
     max = np.nanmax(column)
@@ -39,10 +64,27 @@ def get_limits_and_bins(column: pd.Series, num_bins: int = 100):
     return min, max, bins
 
 
-# for the plotting:
-# function to get the contour levels for the distribution
-# function to plot the whole thing and save it
-def plot_2d_distribution(col_x, col_y, base_output_path: Path, cmap: str = "bone_r"):
+def plot_2d_distribution(
+    col_x: pd.Series, col_y: pd.Series, base_output_path: Path, cmap: str = "bone_r"
+) -> Path:
+    """Function that takes two columns of float data from a pandas dataframe, plots them as a contour plot, and saves the plot as an svg.
+
+    Parameters
+    ----------
+    col_x : pd.Series
+        The x column.
+    col_y : pd.Series
+        The y column.
+    base_output_path : Path
+        The path of the folder to write the plots to.
+    cmap : str, optional
+        The cmap to use for the contour plot, by default "bone_r"
+
+    Returns
+    -------
+    Path
+        The path that the plot was written to.
+    """
 
     # get the contour levels
     x_min, x_max, x_bins = get_limits_and_bins(col_x)
@@ -76,12 +118,20 @@ def plot_2d_distribution(col_x, col_y, base_output_path: Path, cmap: str = "bone
     return output_path
 
 
-# function that creates the distribution plots
-
-
 def create_dist_csvs(
     df_data: pd.DataFrame, base_output_path: Path, metadata_dict: dict
 ):
+    """Given a dataframe, iterates through the columns and gets the histogrammed frequency distribution of the values in that column, and saves it and the bin centers as a csv.
+
+    Parameters
+    ----------
+    df_data : pd.DataFrame
+        The dataframe of data.
+    base_output_path : Path
+        The path to the folder where distribution csvs will be written.
+    metadata_dict : dict
+        The metadata dictionary to add to.
+    """
     # function that creates the distribution csvs
 
     for c in df_data.columns:
@@ -107,12 +157,24 @@ def generate_distributions_and_write_output(
         str, typer.Option(help="The path to the output for this version of the code.")
     ] = "./output/v1.0/"
 ):
+    """This function generates plots and data for the JHIVE Visualization Tool's details pane and the detail page. It generates contour plots of the given columns in 'TO_PLOT', and saves those as SVGs. It also saves histograms of the distributions of data in each column of the core catalog as csvs. Finally, it generates and writes a metadata.json file which contains paths to all of these files, as well as the minimum and maximum values of the distributions for each of the columns.
+
+    Parameters
+    ----------
+    input_path : Annotated[ str, typer.Option, optional
+        The path to the output for this version of the code, where the catalog_core.csv files are stored, by default ="./output/v1.0/"
+
+    Raises
+    ------
+    FileNotFoundError
+        Raises a FileNotFoundError if there are no catalog_core.csv files found within the file structure of the input path folder.
+    """
 
     # create and validate output and input paths
-    input_path = utils.validate_path(input_path)
+    input_path = utils.validate_dir_path(input_path)
     output_path = input_path / "distributions"
-    dist_output_path = utils.validate_path(output_path / "data_files")
-    plot_output_path = utils.validate_path(output_path / "plots")
+    dist_output_path = utils.validate_dir_path(output_path / "data_files")
+    plot_output_path = utils.validate_dir_path(output_path / "plots")
 
     df_data = read_files_to_dataframe(input_path)
 

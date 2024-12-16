@@ -100,7 +100,24 @@ def write_json(data: dict, base_output_path: Path, filename: str):
         json.dump(data, f, indent=4)
 
 
-def validate_path(given_path: Union[str, Path]):
+def validate_dir_path(given_path: Union[str, Path]) -> Path:
+    """Turns the given path into a Path object, if it is a string. It then validates that the path exists, and creates the path if it does not exist.
+
+    Parameters
+    ----------
+    given_path : Union[str, Path]
+        The full path to a directory to validate.
+
+    Returns
+    -------
+    Path
+        The full path to validate as a Path object.
+
+    Raises
+    ------
+    FileExistsError
+        Raises an error if the path exists as a file already.
+    """
 
     if isinstance(given_path, str):
         given_path = Path(given_path)
