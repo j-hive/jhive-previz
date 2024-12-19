@@ -71,6 +71,7 @@ def filter_catalog(
 
     # dict for new table
     flag_dict = {}
+    flag_dict["id"] = cat[col_field_params["id"]["input_column_name"]]
 
     # iterate through the list of flux columns to use and get mask of column
     for c in columns:

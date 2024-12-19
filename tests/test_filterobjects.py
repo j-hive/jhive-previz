@@ -24,7 +24,7 @@ def test_filter_catalog(load_config, change_SNR_cut):
         test_df,
     )
 
-    assert len(ingest_df.columns) == 2
+    assert len(ingest_df.columns) == 3
     # make sure that it's True and false in a couple of the correct places
     assert ingest_df.loc[3, "f333w_corr_1"] == False
     assert ingest_df.loc[3, "f444w_corr_1"] == False

@@ -4,14 +4,14 @@ import json
 import matplotlib.pyplot as plt
 import typer
 from pathlib import Path
-from typing_extensions import Annotated, Tuple
+from typing_extensions import Annotated, Tuple, List
 
 from . import utils
 
 TO_PLOT = [("logSFRinst_50", "logM_50"), ("zfit_50", "logM_50")]
 
 
-def read_files_to_dataframe(input_path: Path) -> pd.DataFrame:
+def read_files_to_dataframe(input_path: Path) -> Tuple[pd.DataFrame, List]:
     """Reads in all catalog files contained in the input path called 'catalog_core.csv' and concatenates them into one long dataframe.
 
     Parameters
@@ -23,6 +23,8 @@ def read_files_to_dataframe(input_path: Path) -> pd.DataFrame:
     -------
     pd.DataFrame
         A dataframe of all the catalogs concatenated together (one on top of the other).
+    List
+        A list of the folders where catalog data was found (essentially the field keys).
     """
 
     # create generator of files to import
@@ -30,13 +32,18 @@ def read_files_to_dataframe(input_path: Path) -> pd.DataFrame:
 
     # read in files and concat them to the main df
     full_df = pd.DataFrame()
+    field_keys = []
 
     for datafile_path in core_datafile_list:
+        # get the field name key from the path
+        field_keys.append(str(datafile_path.parts[-2]))
+
+        # read in file and add to end of master catalog
         tmp_df = pd.read_csv(datafile_path)
 
         full_df = pd.concat([full_df, tmp_df])
 
-    return full_df
+    return full_df, field_keys
 
 
 def get_limits_and_bins(
@@ -176,13 +183,15 @@ def generate_distributions_and_write_output(
     dist_output_path = utils.validate_dir_path(output_path / "data_files")
     plot_output_path = utils.validate_dir_path(output_path / "plots")
 
-    df_data = read_files_to_dataframe(input_path)
+    df_data, field_keys = read_files_to_dataframe(input_path)
 
     if len(df_data) == 0:
         raise FileNotFoundError(f"No core data files found in {input_path}")
 
-    # create metadata dict
+    # create metadata dict and put information in
     metadata_dict = {"dist": {}, "limits": {}, "plots": {}}
+    metadata_dict["field_keys_included"] = field_keys
+    metadata_dict["num_objects"] = len(df_data)
 
     # get the distribution csvs
     create_dist_csvs(df_data, dist_output_path, metadata_dict)
