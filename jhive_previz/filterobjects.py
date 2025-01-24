@@ -49,6 +49,26 @@ def get_err_column_name(flux_col_name: str) -> str:
     return err_colname
 
 
+def get_new_column_name(flux_col_name: str) -> str:
+    """Creates the new column name for the filter in the ingest table.
+    The new column name will be `ingest_[FILTER NAME]`.
+
+    Parameters
+    ----------
+    flux_col_name : str
+        The old column name.
+
+    Returns
+    -------
+    str
+        The new column name
+    """
+
+    # split name into components
+    colname_split = flux_col_name.split("_")
+    return "ingest_" + colname_split[0]
+
+
 def filter_catalog(
     columns: List[str], col_field_params: dict, cat: pd.DataFrame
 ) -> pd.DataFrame:
@@ -80,8 +100,9 @@ def filter_catalog(
             # skip columns that are not magnitudes calculated from fluxes
             continue
 
+        # get necessary column names
         col_name = col_field_params[c]["input_column_name"]
-        # get the relevant error column name
+        new_col_name = get_new_column_name(col_name)
         err_colname = get_err_column_name(col_name)
 
         # replace negative fluxes with nans
@@ -89,7 +110,7 @@ def filter_catalog(
 
         # check if flux column is SNR_MAG times the error column and put that data in to the dict
         flag_col = data_col > (cat[err_colname] * SNR_MAG)
-        flag_dict[col_name] = flag_col
+        flag_dict[new_col_name] = flag_col
 
     df_ingest = pd.DataFrame.from_dict(flag_dict)
 
