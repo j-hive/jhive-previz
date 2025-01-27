@@ -164,6 +164,6 @@ cython_debug/
 
 # Project
 data/
-*output/
+*output*/
 *_tomerge.csv
 *_toedit.csv
