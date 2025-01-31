@@ -44,7 +44,7 @@ columns:
     display: "Surface Brightness (F150W)"
     is_magnitude: false
     data_type: "float"
-    output_units: null
+    output_units: "mag/arcsec^2"
     input_units: "mag/arcsec^2"
     input_column_name: "surface brightness (f150w-clear)"
     filt_max_val: null
@@ -57,7 +57,7 @@ columns:
     display: "Effective Radius (F150W)"
     is_magnitude: false
     data_type: "float"
-    output_units: null
+    output_units: "pixels"
     input_units: "pixels"
     input_column_name: "effective radius (f150w-clear)"
     filt_max_val: null
@@ -122,7 +122,7 @@ columns:
     display: "Surface Brightness (F277W)"
     is_magnitude: false
     data_type: "float"
-    output_units: null
+    output_units: "mag/arcsec^2"
     input_units: "mag/arcsec^2"
     input_column_name: "surface brightness (clearp-f277w)"
     filt_max_val: null
@@ -135,7 +135,7 @@ columns:
     display: "Effective Radius (F277W)"
     is_magnitude: false
     data_type: "float"
-    output_units: null
+    output_units: "pixels"
     input_units: "pixels"
     input_column_name: "effective radius (clearp-f277w)"
     filt_max_val: null
@@ -200,7 +200,7 @@ columns:
     display: "Surface Brightness (F356W)"
     is_magnitude: false
     data_type: "float"
-    output_units: null
+    output_units: "mag/arcsec^2"
     input_units: "mag/arcsec^2"
     input_column_name: "surface brightness (clearp-f356w)"
     filt_max_val: null
@@ -213,7 +213,7 @@ columns:
     display: "Effective Radius (F356W)"
     is_magnitude: false
     data_type: "float"
-    output_units: null
+    output_units: "pixels"
     input_units: "pixels"
     input_column_name: "effective radius (clearp-f356w)"
     filt_max_val: null
@@ -278,7 +278,7 @@ columns:
     display: "Surface Brightness (F430M)"
     is_magnitude: false
     data_type: "float"
-    output_units: null
+    output_units: "mag/arcsec^2"
     input_units: "mag/arcsec^2"
     input_column_name: "surface brightness (clearp-f430m)"
     filt_max_val: null
@@ -291,7 +291,7 @@ columns:
     display: "Effective Radius (F430M)"
     is_magnitude: false
     data_type: "float"
-    output_units: null
+    output_units: "pixels"
     input_units: "pixels"
     input_column_name: "effective radius (clearp-f430m)"
     filt_max_val: null
@@ -356,7 +356,7 @@ columns:
     display: "Surface Brightness (F444W)"
     is_magnitude: false
     data_type: "float"
-    output_units: null
+    output_units: "mag/arcsec^2"
     input_units: "mag/arcsec^2"
     input_column_name: "surface brightness (clearp-f444w)"
     filt_max_val: null
@@ -369,7 +369,7 @@ columns:
     display: "Effective Radius (F444W)"
     is_magnitude: false
     data_type: "float"
-    output_units: null
+    output_units: "pixels"
     input_units: "pixels"
     input_column_name: "effective radius (clearp-f444w)"
     filt_max_val: null
@@ -434,7 +434,7 @@ columns:
     display: "Surface Brightness (F480M)"
     is_magnitude: false
     data_type: "float"
-    output_units: null
+    output_units: "mag/arcsec^2"
     input_units: "mag/arcsec^2"
     input_column_name: "surface brightness (clearp-f480m)"
     filt_max_val: null
@@ -447,7 +447,7 @@ columns:
     display: "Effective Radius (F480M)"
     is_magnitude: false
     data_type: "float"
-    output_units: null
+    output_units: "pixels"
     input_units: "pixels"
     input_column_name: "effective radius (clearp-f480m)"
     filt_max_val: null
@@ -512,7 +512,7 @@ columns:
     display: "Surface Brightness (F070W)"
     is_magnitude: false
     data_type: "float"
-    output_units: null
+    output_units: "mag/arcsec^2"
     input_units: "mag/arcsec^2"
     input_column_name: "surface brightness (f070w-clear)"
     filt_max_val: null
@@ -525,7 +525,7 @@ columns:
     display: "Effective Radius (F070W)"
     is_magnitude: false
     data_type: "float"
-    output_units: null
+    output_units: "pixels"
     input_units: "pixels"
     input_column_name: "effective radius (f070w-clear)"
     filt_max_val: null
@@ -590,7 +590,7 @@ columns:
     display: "Surface Brightness (F090W)"
     is_magnitude: false
     data_type: "float"
-    output_units: null
+    output_units: "mag/arcsec^2"
     input_units: "mag/arcsec^2"
     input_column_name: "surface brightness (f090w-clear)"
     filt_max_val: null
@@ -603,7 +603,7 @@ columns:
     display: "Effective Radius (F090W)"
     is_magnitude: false
     data_type: "float"
-    output_units: null
+    output_units: "pixels"
     input_units: "pixels"
     input_column_name: "effective radius (f090w-clear)"
     filt_max_val: null
@@ -668,7 +668,7 @@ columns:
     display: "Surface Brightness (F115W)"
     is_magnitude: false
     data_type: "float"
-    output_units: null
+    output_units: "mag/arcsec^2"
     input_units: "mag/arcsec^2"
     input_column_name: "surface brightness (f115w-clear)"
     filt_max_val: null
@@ -681,7 +681,7 @@ columns:
     display: "Effective Radius (F115W)"
     is_magnitude: false
     data_type: "float"
-    output_units: null
+    output_units: "pixels"
     input_units: "pixels"
     input_column_name: "effective radius (f115w-clear)"
     filt_max_val: null
@@ -746,7 +746,7 @@ columns:
     display: "Surface Brightness (F140M)"
     is_magnitude: false
     data_type: "float"
-    output_units: null
+    output_units: "mag/arcsec^2"
     input_units: "mag/arcsec^2"
     input_column_name: "surface brightness (f140m-clear)"
     filt_max_val: null
@@ -759,7 +759,7 @@ columns:
     display: "Effective Radius (F140M)"
     is_magnitude: false
     data_type: "float"
-    output_units: null
+    output_units: "pixels"
     input_units: "pixels"
     input_column_name: "effective radius (f140m-clear)"
     filt_max_val: null
@@ -824,7 +824,7 @@ columns:
     display: "Surface Brightness (F182M)"
     is_magnitude: false
     data_type: "float"
-    output_units: null
+    output_units: "mag/arcsec^2"
     input_units: "mag/arcsec^2"
     input_column_name: "surface brightness (f182m-clear)"
     filt_max_val: null
@@ -837,7 +837,7 @@ columns:
     display: "Effective Radius (F182M)"
     is_magnitude: false
     data_type: "float"
-    output_units: null
+    output_units: "pixels"
     input_units: "pixels"
     input_column_name: "effective radius (f182m-clear)"
     filt_max_val: null
@@ -902,7 +902,7 @@ columns:
     display: "Surface Brightness (F200W)"
     is_magnitude: false
     data_type: "float"
-    output_units: null
+    output_units: "mag/arcsec^2"
     input_units: "mag/arcsec^2"
     input_column_name: "surface brightness (f200w-clear)"
     filt_max_val: null
@@ -915,7 +915,7 @@ columns:
     display: "Effective Radius (F200W)"
     is_magnitude: false
     data_type: "float"
-    output_units: null
+    output_units: "pixels"
     input_units: "pixels"
     input_column_name: "effective radius (f200w-clear)"
     filt_max_val: null
@@ -980,7 +980,7 @@ columns:
     display: "Surface Brightness (F210M)"
     is_magnitude: false
     data_type: "float"
-    output_units: null
+    output_units: "mag/arcsec^2"
     input_units: "mag/arcsec^2"
     input_column_name: "surface brightness (f210m-clear)"
     filt_max_val: null
@@ -993,7 +993,7 @@ columns:
     display: "Effective Radius (F210M)"
     is_magnitude: false
     data_type: "float"
-    output_units: null
+    output_units: "pixels"
     input_units: "pixels"
     input_column_name: "effective radius (f210m-clear)"
     filt_max_val: null
@@ -1058,7 +1058,7 @@ columns:
     display: "Surface Brightness (F250M)"
     is_magnitude: false
     data_type: "float"
-    output_units: null
+    output_units: "mag/arcsec^2"
     input_units: "mag/arcsec^2"
     input_column_name: "surface brightness (f250m-clear)"
     filt_max_val: null
@@ -1071,7 +1071,7 @@ columns:
     display: "Effective Radius (F250M)"
     is_magnitude: false
     data_type: "float"
-    output_units: null
+    output_units: "pixels"
     input_units: "pixels"
     input_column_name: "effective radius (f250m-clear)"
     filt_max_val: null
@@ -1136,7 +1136,7 @@ columns:
     display: "Surface Brightness (F277W)"
     is_magnitude: false
     data_type: "float"
-    output_units: null
+    output_units: "mag/arcsec^2"
     input_units: "mag/arcsec^2"
     input_column_name: "surface brightness (f277w-clear)"
     filt_max_val: null
@@ -1149,7 +1149,7 @@ columns:
     display: "Effective Radius (F277W)"
     is_magnitude: false
     data_type: "float"
-    output_units: null
+    output_units: "pixels"
     input_units: "pixels"
     input_column_name: "effective radius (f277w-clear)"
     filt_max_val: null
@@ -1214,7 +1214,7 @@ columns:
     display: "Surface Brightness (F300M)"
     is_magnitude: false
     data_type: "float"
-    output_units: null
+    output_units: "mag/arcsec^2"
     input_units: "mag/arcsec^2"
     input_column_name: "surface brightness (f300m-clear)"
     filt_max_val: null
@@ -1227,7 +1227,7 @@ columns:
     display: "Effective Radius (F300M)"
     is_magnitude: false
     data_type: "float"
-    output_units: null
+    output_units: "pixels"
     input_units: "pixels"
     input_column_name: "effective radius (f300m-clear)"
     filt_max_val: null
@@ -1292,7 +1292,7 @@ columns:
     display: "Surface Brightness (F335M)"
     is_magnitude: false
     data_type: "float"
-    output_units: null
+    output_units: "mag/arcsec^2"
     input_units: "mag/arcsec^2"
     input_column_name: "surface brightness (f335m-clear)"
     filt_max_val: null
@@ -1305,7 +1305,7 @@ columns:
     display: "Effective Radius (F335M)"
     is_magnitude: false
     data_type: "float"
-    output_units: null
+    output_units: "pixels"
     input_units: "pixels"
     input_column_name: "effective radius (f335m-clear)"
     filt_max_val: null
@@ -1370,7 +1370,7 @@ columns:
     display: "Surface Brightness (F356W)"
     is_magnitude: false
     data_type: "float"
-    output_units: null
+    output_units: "mag/arcsec^2"
     input_units: "mag/arcsec^2"
     input_column_name: "surface brightness (f356w-clear)"
     filt_max_val: null
@@ -1383,7 +1383,7 @@ columns:
     display: "Effective Radius (F356W)"
     is_magnitude: false
     data_type: "float"
-    output_units: null
+    output_units: "pixels"
     input_units: "pixels"
     input_column_name: "effective radius (f356w-clear)"
     filt_max_val: null
@@ -1448,7 +1448,7 @@ columns:
     display: "Surface Brightness (F360M)"
     is_magnitude: false
     data_type: "float"
-    output_units: null
+    output_units: "mag/arcsec^2"
     input_units: "mag/arcsec^2"
     input_column_name: "surface brightness (f360m-clear)"
     filt_max_val: null
@@ -1461,7 +1461,7 @@ columns:
     display: "Effective Radius (F360M)"
     is_magnitude: false
     data_type: "float"
-    output_units: null
+    output_units: "pixels"
     input_units: "pixels"
     input_column_name: "effective radius (f360m-clear)"
     filt_max_val: null
@@ -1526,7 +1526,7 @@ columns:
     display: "Surface Brightness (F410M)"
     is_magnitude: false
     data_type: "float"
-    output_units: null
+    output_units: "mag/arcsec^2"
     input_units: "mag/arcsec^2"
     input_column_name: "surface brightness (f410m-clear)"
     filt_max_val: null
@@ -1539,7 +1539,7 @@ columns:
     display: "Effective Radius (F410M)"
     is_magnitude: false
     data_type: "float"
-    output_units: null
+    output_units: "pixels"
     input_units: "pixels"
     input_column_name: "effective radius (f410m-clear)"
     filt_max_val: null
@@ -1604,7 +1604,7 @@ columns:
     display: "Surface Brightness (F430M)"
     is_magnitude: false
     data_type: "float"
-    output_units: null
+    output_units: "mag/arcsec^2"
     input_units: "mag/arcsec^2"
     input_column_name: "surface brightness (f430m-clear)"
     filt_max_val: null
@@ -1617,7 +1617,7 @@ columns:
     display: "Effective Radius (F430M)"
     is_magnitude: false
     data_type: "float"
-    output_units: null
+    output_units: "pixels"
     input_units: "pixels"
     input_column_name: "effective radius (f430m-clear)"
     filt_max_val: null
@@ -1682,7 +1682,7 @@ columns:
     display: "Surface Brightness (F444W)"
     is_magnitude: false
     data_type: "float"
-    output_units: null
+    output_units: "mag/arcsec^2"
     input_units: "mag/arcsec^2"
     input_column_name: "surface brightness (f444w-clear)"
     filt_max_val: null
@@ -1695,7 +1695,7 @@ columns:
     display: "Effective Radius (F444W)"
     is_magnitude: false
     data_type: "float"
-    output_units: null
+    output_units: "pixels"
     input_units: "pixels"
     input_column_name: "effective radius (f444w-clear)"
     filt_max_val: null
@@ -1760,7 +1760,7 @@ columns:
     display: "Surface Brightness (F460M)"
     is_magnitude: false
     data_type: "float"
-    output_units: null
+    output_units: "mag/arcsec^2"
     input_units: "mag/arcsec^2"
     input_column_name: "surface brightness (f460m-clear)"
     filt_max_val: null
@@ -1773,7 +1773,7 @@ columns:
     display: "Effective Radius (F460M)"
     is_magnitude: false
     data_type: "float"
-    output_units: null
+    output_units: "pixels"
     input_units: "pixels"
     input_column_name: "effective radius (f460m-clear)"
     filt_max_val: null
@@ -1838,7 +1838,7 @@ columns:
     display: "Surface Brightness (F480M)"
     is_magnitude: false
     data_type: "float"
-    output_units: null
+    output_units: "mag/arcsec^2"
     input_units: "mag/arcsec^2"
     input_column_name: "surface brightness (f480m-clear)"
     filt_max_val: null
@@ -1851,7 +1851,7 @@ columns:
     display: "Effective Radius (F480M)"
     is_magnitude: false
     data_type: "float"
-    output_units: null
+    output_units: "pixels"
     input_units: "pixels"
     input_column_name: "effective radius (f480m-clear)"
     filt_max_val: null
