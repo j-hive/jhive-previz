@@ -26,9 +26,9 @@ def test_filter_catalog(load_config, change_SNR_cut):
 
     assert len(ingest_df.columns) == 3
     # make sure that it's True and false in a couple of the correct places
-    assert ingest_df.loc[3, "f333w_corr_1"] == False
-    assert ingest_df.loc[3, "f444w_corr_1"] == False
-    assert ingest_df.loc[4, "f444w_corr_1"] == True
+    assert ingest_df.loc[3, "ingest_f333w"] == False
+    assert ingest_df.loc[3, "ingest_f444w"] == False
+    assert ingest_df.loc[4, "ingest_f444w"] == True
 
 
 def test_create_and_write_flag_file(load_config, create_output_path, change_SNR_cut):

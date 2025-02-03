@@ -145,7 +145,8 @@ def create_and_write_flag_file(
     )
 
     # get a column that has the number of truth values in that row
-    flag_values = df_ingest.sum(axis=1)
+    columns_to_sum = df_ingest.drop("id", axis=1)  # don't add up the id column
+    flag_values = columns_to_sum.sum(axis=1)
 
     # create viz flag column based on the number of positive flags in flag_values
     viz_flag = flag_values >= NUM_FLAGS
