@@ -57,8 +57,8 @@ columns:
     display: "Effective Radius (F150W)"
     is_magnitude: false
     data_type: "float"
-    output_units: "pixels"
-    input_units: "pixels"
+    output_units: "log arcsec"
+    input_units: "arcsec"
     input_column_name: "effective radius (f150w-clear)"
     filt_max_val: null
     filt_min_val: null
@@ -135,8 +135,8 @@ columns:
     display: "Effective Radius (F277W)"
     is_magnitude: false
     data_type: "float"
-    output_units: "pixels"
-    input_units: "pixels"
+    output_units: "log arcsec"
+    input_units: "arcsec"
     input_column_name: "effective radius (clearp-f277w)"
     filt_max_val: null
     filt_min_val: null
@@ -213,8 +213,8 @@ columns:
     display: "Effective Radius (F356W)"
     is_magnitude: false
     data_type: "float"
-    output_units: "pixels"
-    input_units: "pixels"
+    output_units: "log arcsec"
+    input_units: "arcsec"
     input_column_name: "effective radius (clearp-f356w)"
     filt_max_val: null
     filt_min_val: null
@@ -291,8 +291,8 @@ columns:
     display: "Effective Radius (F430M)"
     is_magnitude: false
     data_type: "float"
-    output_units: "pixels"
-    input_units: "pixels"
+    output_units: "log arcsec"
+    input_units: "arcsec"
     input_column_name: "effective radius (clearp-f430m)"
     filt_max_val: null
     filt_min_val: null
@@ -369,8 +369,8 @@ columns:
     display: "Effective Radius (F444W)"
     is_magnitude: false
     data_type: "float"
-    output_units: "pixels"
-    input_units: "pixels"
+    output_units: "log arcsec"
+    input_units: "arcsec"
     input_column_name: "effective radius (clearp-f444w)"
     filt_max_val: null
     filt_min_val: null
@@ -447,8 +447,8 @@ columns:
     display: "Effective Radius (F480M)"
     is_magnitude: false
     data_type: "float"
-    output_units: "pixels"
-    input_units: "pixels"
+    output_units: "log arcsec"
+    input_units: "arcsec"
     input_column_name: "effective radius (clearp-f480m)"
     filt_max_val: null
     filt_min_val: null
@@ -525,8 +525,8 @@ columns:
     display: "Effective Radius (F070W)"
     is_magnitude: false
     data_type: "float"
-    output_units: "pixels"
-    input_units: "pixels"
+    output_units: "log arcsec"
+    input_units: "arcsec"
     input_column_name: "effective radius (f070w-clear)"
     filt_max_val: null
     filt_min_val: null
@@ -603,8 +603,8 @@ columns:
     display: "Effective Radius (F090W)"
     is_magnitude: false
     data_type: "float"
-    output_units: "pixels"
-    input_units: "pixels"
+    output_units: "log arcsec"
+    input_units: "arcsec"
     input_column_name: "effective radius (f090w-clear)"
     filt_max_val: null
     filt_min_val: null
@@ -681,8 +681,8 @@ columns:
     display: "Effective Radius (F115W)"
     is_magnitude: false
     data_type: "float"
-    output_units: "pixels"
-    input_units: "pixels"
+    output_units: "log arcsec"
+    input_units: "arcsec"
     input_column_name: "effective radius (f115w-clear)"
     filt_max_val: null
     filt_min_val: null
@@ -759,8 +759,8 @@ columns:
     display: "Effective Radius (F140M)"
     is_magnitude: false
     data_type: "float"
-    output_units: "pixels"
-    input_units: "pixels"
+    output_units: "log arcsec"
+    input_units: "arcsec"
     input_column_name: "effective radius (f140m-clear)"
     filt_max_val: null
     filt_min_val: null
@@ -837,8 +837,8 @@ columns:
     display: "Effective Radius (F182M)"
     is_magnitude: false
     data_type: "float"
-    output_units: "pixels"
-    input_units: "pixels"
+    output_units: "log arcsec"
+    input_units: "arcsec"
     input_column_name: "effective radius (f182m-clear)"
     filt_max_val: null
     filt_min_val: null
@@ -915,8 +915,8 @@ columns:
     display: "Effective Radius (F200W)"
     is_magnitude: false
     data_type: "float"
-    output_units: "pixels"
-    input_units: "pixels"
+    output_units: "log arcsec"
+    input_units: "arcsec"
     input_column_name: "effective radius (f200w-clear)"
     filt_max_val: null
     filt_min_val: null
@@ -993,8 +993,8 @@ columns:
     display: "Effective Radius (F210M)"
     is_magnitude: false
     data_type: "float"
-    output_units: "pixels"
-    input_units: "pixels"
+    output_units: "log arcsec"
+    input_units: "arcsec"
     input_column_name: "effective radius (f210m-clear)"
     filt_max_val: null
     filt_min_val: null
@@ -1071,8 +1071,8 @@ columns:
     display: "Effective Radius (F250M)"
     is_magnitude: false
     data_type: "float"
-    output_units: "pixels"
-    input_units: "pixels"
+    output_units: "log arcsec"
+    input_units: "arcsec"
     input_column_name: "effective radius (f250m-clear)"
     filt_max_val: null
     filt_min_val: null
@@ -1149,8 +1149,8 @@ columns:
     display: "Effective Radius (F277W)"
     is_magnitude: false
     data_type: "float"
-    output_units: "pixels"
-    input_units: "pixels"
+    output_units: "log arcsec"
+    input_units: "arcsec"
     input_column_name: "effective radius (f277w-clear)"
     filt_max_val: null
     filt_min_val: null
@@ -1227,8 +1227,8 @@ columns:
     display: "Effective Radius (F300M)"
     is_magnitude: false
     data_type: "float"
-    output_units: "pixels"
-    input_units: "pixels"
+    output_units: "log arcsec"
+    input_units: "arcsec"
     input_column_name: "effective radius (f300m-clear)"
     filt_max_val: null
     filt_min_val: null
@@ -1305,8 +1305,8 @@ columns:
     display: "Effective Radius (F335M)"
     is_magnitude: false
     data_type: "float"
-    output_units: "pixels"
-    input_units: "pixels"
+    output_units: "log arcsec"
+    input_units: "arcsec"
     input_column_name: "effective radius (f335m-clear)"
     filt_max_val: null
     filt_min_val: null
@@ -1383,8 +1383,8 @@ columns:
     display: "Effective Radius (F356W)"
     is_magnitude: false
     data_type: "float"
-    output_units: "pixels"
-    input_units: "pixels"
+    output_units: "log arcsec"
+    input_units: "arcsec"
     input_column_name: "effective radius (f356w-clear)"
     filt_max_val: null
     filt_min_val: null
@@ -1461,8 +1461,8 @@ columns:
     display: "Effective Radius (F360M)"
     is_magnitude: false
     data_type: "float"
-    output_units: "pixels"
-    input_units: "pixels"
+    output_units: "log arcsec"
+    input_units: "arcsec"
     input_column_name: "effective radius (f360m-clear)"
     filt_max_val: null
     filt_min_val: null
@@ -1539,8 +1539,8 @@ columns:
     display: "Effective Radius (F410M)"
     is_magnitude: false
     data_type: "float"
-    output_units: "pixels"
-    input_units: "pixels"
+    output_units: "log arcsec"
+    input_units: "arcsec"
     input_column_name: "effective radius (f410m-clear)"
     filt_max_val: null
     filt_min_val: null
@@ -1617,8 +1617,8 @@ columns:
     display: "Effective Radius (F430M)"
     is_magnitude: false
     data_type: "float"
-    output_units: "pixels"
-    input_units: "pixels"
+    output_units: "log arcsec"
+    input_units: "arcsec"
     input_column_name: "effective radius (f430m-clear)"
     filt_max_val: null
     filt_min_val: null
@@ -1695,8 +1695,8 @@ columns:
     display: "Effective Radius (F444W)"
     is_magnitude: false
     data_type: "float"
-    output_units: "pixels"
-    input_units: "pixels"
+    output_units: "log arcsec"
+    input_units: "arcsec"
     input_column_name: "effective radius (f444w-clear)"
     filt_max_val: null
     filt_min_val: null
@@ -1773,8 +1773,8 @@ columns:
     display: "Effective Radius (F460M)"
     is_magnitude: false
     data_type: "float"
-    output_units: "pixels"
-    input_units: "pixels"
+    output_units: "log arcsec"
+    input_units: "arcsec"
     input_column_name: "effective radius (f460m-clear)"
     filt_max_val: null
     filt_min_val: null
@@ -1851,8 +1851,8 @@ columns:
     display: "Effective Radius (F480M)"
     is_magnitude: false
     data_type: "float"
-    output_units: "pixels"
-    input_units: "pixels"
+    output_units: "log arcsec"
+    input_units: "arcsec"
     input_column_name: "effective radius (f480m-clear)"
     filt_max_val: null
     filt_min_val: null
